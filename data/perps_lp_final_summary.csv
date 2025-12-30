@@ -1,0 +1,8 @@
+project,records,date_start,date_end,avg_apy,min_apy,max_apy
+gmx-v2-perps,9633,2023-10-09,2025-12-27,17.58,0.01,2692.25
+jlp-kamino-lend,771,2023-11-18,2025-12-27,0,0,0
+jupiter-perpetual-exchange,697,2024-01-29,2025-12-26,44.6,0.0,212.83
+jlp-orca-dex,693,2024-03-07,2025-12-27,53.38,0.05,3213.83
+jlp-kamino-liquidity,451,2024-09-03,2025-12-27,39.02,2.72,682.42
+jlp-save,406,2024-11-17,2025-12-27,0,0,0
+jlp-raydium-amm,334,2025-01-28,2025-12-27,41.25,5.52,212.51

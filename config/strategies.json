@@ -1,0 +1,379 @@
+{
+    "version": "2.0",
+    "last_updated": "2025-12-29",
+    "approved_by": "Strategy Board",
+    "validated_by": "QR Board",
+    "document_version_history": [
+        {
+            "version": "1.0",
+            "date": "2024-12-01",
+            "changes": "Initial 10 strategies with mixed protocols"
+        },
+        {
+            "version": "2.0",
+            "date": "2025-12-23",
+            "changes": "Sanctum added, Stable Growth fixed (40%â†’30%), Huma removed from stable strategies"
+        },
+        {
+            "version": "2.0.1",
+            "date": "2025-12-29",
+            "changes": "QR Board validation: fixed proxy_mapping, added variance warnings for high-crypto strategies"
+        }
+    ],
+    "protocols": {
+        "sky": {
+            "name": "Sky SSR",
+            "chain": "Arbitrum",
+            "asset": "USDS",
+            "type": "stablecoin_yield",
+            "defillama_project": "sky-lending",
+            "crypto_exposure": false
+        },
+        "aave": {
+            "name": "Aave V3",
+            "chain": "Arbitrum",
+            "asset": "USDC",
+            "type": "lending",
+            "defillama_project": "aave-v3",
+            "crypto_exposure": false
+        },
+        "compound": {
+            "name": "Compound V3",
+            "chain": "Arbitrum",
+            "asset": "USDC",
+            "type": "lending",
+            "defillama_project": "compound-v3",
+            "crypto_exposure": false
+        },
+        "sanctum": {
+            "name": "Sanctum INF",
+            "chain": "Solana",
+            "asset": "SOL LST Basket",
+            "type": "liquid_staking",
+            "crypto_exposure": true,
+            "price_exposure": "SOL",
+            "notes": "Diversified LST basket on Solana"
+        },
+        "jlp": {
+            "name": "Jupiter JLP",
+            "chain": "Solana",
+            "asset": "Perps LP",
+            "type": "perps_lp",
+            "crypto_exposure": true,
+            "basket_composition": {
+                "SOL": 0.45,
+                "ETH": 0.27,
+                "BTC": 0.27,
+                "other": 0.01
+            },
+            "notes": "Crypto return = weighted basket + JLP APY"
+        },
+        "jito": {
+            "name": "Jito",
+            "chain": "Solana",
+            "asset": "JitoSOL",
+            "type": "liquid_staking_mev",
+            "crypto_exposure": true,
+            "price_exposure": "SOL",
+            "notes": "SOL staking + MEV rewards"
+        }
+    },
+    "strategies": [
+        {
+            "id": 1,
+            "name": "Safe Harbor",
+            "goal": "Emergency Fund",
+            "crypto_pct": 0,
+            "risk_tier": "Minimal",
+            "target_apy_range": "6-10%",
+            "target_user": "Ana (conservative)",
+            "allocations": {
+                "stable": {
+                    "sky": 0.50,
+                    "aave": 0.30,
+                    "compound": 0.20
+                },
+                "crypto": {}
+            },
+            "allocation_string": "50% Sky + 30% Aave + 20% Compound",
+            "monte_carlo_validated": {
+                "prob_loss": "<1%",
+                "confidence": "High"
+            }
+        },
+        {
+            "id": 2,
+            "name": "Stable Growth",
+            "goal": "Emergency Fund",
+            "crypto_pct": 30,
+            "risk_tier": "Low",
+            "target_apy_range": "7-12%",
+            "target_user": "Ana (crypto-comfortable)",
+            "allocations": {
+                "stable": {
+                    "sky": 0.70
+                },
+                "crypto": {
+                    "sanctum": 0.30
+                }
+            },
+            "allocation_string": "70% Sky + 30% Sanctum",
+            "v2_change": "Replaced 25% Jito + 15% Lido with 30% Sanctum to fix 30% crypto labeling",
+            "monte_carlo_validated": {
+                "prob_loss": "~5%",
+                "confidence": "High"
+            }
+        },
+        {
+            "id": 3,
+            "name": "Goal Keeper",
+            "goal": "Short-Term",
+            "crypto_pct": 0,
+            "risk_tier": "Minimal",
+            "target_apy_range": "6-9%",
+            "target_user": "Ana, Camila",
+            "allocations": {
+                "stable": {
+                    "sky": 0.60,
+                    "aave": 0.25,
+                    "compound": 0.15
+                },
+                "crypto": {}
+            },
+            "allocation_string": "60% Sky + 25% Aave + 15% Compound",
+            "monte_carlo_validated": {
+                "prob_loss": "<1%",
+                "confidence": "High"
+            }
+        },
+        {
+            "id": 4,
+            "name": "Steady Progress",
+            "goal": "Short-Term",
+            "crypto_pct": 35,
+            "risk_tier": "Low-Medium",
+            "target_apy_range": "7-11%",
+            "target_user": "Camila",
+            "allocations": {
+                "stable": {
+                    "sky": 0.65
+                },
+                "crypto": {
+                    "sanctum": 0.35
+                }
+            },
+            "allocation_string": "65% Sky + 35% Sanctum",
+            "v2_change": "Simplified from 65% Sky + 20% Jito + 15% Marinade",
+            "monte_carlo_validated": {
+                "prob_loss": "~7%",
+                "confidence": "High"
+            }
+        },
+        {
+            "id": 5,
+            "name": "Patient Builder",
+            "goal": "Medium-Term",
+            "crypto_pct": 0,
+            "risk_tier": "Minimal",
+            "target_apy_range": "5-8%",
+            "target_user": "Mariana",
+            "allocations": {
+                "stable": {
+                    "sky": 0.50,
+                    "aave": 0.30,
+                    "compound": 0.20
+                },
+                "crypto": {}
+            },
+            "allocation_string": "50% Sky + 30% Aave + 20% Compound",
+            "monte_carlo_validated": {
+                "prob_loss": "<1%",
+                "confidence": "High"
+            }
+        },
+        {
+            "id": 6,
+            "name": "Balanced Builder",
+            "goal": "Medium-Term",
+            "crypto_pct": 40,
+            "risk_tier": "Medium",
+            "target_apy_range": "10-16%",
+            "target_user": "Mariana (crypto-comfortable)",
+            "allocations": {
+                "stable": {
+                    "sky": 0.60
+                },
+                "crypto": {
+                    "sanctum": 0.25,
+                    "jlp": 0.15
+                }
+            },
+            "allocation_string": "60% Sky + 25% Sanctum + 15% JLP",
+            "monte_carlo_validated": {
+                "prob_loss": "~12%",
+                "confidence": "High"
+            }
+        },
+        {
+            "id": 7,
+            "name": "Steady Compounder",
+            "goal": "Long-Term",
+            "crypto_pct": 0,
+            "risk_tier": "Minimal",
+            "target_apy_range": "6-10%",
+            "target_user": "Bruno",
+            "allocations": {
+                "stable": {
+                    "sky": 0.55,
+                    "aave": 0.30,
+                    "compound": 0.15
+                },
+                "crypto": {}
+            },
+            "allocation_string": "55% Sky + 30% Aave + 15% Compound",
+            "monte_carlo_validated": {
+                "prob_loss": "<1%",
+                "confidence": "High"
+            }
+        },
+        {
+            "id": 8,
+            "name": "Wealth Accelerator",
+            "goal": "Long-Term",
+            "crypto_pct": 70,
+            "risk_tier": "High",
+            "target_user": "Bruno (crypto-comfortable), Felipe",
+            "allocations": {
+                "stable": {
+                    "sky": 0.30
+                },
+                "crypto": {
+                    "sanctum": 0.35,
+                    "jlp": 0.35
+                }
+            },
+            "allocation_string": "30% Sky + 35% Sanctum + 35% JLP",
+            "monte_carlo_validated": {
+                "prob_loss": "~24%",
+                "median_return": "~50%",
+                "p5_return": "-60%",
+                "p95_return": "+200%",
+                "confidence": "Medium"
+            },
+            "variance_warning": "HIGH VARIANCE: Outcomes range from -60% to +200% in Monte Carlo simulations. Not suitable for users who cannot tolerate significant losses."
+        },
+        {
+            "id": 9,
+            "name": "Yield Maximizer",
+            "goal": "Wealth Building",
+            "crypto_pct": 0,
+            "risk_tier": "Minimal",
+            "target_apy_range": "7-11%",
+            "target_user": "Felipe (conservative mode)",
+            "allocations": {
+                "stable": {
+                    "sky": 0.45,
+                    "aave": 0.35,
+                    "compound": 0.20
+                },
+                "crypto": {}
+            },
+            "allocation_string": "45% Sky + 35% Aave + 20% Compound",
+            "monte_carlo_validated": {
+                "prob_loss": "<1%",
+                "confidence": "High"
+            }
+        },
+        {
+            "id": 10,
+            "name": "Full Throttle",
+            "goal": "Wealth Building",
+            "crypto_pct": 85,
+            "risk_tier": "Very High",
+            "target_user": "Felipe (aggressive)",
+            "allocations": {
+                "stable": {
+                    "sky": 0.15
+                },
+                "crypto": {
+                    "sanctum": 0.30,
+                    "jlp": 0.35,
+                    "jito": 0.20
+                }
+            },
+            "allocation_string": "15% Sky + 30% Sanctum + 35% JLP + 20% Jito",
+            "monte_carlo_validated": {
+                "prob_loss": "~27%",
+                "median_return": "~80%",
+                "p5_return": "-78%",
+                "p95_return": "+400%",
+                "tail_1_in_1000": "+12000%",
+                "confidence": "Medium"
+            },
+            "variance_warning": "EXTREME VARIANCE: Outcomes range from -78% to +12,000% in Monte Carlo simulations. Maximum drawdown exceeded 66% in Battle Test. Only for users who can tolerate near-total loss.",
+            "access_requirements": {
+                "min_account_age_months": 6,
+                "min_balance_eur": 1000,
+                "max_portfolio_pct": 20,
+                "requires_acknowledgment": true,
+                "cooling_period_hours": 24
+            }
+        }
+    ],
+    "validation_rules": {
+        "all_allocations_sum_to_100": true,
+        "stable_pct_equals_100_minus_crypto_pct": true,
+        "crypto_pct_matches_crypto_allocations_sum": true,
+        "no_huma_in_any_strategy": true,
+        "jito_only_in_full_throttle": true
+    },
+    "proxy_methodology": {
+        "_comment": "QR Board validated - use these formulas for backtesting when historical data unavailable",
+        "sanctum": {
+            "formula": "Lido_ETH_APY Ã— 2.0 + 0.5%",
+            "rationale": "SOL staking typically 2x ETH staking, plus 0.5% for LST basket diversification",
+            "apply_when": "All historical periods (no Sanctum historical data available)",
+            "confidence": "Medium",
+            "validated_by": "QR Board"
+        },
+        "jito": {
+            "formula": "Lido_ETH_APY Ã— 2.0 + 1.0%",
+            "rationale": "Same SOL base as Sanctum, plus additional 0.5% MEV premium",
+            "apply_when": "Before March 2025",
+            "confidence": "Medium",
+            "validated_by": "QR Board"
+        },
+        "jlp": {
+            "formula": "Fixed 25%",
+            "rationale": "Based on GMX GLP historical average performance. JLP has similar mechanics.",
+            "apply_when": "Before January 2024",
+            "confidence": "Low",
+            "validated_by": "QR Board"
+        },
+        "compound_v3": {
+            "formula": "Aave_APY Ã— 1.1",
+            "rationale": "Compound V3 typically yields ~10% more than Aave",
+            "apply_when": "Before October 2022",
+            "confidence": "High",
+            "validated_by": "QR Board"
+        }
+    },
+    "crypto_correlation_matrix": {
+        "description": "Correlation coefficients for crypto price movements (for Monte Carlo)",
+        "matrix": {
+            "SOL_ETH": 0.75,
+            "SOL_BTC": 0.70,
+            "ETH_BTC": 0.85
+        },
+        "notes": "Based on 2022-2025 daily returns analysis. Matrix is positive semi-definite.",
+        "validated_by": "QR Board"
+    },
+    "jlp_return_calculation": {
+        "formula": "(0.45 Ã— SOL_return) + (0.27 Ã— ETH_return) + (0.27 Ã— BTC_return) + (JLP_APY / 365)",
+        "components": {
+            "price_exposure": "Weighted basket of SOL/ETH/BTC per basket_composition",
+            "fee_income": "Daily JLP APY from perps trading fees"
+        },
+        "validated_by": "QR Board"
+    }
+}

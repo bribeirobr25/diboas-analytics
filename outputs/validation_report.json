@@ -1,0 +1,572 @@
+{
+  "generated_at": "2025-12-30T16:43:16.958418",
+  "type": "validation",
+  "status": "PASSED",
+  "total_rules": 70,
+  "passed": 70,
+  "failed": 0,
+  "critical_failures": 0,
+  "warnings": 0,
+  "validations": [
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-04",
+      "passed": "True",
+      "severity": "warning",
+      "message": "OK",
+      "value": 19172.91247744905,
+      "threshold": 18600
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0.01
+    },
+    {
+      "rule_id": "CV-06",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 546.2124774490483,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-07",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 50
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 6966.239461181006,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 31.109196452356848,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": true,
+      "severity": "info",
+      "message": "Not a stable strategy, rule not applicable",
+      "value": null,
+      "threshold": null
+    },
+    {
+      "rule_id": "CV-04",
+      "passed": true,
+      "severity": "info",
+      "message": "Not a stable strategy, rule not applicable",
+      "value": null,
+      "threshold": null
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0.01
+    },
+    {
+      "rule_id": "CV-06",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 12478.246725193636,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-07",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 20
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-04",
+      "passed": "True",
+      "severity": "warning",
+      "message": "OK",
+      "value": 19182.04653820751,
+      "threshold": 18600
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0.01
+    },
+    {
+      "rule_id": "CV-06",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 555.346538207509,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-07",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 50
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 6364.946436962542,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 37.16808070597511,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": true,
+      "severity": "info",
+      "message": "Not a stable strategy, rule not applicable",
+      "value": null,
+      "threshold": null
+    },
+    {
+      "rule_id": "CV-04",
+      "passed": true,
+      "severity": "info",
+      "message": "Not a stable strategy, rule not applicable",
+      "value": null,
+      "threshold": null
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0.01
+    },
+    {
+      "rule_id": "CV-06",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 14508.51843732806,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-07",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 20
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-04",
+      "passed": "True",
+      "severity": "warning",
+      "message": "OK",
+      "value": 19172.91247744905,
+      "threshold": 18600
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0.01
+    },
+    {
+      "rule_id": "CV-06",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 546.2124774490483,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-07",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 50
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 6486.353899225658,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 36.095658385403866,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": true,
+      "severity": "info",
+      "message": "Not a stable strategy, rule not applicable",
+      "value": null,
+      "threshold": null
+    },
+    {
+      "rule_id": "CV-04",
+      "passed": true,
+      "severity": "info",
+      "message": "Not a stable strategy, rule not applicable",
+      "value": null,
+      "threshold": null
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0.01
+    },
+    {
+      "rule_id": "CV-06",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 20211.859384324856,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-07",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 30
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-04",
+      "passed": "True",
+      "severity": "warning",
+      "message": "OK",
+      "value": 19200.88805135164,
+      "threshold": 18600
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0.01
+    },
+    {
+      "rule_id": "CV-06",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 574.1880513516414,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-07",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 50
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 4219.274560083515,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 58.87221299873951,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": true,
+      "severity": "info",
+      "message": "Not a stable strategy, rule not applicable",
+      "value": null,
+      "threshold": null
+    },
+    {
+      "rule_id": "CV-04",
+      "passed": true,
+      "severity": "info",
+      "message": "Not a stable strategy, rule not applicable",
+      "value": null,
+      "threshold": null
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0.01
+    },
+    {
+      "rule_id": "CV-06",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 41113.56954071413,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-07",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-04",
+      "passed": "True",
+      "severity": "warning",
+      "message": "OK",
+      "value": 19191.74666123639,
+      "threshold": 18600
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0.01
+    },
+    {
+      "rule_id": "CV-06",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 565.0466612363896,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-07",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 50
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 3076.743765274715,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 70.15823926911034,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": true,
+      "severity": "info",
+      "message": "Not a stable strategy, rule not applicable",
+      "value": null,
+      "threshold": null
+    },
+    {
+      "rule_id": "CV-04",
+      "passed": true,
+      "severity": "info",
+      "message": "Not a stable strategy, rule not applicable",
+      "value": null,
+      "threshold": null
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 0.01
+    },
+    {
+      "rule_id": "CV-06",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 46035.84909462901,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-07",
+      "passed": true,
+      "severity": "warning",
+      "message": "OK",
+      "value": 10000,
+      "threshold": 200
+    }
+  ]
+}
