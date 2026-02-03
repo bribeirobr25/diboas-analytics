@@ -231,6 +231,37 @@ def _collect_all_live(registry, output_dir, start_date=None, append_mode=False):
 
     print("-" * 40)
 
+    # Also collect Jupiter JLP APY (calculated from fees/TVL)
+    _collect_jupiter_jlp_live(registry, output_dir)
+
+
+def _collect_jupiter_jlp_live(registry, output_dir):
+    """
+    Collect Jupiter JLP live APY data.
+
+    Jupiter JLP APY is calculated from DeFiLlama fees/TVL data,
+    not available directly from the yields API.
+    """
+    print("\n--- JUPITER JLP (Live Calculation) ---")
+
+    try:
+        collector = registry.get("defillama_live", {})
+        apy, metadata = collector.collect_jupiter_jlp_apy(str(output_dir))
+
+        if apy is not None:
+            print(f"  Jupiter JLP APY: {apy:.2f}%")
+            print(f"  TVL: ${metadata.get('tvl_usd', 0):,.0f}")
+            print(f"  Daily Fees: ${metadata.get('daily_fees_usd', 0):,.0f}")
+            print(f"  Data appended to jupiter_jlp_historical_apy.csv")
+        else:
+            print("  Warning: Could not calculate Jupiter JLP APY")
+            print("  Using bundled historical data as fallback")
+
+    except Exception as e:
+        logger.warning(f"Jupiter JLP live collection failed: {e}")
+        print(f"  Error: {e}")
+        print("  Falling back to bundled historical data")
+
 
 def _display_collected_data(source, data):
     """Display collected data summary."""

@@ -318,6 +318,118 @@ class DeFiLlamaCollector(Collector):
 
         return df
 
+    def collect_jupiter_jlp_apy(
+        self,
+        output_dir: str = None
+    ) -> tuple:
+        """
+        Calculate Jupiter JLP APY from DeFiLlama fees and TVL data.
+
+        Jupiter JLP APY is not available directly via DeFiLlama yields API.
+        Instead, it must be calculated from:
+        - TVL: api.llama.fi/tvl/jupiter-perpetual-exchange
+        - Fees: api.llama.fi/overview/fees (daily fees)
+
+        Formula: APY = (daily_fees × 365 × 0.75) / TVL × 100
+        - JLP earns 75% of Jupiter Perps trading fees
+
+        Args:
+            output_dir: Output directory to append to historical file
+
+        Returns:
+            Tuple of (current_apy, metadata_dict) or (None, {}) on failure
+        """
+        from pathlib import Path
+        from config.settings import DATA_DIR
+        import requests
+
+        output_path = Path(output_dir) if output_dir else DATA_DIR
+
+        try:
+            # Get TVL
+            logger.info("Fetching Jupiter Perpetual Exchange TVL...")
+            tvl_response = requests.get(
+                "https://api.llama.fi/tvl/jupiter-perpetual-exchange",
+                timeout=30
+            )
+            tvl_response.raise_for_status()
+            tvl = tvl_response.json()  # Returns float
+
+            # Get fees
+            logger.info("Fetching DeFiLlama fees overview...")
+            fees_response = requests.get(
+                "https://api.llama.fi/overview/fees",
+                timeout=30
+            )
+            fees_response.raise_for_status()
+            fees_data = fees_response.json()
+
+            # Find Jupiter Perps in protocols list
+            jup_perps = next(
+                (p for p in fees_data.get('protocols', [])
+                 if p.get('name') == 'Jupiter Perpetual Exchange'),
+                None
+            )
+
+            if jup_perps is None:
+                logger.warning("Jupiter Perpetual Exchange not found in DeFiLlama fees")
+                return None, {}
+
+            daily_fees = jup_perps.get('total24h', 0) or 0
+
+            # Calculate APY (JLP gets 75% of fees)
+            if tvl and tvl > 0:
+                apy = (daily_fees * 365 * 0.75) / tvl * 100
+            else:
+                apy = 0
+
+            metadata = {
+                'source': 'defillama_calculated',
+                'tvl_usd': tvl,
+                'daily_fees_usd': daily_fees,
+                'fee_share': 0.75,
+                'calculation': '(daily_fees × 365 × 0.75) / TVL × 100',
+                'timestamp': datetime.utcnow().isoformat(),
+            }
+
+            logger.info(
+                f"Jupiter JLP APY: {apy:.2f}% "
+                f"(TVL: ${tvl:,.0f}, Daily Fees: ${daily_fees:,.0f})"
+            )
+
+            # Append to historical file if output_dir provided
+            filepath = output_path / 'jupiter_jlp_historical_apy.csv'
+            new_row = pd.DataFrame([{
+                'date': date.today().isoformat(),
+                'apy': round(apy, 2),
+                'tvl_usd': tvl,
+                'daily_fees': daily_fees,
+            }])
+
+            if filepath.exists():
+                existing = pd.read_csv(filepath)
+                # Ensure date column exists
+                if 'date' in existing.columns:
+                    combined = pd.concat([existing, new_row])
+                    combined = combined.drop_duplicates(subset=['date'], keep='last')
+                    combined = combined.sort_values('date').reset_index(drop=True)
+                else:
+                    combined = new_row
+            else:
+                combined = new_row
+
+            if safe_write_csv(combined, filepath):
+                logger.info(f"Updated Jupiter JLP historical data: {filepath}")
+
+            return apy, metadata
+
+        except requests.RequestException as e:
+            logger.error(f"Failed to fetch Jupiter JLP data: {e}")
+            return None, {}
+        except Exception as e:
+            logger.error(f"Error calculating Jupiter JLP APY: {e}")
+            return None, {}
+
     def save_to_csv(
         self,
         output_dir: str = None,
