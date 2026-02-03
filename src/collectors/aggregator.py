@@ -201,6 +201,16 @@ class AggregatorCollector(Collector):
                 if hasattr(collector, 'save_to_csv'):
                     paths = collector.save_to_csv(str(output_path), start_date, end_date)
                     saved_files[source] = paths
+
+                    # P0-ADDENDUM-1: Also collect Jito to dedicated file
+                    if source == 'defillama_live' and hasattr(collector, 'collect_jito_history'):
+                        logger.info("Saving Jito APY data to dedicated file...")
+                        jito_df = collector.collect_jito_history(str(output_path), start_date, end_date)
+                        if not jito_df.empty:
+                            if isinstance(saved_files[source], str):
+                                saved_files[source] = {'defillama': saved_files[source]}
+                            if isinstance(saved_files[source], dict):
+                                saved_files[source]['jito'] = str(output_path / 'jito_historical_apy.csv')
                 else:
                     # Fallback: collect and save manually
                     data = collector.collect(start_date, end_date)

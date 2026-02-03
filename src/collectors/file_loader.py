@@ -26,6 +26,7 @@ class FileLoader:
         'defillama': 'defillama_historical_apy.csv',
         'yahoo': 'crypto_prices.csv',  # V3: wide format with btc_close, eth_close, sol_close
         'jupiter': 'jupiter_jlp_historical_apy.csv',
+        'jito': 'jito_historical_apy.csv',  # P0-ADDENDUM-1: dedicated Jito APY file
         'perps': 'perps_lp_combined_apy.csv',
         # Additional v3 sources
         'crypto_prices': 'crypto_prices.csv',
@@ -147,7 +148,7 @@ class FileLoader:
         for source in self.FILES.keys():
             try:
                 data[source] = self.load(source, start_date, end_date)
-            except FileNotFoundError as e:
+            except (FileNotFoundError, DataNotFoundError) as e:
                 logger.warning(f"Could not load {source}: {e}")
                 data[source] = pd.DataFrame()
         return data

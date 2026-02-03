@@ -251,6 +251,73 @@ class DeFiLlamaCollector(Collector):
         """Return source type."""
         return "api"
 
+    def collect_jito_history(
+        self,
+        output_dir: str = None,
+        start_date: Optional[date] = None,
+        end_date: Optional[date] = None
+    ) -> pd.DataFrame:
+        """
+        Collect Jito APY history from DeFiLlama and save to dedicated file.
+
+        Jito requires a separate file because Battle Test loads it independently
+        from the combined defillama_historical_apy.csv.
+
+        Args:
+            output_dir: Output directory (default: data/)
+            start_date: Start date filter
+            end_date: End date filter
+
+        Returns:
+            DataFrame with columns: date, apy, tvl_usd
+        """
+        from pathlib import Path
+        from config.settings import DATA_DIR
+
+        output_path = Path(output_dir) if output_dir else DATA_DIR
+
+        # Fetch Jito pool history
+        pool_info = TRACKED_POOLS['jito']
+        pool_id = pool_info['pool_id']
+
+        logger.info(f"Fetching Jito history from DeFiLlama (pool: {pool_id})")
+
+        history = self._fetch_pool_history(pool_id)
+
+        if not history:
+            logger.warning("No Jito history data received from DeFiLlama")
+            return pd.DataFrame()
+
+        records = []
+        for item in history:
+            timestamp = item.get('timestamp')
+            if timestamp:
+                dt = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+                records.append({
+                    'date': dt.strftime('%Y-%m-%d'),
+                    'apy': item.get('apy', 0),
+                    'tvl_usd': item.get('tvlUsd', 0)
+                })
+
+        df = pd.DataFrame(records)
+
+        if not df.empty:
+            df['date'] = pd.to_datetime(df['date'])
+            df = df.sort_values('date').reset_index(drop=True)
+
+            # Filter by date range
+            if start_date:
+                df = df[df['date'] >= pd.to_datetime(start_date)]
+            if end_date:
+                df = df[df['date'] <= pd.to_datetime(end_date)]
+
+            # Save to dedicated file
+            filepath = output_path / 'jito_historical_apy.csv'
+            if safe_write_csv(df, filepath):
+                logger.info(f"Saved {len(df)} Jito APY records to {filepath}")
+
+        return df
+
     def save_to_csv(
         self,
         output_dir: str = None,

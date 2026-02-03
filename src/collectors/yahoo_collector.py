@@ -43,6 +43,8 @@ CRYPTO_TICKERS = {
     'btc': 'BTC-USD',
     'eth': 'ETH-USD',
     'sol': 'SOL-USD',
+    'usdc': 'USDC-USD',  # For depeg monitoring (P0-5b triggers)
+    'usdt': 'USDT-USD',  # For depeg monitoring (P0-5b triggers)
 }
 
 COMMODITY_TICKERS = {
