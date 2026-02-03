@@ -10,6 +10,7 @@ import logging
 
 from src.domain.simulation import BattleTestResult, MonteCarloResult, SimulationMetadata
 from src.utils.file_io import safe_write_json
+from src.adelaide.localization import HYPOTHETICAL_DISCLAIMERS
 from config.settings import OUTPUT_DIR
 
 logger = logging.getLogger(__name__)
@@ -43,6 +44,8 @@ class JSONReporter:
         output = {
             'generated_at': datetime.utcnow().isoformat(),
             'type': 'battle_test',
+            'is_hypothetical': True,
+            'hypothetical_disclaimer': HYPOTHETICAL_DISCLAIMERS['en'],
             'results': [r.to_dict() for r in results]
         }
 
@@ -75,6 +78,8 @@ class JSONReporter:
         output = {
             'generated_at': datetime.utcnow().isoformat(),
             'type': 'monte_carlo',
+            'is_hypothetical': True,
+            'hypothetical_disclaimer': HYPOTHETICAL_DISCLAIMERS['en'],
             'results': [r.to_dict() for r in results]
         }
 

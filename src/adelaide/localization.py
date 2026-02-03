@@ -152,6 +152,25 @@ Desempenho passado não é indicativo de resultados futuros.
 }
 
 
+# Hypothetical performance disclaimers (SEC Marketing Rule compliance)
+HYPOTHETICAL_DISCLAIMERS = {
+    'en': (
+        "⚠️ HYPOTHETICAL PERFORMANCE: This analysis is based on historical data "
+        "and simulated results. Past performance does not guarantee future returns. "
+        "Actual results may differ materially due to market conditions, execution, "
+        "and other factors. These results reflect hindsight bias and should not be "
+        "relied upon as indicative of future performance."
+    ),
+    'pt-br': (
+        "⚠️ DESEMPENHO HIPOTÉTICO: Esta análise é baseada em dados históricos "
+        "e resultados simulados. Desempenho passado não garante retornos futuros. "
+        "Resultados reais podem diferir significativamente devido às condições de "
+        "mercado, execução e outros fatores. Estes resultados refletem viés de "
+        "retrospectiva e não devem ser considerados indicativos de desempenho futuro."
+    )
+}
+
+
 class LocalizationEngine:
     """
     Localization engine for Adelaide content.
@@ -214,6 +233,15 @@ class LocalizationEngine:
         """Get full disclaimer for locale."""
         locale = locale or self.default_locale
         return REGIONAL_DISCLAIMERS.get(locale, REGIONAL_DISCLAIMERS['en'])
+
+    def get_hypothetical_disclaimer(self, locale: str = None) -> str:
+        """
+        Get hypothetical performance disclaimer for locale.
+
+        Required for Monte Carlo and Battle Test outputs per SEC Marketing Rule.
+        """
+        locale = locale or self.default_locale
+        return HYPOTHETICAL_DISCLAIMERS.get(locale, HYPOTHETICAL_DISCLAIMERS['en'])
 
     def format_number(self, value: float, locale: str = None) -> str:
         """Format number for locale."""

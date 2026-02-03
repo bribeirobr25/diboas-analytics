@@ -33,6 +33,9 @@ class BattleTestResult:
     daily_values: Optional[list[float]] = None
     monthly_deposits: Optional[list[float]] = None
 
+    # Compliance flag (always True for Battle Test)
+    is_hypothetical: bool = True
+
     @property
     def is_profitable(self) -> bool:
         """Check if strategy was profitable."""
@@ -60,7 +63,8 @@ class BattleTestResult:
             'profit': round(self.profit, 2),
             'return_pct': round(self.return_pct, 2),
             'max_drawdown_pct': round(self.max_drawdown_pct, 2),
-            'annualized_return': round(self.annualized_return, 2)
+            'annualized_return': round(self.annualized_return, 2),
+            'is_hypothetical': self.is_hypothetical,
         }
 
 
@@ -113,6 +117,9 @@ class MonteCarloResult:
     # Raw distribution (optional)
     final_values: Optional[np.ndarray] = field(default=None, repr=False)
 
+    # Compliance flag (always True for Monte Carlo)
+    is_hypothetical: bool = True
+
     @property
     def confidence_interval_90(self) -> tuple[float, float]:
         """Get 90% confidence interval for final value."""
@@ -153,7 +160,8 @@ class MonteCarloResult:
             'p95_final': round(self.p95_final, 2),
             'mean_max_drawdown': round(self.mean_max_drawdown, 2),
             'p95_max_drawdown': round(self.p95_max_drawdown, 2),
-            'sharpe_ratio': round(self.sharpe_ratio, 3)
+            'sharpe_ratio': round(self.sharpe_ratio, 3),
+            'is_hypothetical': self.is_hypothetical,
         }
 
 
