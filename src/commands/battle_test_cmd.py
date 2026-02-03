@@ -1,15 +1,15 @@
 """
 Battle Test command.
+
+Uses registry framework for pluggable engine and output access.
 """
 
 import logging
 from datetime import datetime
 
-from src.engines.battle_test import BattleTestEngine, SCENARIOS, run_battle_test
-from src.validators.result_validator import ResultValidator, ValidationReport
-from src.reporters.csv_reporter import CSVReporter
-from src.reporters.json_reporter import JSONReporter
-from src.reporters.markdown_reporter import MarkdownReporter
+from src.engines.battle_test import SCENARIOS, run_battle_test
+from src.registries import EngineRegistry, ValidatorRegistry, OutputRegistry
+from src.validators.result_validator import ValidationReport
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +17,10 @@ logger = logging.getLogger(__name__)
 def run_battle_test_cmd(args):
     """
     Execute Battle Test simulation.
+
+    Uses registries for validators and output formatters.
+    Engine uses direct run_battle_test() for backward compatibility
+    with date parameters.
 
     Args:
         args: Parsed command line arguments
@@ -47,7 +51,7 @@ def run_battle_test_cmd(args):
     print("Running simulation...")
     print()
 
-    # Run Battle Test
+    # Run Battle Test (using existing function for date support)
     results, metadata = run_battle_test(
         strategy_id=args.strategy,
         scenario=scenario,
@@ -67,9 +71,9 @@ def run_battle_test_cmd(args):
     print("-" * 70)
     print()
 
-    # Run validation
+    # Run validation using registry
     print("Validating results...")
-    validator = ResultValidator()
+    validator = ValidatorRegistry.get_instance().get("result_validator", {})
     all_validations = []
 
     for r in results:
@@ -95,17 +99,17 @@ def run_battle_test_cmd(args):
 
     print()
 
-    # Export results
+    # Export results using registry
     print("Exporting results...")
 
-    csv_reporter = CSVReporter()
-    json_reporter = JSONReporter()
-    md_reporter = MarkdownReporter()
+    csv_formatter = OutputRegistry.get_instance().get("csv", {})
+    json_formatter = OutputRegistry.get_instance().get("json", {})
+    md_formatter = OutputRegistry.get_instance().get("markdown", {})
 
-    csv_path = csv_reporter.export_battle_test(results)
-    json_reporter.export_battle_test(results, metadata)
-    md_reporter.generate_battle_test_report(results, scenario)
-    json_reporter.export_validation(report.to_dict())
+    csv_path = csv_formatter.export_battle_test(results)
+    json_formatter.export_battle_test(results, metadata)
+    md_formatter.export_battle_test(results, metadata)
+    json_formatter.export_validation(report.to_dict())
 
     print(f"  CSV: {csv_path}")
     print()

@@ -111,9 +111,9 @@ class TestPathProjections:
             bank_multiplier=1.005
         )
 
-        assert proj.projected_value(1000) == 1100
-        assert proj.bank_value(1000) == 1005
-        assert proj.advantage_over_bank(1000) == 95
+        assert proj.projected_value(1000) == pytest.approx(1100)
+        assert proj.bank_value(1000) == pytest.approx(1005)
+        assert proj.advantage_over_bank(1000) == pytest.approx(95)
 
     def test_five_year_projection_compounds(self):
         """Test that 5-year projections compound correctly."""

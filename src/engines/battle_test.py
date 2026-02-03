@@ -90,8 +90,14 @@ class BattleTestEngine:
         # Load JLP data
         self.jlp_data = self.loader.load('jupiter')
 
-        # Prepare Lido APY series for proxies
-        lido_df = self.apy_data[self.apy_data['project'] == 'lido'].copy()
+        # Determine protocol column name (v3 uses 'protocol', legacy uses 'project')
+        protocol_col = 'protocol' if 'protocol' in self.apy_data.columns else 'project'
+
+        # Prepare Lido APY series for proxies (use jito as proxy for lido if not available)
+        lido_df = self.apy_data[self.apy_data[protocol_col] == 'lido'].copy()
+        if lido_df.empty:
+            # Try jito as staking proxy
+            lido_df = self.apy_data[self.apy_data[protocol_col] == 'jito'].copy()
         if not lido_df.empty:
             lido_df = lido_df.set_index('date')
             self.lido_apy_series = lido_df.groupby('date')['apy'].mean()
@@ -99,7 +105,7 @@ class BattleTestEngine:
             self.lido_apy_series = pd.Series(dtype=float)
 
         # Prepare Aave APY series for proxies
-        aave_df = self.apy_data[self.apy_data['project'] == 'aave-v3'].copy()
+        aave_df = self.apy_data[self.apy_data[protocol_col] == 'aave-v3'].copy()
         if not aave_df.empty:
             aave_df = aave_df.set_index('date')
             self.aave_apy_series = aave_df.groupby('date')['apy'].mean()
@@ -109,13 +115,21 @@ class BattleTestEngine:
         # Initialize proxy calculator
         self.proxy_calc = ProxyCalculator(self.lido_apy_series, self.aave_apy_series)
 
-        # Prepare price return series
+        # Prepare price return series (handles both v3 wide format and legacy long format)
         self.price_returns = {}
         for symbol in ['BTC', 'ETH', 'SOL']:
-            symbol_df = self.price_data[self.price_data['symbol'] == symbol].copy()
-            if not symbol_df.empty:
-                symbol_df = symbol_df.set_index('date').sort_index()
-                self.price_returns[symbol] = symbol_df['close'].pct_change().fillna(0)
+            close_col = f'{symbol.lower()}_close'
+            if close_col in self.price_data.columns:
+                # V3 wide format (btc_close, eth_close, sol_close)
+                price_df = self.price_data[['date', close_col]].copy()
+                price_df = price_df.set_index('date').sort_index()
+                self.price_returns[symbol] = price_df[close_col].pct_change().fillna(0)
+            elif 'symbol' in self.price_data.columns:
+                # Legacy long format
+                symbol_df = self.price_data[self.price_data['symbol'] == symbol].copy()
+                if not symbol_df.empty:
+                    symbol_df = symbol_df.set_index('date').sort_index()
+                    self.price_returns[symbol] = symbol_df['close'].pct_change().fillna(0)
 
         # Prepare JLP APY series
         if not self.jlp_data.empty:

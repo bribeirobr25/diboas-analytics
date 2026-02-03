@@ -1,14 +1,14 @@
 """
 Monte Carlo command.
+
+Uses registry framework for pluggable engine and output access.
 """
 
 import logging
 
-from src.engines.monte_carlo import MonteCarloEngine, run_monte_carlo
-from src.validators.result_validator import ResultValidator, ValidationReport
-from src.reporters.csv_reporter import CSVReporter
-from src.reporters.json_reporter import JSONReporter
-from src.reporters.markdown_reporter import MarkdownReporter
+from src.engines.monte_carlo import run_monte_carlo
+from src.registries import EngineRegistry, ValidatorRegistry, OutputRegistry
+from src.validators.result_validator import ValidationReport
 from config.settings import DEFAULT_SIMULATIONS
 
 logger = logging.getLogger(__name__)
@@ -17,6 +17,8 @@ logger = logging.getLogger(__name__)
 def run_monte_carlo_cmd(args):
     """
     Execute Monte Carlo simulation.
+
+    Uses registries for validators and output formatters.
 
     Args:
         args: Parsed command line arguments
@@ -40,7 +42,7 @@ def run_monte_carlo_cmd(args):
     print("(This may take a minute)")
     print()
 
-    # Run Monte Carlo
+    # Run Monte Carlo (using existing function for full feature support)
     results, metadata = run_monte_carlo(
         strategy_id=args.strategy,
         n_simulations=n_simulations,
@@ -59,9 +61,9 @@ def run_monte_carlo_cmd(args):
     print("-" * 80)
     print()
 
-    # Run validation
+    # Run validation using registry
     print("Validating results...")
-    validator = ResultValidator()
+    validator = ValidatorRegistry.get_instance().get("result_validator", {})
     all_validations = []
 
     for r in results:
@@ -79,16 +81,16 @@ def run_monte_carlo_cmd(args):
 
     print()
 
-    # Export results
+    # Export results using registry
     print("Exporting results...")
 
-    csv_reporter = CSVReporter()
-    json_reporter = JSONReporter()
-    md_reporter = MarkdownReporter()
+    csv_formatter = OutputRegistry.get_instance().get("csv", {})
+    json_formatter = OutputRegistry.get_instance().get("json", {})
+    md_formatter = OutputRegistry.get_instance().get("markdown", {})
 
-    csv_path = csv_reporter.export_monte_carlo(results)
-    json_reporter.export_monte_carlo(results, metadata)
-    md_reporter.generate_monte_carlo_report(results)
+    csv_path = csv_formatter.export_monte_carlo(results)
+    json_formatter.export_monte_carlo(results, metadata)
+    md_formatter.export_monte_carlo(results, metadata)
 
     print(f"  CSV: {csv_path}")
     print()

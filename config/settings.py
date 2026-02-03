@@ -6,13 +6,78 @@ All configuration values that can be customized via environment variables.
 
 import os
 from pathlib import Path
+from typing import Optional
 
-# Optional: load environment variables from .env file
+# Load environment variables from .env file
 try:
     from dotenv import load_dotenv
     load_dotenv()
 except ImportError:
     pass  # dotenv not installed, use environment variables directly
+
+
+class Settings:
+    """
+    Centralized settings access with validation.
+
+    Usage:
+        from config.settings import settings
+        api_key = settings.require('FRED_API_KEY')
+    """
+
+    # API Keys
+    FRED_API_KEY: Optional[str] = os.getenv('FRED_API_KEY')
+    COINGECKO_API_KEY: Optional[str] = os.getenv('COINGECKO_API_KEY')
+    ETHERSCAN_API_KEY: Optional[str] = os.getenv('ETHERSCAN_API_KEY')
+    HELIUS_API_KEY: Optional[str] = os.getenv('HELIUS_API_KEY')
+    SLACK_ANALYTICS_WEBHOOK: Optional[str] = os.getenv('SLACK_ANALYTICS_WEBHOOK')
+
+    @classmethod
+    def require(cls, key_name: str) -> str:
+        """
+        Get a required API key, raising error if missing.
+
+        Args:
+            key_name: Name of the setting (e.g., 'FRED_API_KEY')
+
+        Returns:
+            The API key value
+
+        Raises:
+            ValueError: If the key is not set
+        """
+        value = getattr(cls, key_name, None)
+        if not value:
+            raise ValueError(
+                f"Missing required API key: {key_name}. "
+                f"Set it in your .env file or environment variables."
+            )
+        return value
+
+    @classmethod
+    def get(cls, key_name: str, default: str = None) -> Optional[str]:
+        """
+        Get an optional setting with default.
+
+        Args:
+            key_name: Name of the setting
+            default: Default value if not set
+
+        Returns:
+            The setting value or default
+        """
+        value = getattr(cls, key_name, None)
+        return value if value else default
+
+    @classmethod
+    def has(cls, key_name: str) -> bool:
+        """Check if a setting is configured."""
+        value = getattr(cls, key_name, None)
+        return bool(value)
+
+
+# Singleton instance
+settings = Settings()
 
 # Paths
 BASE_DIR = Path(__file__).parent.parent
