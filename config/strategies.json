@@ -18,6 +18,11 @@
             "version": "2.0.1",
             "date": "2025-12-29",
             "changes": "QR Board validation: fixed proxy_mapping, added variance warnings for high-crypto strategies"
+        },
+        {
+            "version": "2.1.0",
+            "date": "2026-02-03",
+            "changes": "Sky 30% concentration cap enforcement - redistributed excess to Aave/Compound"
         }
     ],
     "protocols": {
@@ -89,13 +94,14 @@
             "target_user": "Ana (conservative)",
             "allocations": {
                 "stable": {
-                    "sky": 0.50,
-                    "aave": 0.30,
-                    "compound": 0.20
+                    "sky": 0.30,
+                    "aave": 0.40,
+                    "compound": 0.30
                 },
                 "crypto": {}
             },
-            "allocation_string": "50% Sky + 30% Aave + 20% Compound",
+            "allocation_string": "30% Sky + 40% Aave + 30% Compound",
+            "v2_1_change": "Sky reduced 50%->30% per concentration cap; redistributed to Aave/Compound",
             "monte_carlo_validated": {
                 "prob_loss": "<1%",
                 "confidence": "High"
@@ -111,14 +117,17 @@
             "target_user": "Ana (crypto-comfortable)",
             "allocations": {
                 "stable": {
-                    "sky": 0.70
+                    "sky": 0.30,
+                    "aave": 0.25,
+                    "compound": 0.15
                 },
                 "crypto": {
                     "sanctum": 0.30
                 }
             },
-            "allocation_string": "70% Sky + 30% Sanctum",
+            "allocation_string": "30% Sky + 25% Aave + 15% Compound + 30% Sanctum",
             "v2_change": "Replaced 25% Jito + 15% Lido with 30% Sanctum to fix 30% crypto labeling",
+            "v2_1_change": "Sky reduced 70%->30% per concentration cap; added Aave/Compound",
             "monte_carlo_validated": {
                 "prob_loss": "~5%",
                 "confidence": "High"
@@ -134,13 +143,14 @@
             "target_user": "Ana, Camila",
             "allocations": {
                 "stable": {
-                    "sky": 0.60,
-                    "aave": 0.25,
-                    "compound": 0.15
+                    "sky": 0.30,
+                    "aave": 0.40,
+                    "compound": 0.30
                 },
                 "crypto": {}
             },
-            "allocation_string": "60% Sky + 25% Aave + 15% Compound",
+            "allocation_string": "30% Sky + 40% Aave + 30% Compound",
+            "v2_1_change": "Sky reduced 60%->30% per concentration cap; redistributed to Aave/Compound",
             "monte_carlo_validated": {
                 "prob_loss": "<1%",
                 "confidence": "High"
@@ -156,14 +166,17 @@
             "target_user": "Camila",
             "allocations": {
                 "stable": {
-                    "sky": 0.65
+                    "sky": 0.30,
+                    "aave": 0.20,
+                    "compound": 0.15
                 },
                 "crypto": {
                     "sanctum": 0.35
                 }
             },
-            "allocation_string": "65% Sky + 35% Sanctum",
+            "allocation_string": "30% Sky + 20% Aave + 15% Compound + 35% Sanctum",
             "v2_change": "Simplified from 65% Sky + 20% Jito + 15% Marinade",
+            "v2_1_change": "Sky reduced 65%->30% per concentration cap; added Aave/Compound",
             "monte_carlo_validated": {
                 "prob_loss": "~7%",
                 "confidence": "High"
@@ -179,13 +192,14 @@
             "target_user": "Mariana",
             "allocations": {
                 "stable": {
-                    "sky": 0.50,
-                    "aave": 0.30,
-                    "compound": 0.20
+                    "sky": 0.30,
+                    "aave": 0.40,
+                    "compound": 0.30
                 },
                 "crypto": {}
             },
-            "allocation_string": "50% Sky + 30% Aave + 20% Compound",
+            "allocation_string": "30% Sky + 40% Aave + 30% Compound",
+            "v2_1_change": "Sky reduced 50%->30% per concentration cap; redistributed to Aave/Compound",
             "monte_carlo_validated": {
                 "prob_loss": "<1%",
                 "confidence": "High"
@@ -201,14 +215,17 @@
             "target_user": "Mariana (crypto-comfortable)",
             "allocations": {
                 "stable": {
-                    "sky": 0.60
+                    "sky": 0.30,
+                    "aave": 0.20,
+                    "compound": 0.10
                 },
                 "crypto": {
                     "sanctum": 0.25,
                     "jlp": 0.15
                 }
             },
-            "allocation_string": "60% Sky + 25% Sanctum + 15% JLP",
+            "allocation_string": "30% Sky + 20% Aave + 10% Compound + 25% Sanctum + 15% JLP",
+            "v2_1_change": "Sky reduced 60%->30% per concentration cap; added Aave/Compound",
             "monte_carlo_validated": {
                 "prob_loss": "~12%",
                 "confidence": "High"
@@ -224,13 +241,14 @@
             "target_user": "Bruno",
             "allocations": {
                 "stable": {
-                    "sky": 0.55,
-                    "aave": 0.30,
-                    "compound": 0.15
+                    "sky": 0.30,
+                    "aave": 0.40,
+                    "compound": 0.30
                 },
                 "crypto": {}
             },
-            "allocation_string": "55% Sky + 30% Aave + 15% Compound",
+            "allocation_string": "30% Sky + 40% Aave + 30% Compound",
+            "v2_1_change": "Sky reduced 55%->30% per concentration cap; redistributed to Aave/Compound",
             "monte_carlo_validated": {
                 "prob_loss": "<1%",
                 "confidence": "High"
@@ -272,13 +290,14 @@
             "target_user": "Felipe (conservative mode)",
             "allocations": {
                 "stable": {
-                    "sky": 0.45,
-                    "aave": 0.35,
-                    "compound": 0.20
+                    "sky": 0.30,
+                    "aave": 0.40,
+                    "compound": 0.30
                 },
                 "crypto": {}
             },
-            "allocation_string": "45% Sky + 35% Aave + 20% Compound",
+            "allocation_string": "30% Sky + 40% Aave + 30% Compound",
+            "v2_1_change": "Sky reduced 45%->30% per concentration cap; redistributed to Aave/Compound",
             "monte_carlo_validated": {
                 "prob_loss": "<1%",
                 "confidence": "High"
@@ -325,7 +344,9 @@
         "stable_pct_equals_100_minus_crypto_pct": true,
         "crypto_pct_matches_crypto_allocations_sum": true,
         "no_huma_in_any_strategy": true,
-        "jito_only_in_full_throttle": true
+        "jito_only_in_full_throttle": true,
+        "max_sky_allocation_pct": 30,
+        "sky_concentration_cap_enforced": true
     },
     "proxy_methodology": {
         "_comment": "QR Board validated - use these formulas for backtesting when historical data unavailable",
