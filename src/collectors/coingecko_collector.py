@@ -3,6 +3,7 @@ CoinGecko Collector for crypto market data.
 
 Collects:
 - Current prices for BTC, ETH, SOL
+- USDC and USDT prices (for depeg monitoring)
 - Market caps and 24h volumes
 - Historical price data (backup to Yahoo)
 - Market dominance ratios
@@ -30,6 +31,8 @@ COIN_IDS = {
     'btc': 'bitcoin',
     'eth': 'ethereum',
     'sol': 'solana',
+    'usdc': 'usd-coin',     # NEW - for depeg monitoring
+    'usdt': 'tether',       # NEW - for depeg monitoring
 }
 
 
