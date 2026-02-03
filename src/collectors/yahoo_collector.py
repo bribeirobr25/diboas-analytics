@@ -52,6 +52,10 @@ COMMODITY_TICKERS = {
     'copper': 'HG=F',
 }
 
+# Historical start date for full data collection (matches DeFiLlama coverage)
+# P0-ADDENDUM-C: Changed from timedelta(days=365) to fixed historical date
+HISTORICAL_START_DATE = date(2022, 5, 1)
+
 
 @CollectorRegistry.register("yahoo_live")
 class YahooCollector(Collector):
@@ -132,7 +136,7 @@ class YahooCollector(Collector):
             spy_close, tlt_close, xlf_close, xlu_close
         """
         if start_date is None:
-            start_date = date.today() - timedelta(days=365)
+            start_date = self.config.get('start_date') or HISTORICAL_START_DATE
         if end_date is None:
             end_date = date.today()
 
@@ -185,7 +189,7 @@ class YahooCollector(Collector):
             DataFrame with columns: date, btc_close, eth_close, sol_close
         """
         if start_date is None:
-            start_date = date.today() - timedelta(days=365)
+            start_date = self.config.get('start_date') or HISTORICAL_START_DATE
         if end_date is None:
             end_date = date.today()
 
@@ -222,7 +226,7 @@ class YahooCollector(Collector):
             DataFrame with columns: date, gold_close, copper_close
         """
         if start_date is None:
-            start_date = date.today() - timedelta(days=365)
+            start_date = self.config.get('start_date') or HISTORICAL_START_DATE
         if end_date is None:
             end_date = date.today()
 
@@ -324,14 +328,20 @@ class YahooCollector(Collector):
         if start_date is None:
             start_str = self.config.get('start_date')
             if start_str:
-                start_date = datetime.strptime(start_str, '%Y-%m-%d').date()
+                if isinstance(start_str, str):
+                    start_date = datetime.strptime(start_str, '%Y-%m-%d').date()
+                else:
+                    start_date = start_str
             else:
-                start_date = date.today() - timedelta(days=365)
+                start_date = HISTORICAL_START_DATE
 
         if end_date is None:
             end_str = self.config.get('end_date')
             if end_str:
-                end_date = datetime.strptime(end_str, '%Y-%m-%d').date()
+                if isinstance(end_str, str):
+                    end_date = datetime.strptime(end_str, '%Y-%m-%d').date()
+                else:
+                    end_date = end_str
             else:
                 end_date = date.today()
 
@@ -396,5 +406,94 @@ class YahooCollector(Collector):
                 if safe_write_csv(data[key], filepath):
                     paths[key] = str(filepath)
                     logger.info(f"Saved {key} to {filepath}")
+
+        return paths
+
+    def save_to_csv_incremental(
+        self,
+        output_dir: str = None,
+    ) -> Dict[str, str]:
+        """
+        Append new data to existing CSV files without losing history.
+
+        P0-ADDENDUM-C: Incremental append mode for daily operations.
+        Reads existing files, determines last date, fetches only new data,
+        merges and deduplicates.
+
+        Args:
+            output_dir: Output directory (default: data/)
+
+        Returns:
+            Dictionary mapping data type to file path
+        """
+        from pathlib import Path
+        from config.settings import DATA_DIR
+
+        output_path = Path(output_dir) if output_dir else DATA_DIR
+        paths = {}
+
+        file_map = {
+            'tradfi_benchmark': ('tradfi_benchmark_data.csv', self.collect_tradfi_benchmark),
+            'crypto_prices': ('crypto_prices.csv', self.collect_crypto_prices),
+            'commodities': ('commodities.csv', self.collect_commodities),
+        }
+
+        for key, (filename, collect_fn) in file_map.items():
+            filepath = output_path / filename
+
+            # Read existing data
+            if filepath.exists():
+                existing_df = pd.read_csv(filepath)
+                existing_df['date'] = pd.to_datetime(existing_df['date'])
+                last_date = existing_df['date'].max().date()
+                start_date = last_date + timedelta(days=1)
+                logger.info(f"{key}: existing data ends {last_date}, fetching from {start_date}")
+            else:
+                existing_df = pd.DataFrame()
+                start_date = HISTORICAL_START_DATE
+                logger.info(f"{key}: no existing data, fetching from {start_date}")
+
+            # Skip if already up to date
+            if start_date >= date.today():
+                logger.info(f"{key}: already up to date")
+                if filepath.exists():
+                    paths[key] = str(filepath)
+                continue
+
+            # Collect new data
+            new_df = collect_fn(start_date, date.today())
+
+            if new_df.empty:
+                logger.warning(f"{key}: no new data fetched")
+                if filepath.exists():
+                    paths[key] = str(filepath)
+                continue
+
+            # Merge and dedupe
+            if not existing_df.empty:
+                new_df['date'] = pd.to_datetime(new_df['date'])
+                combined = pd.concat([existing_df, new_df])
+                combined = combined.drop_duplicates(subset=['date'], keep='last')
+                combined = combined.sort_values('date').reset_index(drop=True)
+            else:
+                combined = new_df
+
+            # Write combined data
+            if safe_write_csv(combined, filepath):
+                paths[key] = str(filepath)
+                logger.info(f"{key}: saved {len(combined)} total rows to {filepath}")
+
+        # Also handle rotation indicators (derived from tradfi + commodities)
+        tradfi_path = output_path / 'tradfi_benchmark_data.csv'
+        commodities_path = output_path / 'commodities.csv'
+        rotation_path = output_path / 'rotation_indicators.csv'
+
+        if tradfi_path.exists() and commodities_path.exists():
+            tradfi_df = pd.read_csv(tradfi_path)
+            commodities_df = pd.read_csv(commodities_path)
+            rotation_df = self.calculate_rotation_indicators(tradfi_df, commodities_df)
+            if not rotation_df.empty and safe_write_csv(rotation_df, rotation_path):
+                paths['rotation_indicators'] = str(rotation_path)
+                logger.info(f"rotation_indicators: regenerated with {len(rotation_df)} rows")
 
         return paths
