@@ -14,10 +14,7 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
-.env.example
-.env.sample
-.env.template
-*.env
+# Note: .env.example should be committed (template for developers)
 secrets/
 config/secrets/
 .secrets/

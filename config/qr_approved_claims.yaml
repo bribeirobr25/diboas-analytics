@@ -1,0 +1,187 @@
+# QR-Approved Claims List
+# Claims that have been reviewed and approved by Quantitative Research (QR) team.
+# Last updated: 2026-01-26
+# Version: 1.0
+
+# Each claim has:
+#   - id: Unique identifier (QR-XXX format)
+#   - claim: The exact approved wording
+#   - category: Type of claim (performance, risk, feature, comparison)
+#   - conditions: When this claim can be used
+#   - approved_by: QR team member
+#   - approved_date: ISO date
+#   - expires: Expiration date (claims need re-review)
+#   - notes: Additional context
+
+claims:
+  # ─────────────────────────────────────────────────────────────────
+  # PERFORMANCE CLAIMS
+  # ─────────────────────────────────────────────────────────────────
+
+  - id: QR-001
+    claim: "Historical backtests show positive returns in {X}% of simulated scenarios"
+    category: performance
+    conditions:
+      - Must cite specific Monte Carlo simulation results
+      - X must be calculated from actual simulation data
+      - Must include timeframe and sample size
+    approved_by: QR Team
+    approved_date: "2026-01-15"
+    expires: "2026-07-15"
+    notes: Generic performance claim template
+
+  - id: QR-002
+    claim: "Strategy {N} showed {X}% return over the {period} period in historical testing"
+    category: performance
+    conditions:
+      - Must reference specific Battle Test results
+      - Period must be clearly defined (e.g., "Jan 2023 - Dec 2024")
+      - Must include disclaimer about past performance
+    approved_by: QR Team
+    approved_date: "2026-01-15"
+    expires: "2026-07-15"
+    notes: Strategy-specific historical return claim
+
+  - id: QR-003
+    claim: "Stable strategies (1, 3, 5, 7, 9) have shown 0% maximum drawdown in backtests"
+    category: performance
+    conditions:
+      - Only for strategies with 0% crypto allocation
+      - Must reference specific backtest period
+    approved_by: QR Team
+    approved_date: "2026-01-15"
+    expires: "2026-07-15"
+    notes: Stable strategy drawdown claim
+
+  # ─────────────────────────────────────────────────────────────────
+  # RISK CLAIMS
+  # ─────────────────────────────────────────────────────────────────
+
+  - id: QR-010
+    claim: "Maximum historical drawdown of {X}% observed during {event}"
+    category: risk
+    conditions:
+      - Must cite specific historical event (e.g., "March 2020 COVID crash")
+      - X must be verified against Battle Test data
+    approved_by: QR Team
+    approved_date: "2026-01-15"
+    expires: "2026-07-15"
+    notes: Maximum drawdown claim
+
+  - id: QR-011
+    claim: "P95 drawdown in Monte Carlo simulations: {X}%"
+    category: risk
+    conditions:
+      - Must use 95th percentile from actual simulation
+      - Must disclose simulation parameters
+    approved_by: QR Team
+    approved_date: "2026-01-15"
+    expires: "2026-07-15"
+    notes: Monte Carlo risk metric
+
+  - id: QR-012
+    claim: "Probability of any loss over {period}: {X}%"
+    category: risk
+    conditions:
+      - Must be calculated from Monte Carlo results
+      - Period must match simulation parameters
+    approved_by: QR Team
+    approved_date: "2026-01-15"
+    expires: "2026-07-15"
+    notes: Loss probability claim
+
+  # ─────────────────────────────────────────────────────────────────
+  # FEATURE CLAIMS
+  # ─────────────────────────────────────────────────────────────────
+
+  - id: QR-020
+    claim: "Diversified across {N} DeFi protocols"
+    category: feature
+    conditions:
+      - N must reflect actual protocol count in strategy
+      - Must list protocol names if space permits
+    approved_by: QR Team
+    approved_date: "2026-01-15"
+    expires: "2026-07-15"
+    notes: Protocol diversification claim
+
+  - id: QR-021
+    claim: "Automatic rebalancing based on market conditions"
+    category: feature
+    conditions:
+      - Must not imply guaranteed outcomes
+      - Can describe trigger-based rebalancing
+    approved_by: QR Team
+    approved_date: "2026-01-15"
+    expires: "2026-07-15"
+    notes: Rebalancing feature claim
+
+  - id: QR-022
+    claim: "Real-time protocol health monitoring"
+    category: feature
+    conditions:
+      - Must have actual monitoring in place
+      - Cannot imply 100% uptime guarantee
+    approved_by: QR Team
+    approved_date: "2026-01-15"
+    expires: "2026-07-15"
+    notes: Monitoring feature claim
+
+  # ─────────────────────────────────────────────────────────────────
+  # COMPARISON CLAIMS
+  # ─────────────────────────────────────────────────────────────────
+
+  - id: QR-030
+    claim: "Outperformed {benchmark} by {X}% during {period}"
+    category: comparison
+    conditions:
+      - Benchmark must be clearly defined (e.g., "60/40 portfolio", "S&P 500")
+      - Period and methodology must be disclosed
+      - Must include disclaimer about past performance
+    approved_by: QR Team
+    approved_date: "2026-01-15"
+    expires: "2026-07-15"
+    notes: Benchmark comparison claim
+
+  - id: QR-031
+    claim: "Lower volatility than direct crypto holdings"
+    category: comparison
+    conditions:
+      - Must cite specific volatility metrics
+      - Comparison must be apples-to-apples (same period)
+    approved_by: QR Team
+    approved_date: "2026-01-15"
+    expires: "2026-07-15"
+    notes: Volatility comparison claim
+
+# ─────────────────────────────────────────────────────────────────
+# PROHIBITED CLAIMS (for reference)
+# ─────────────────────────────────────────────────────────────────
+
+prohibited_patterns:
+  - "guaranteed"
+  - "risk-free"
+  - "can't lose"
+  - "will definitely"
+  - "always profitable"
+  - "no risk"
+  - "100% safe"
+  - "sure thing"
+  - "certain returns"
+
+# ─────────────────────────────────────────────────────────────────
+# REQUIRED DISCLAIMERS
+# ─────────────────────────────────────────────────────────────────
+
+required_disclaimers:
+  performance:
+    text: "Past performance is not indicative of future results."
+    applies_to: [QR-001, QR-002, QR-003, QR-030]
+
+  investment_advice:
+    text: "This is not investment advice. Consider consulting a licensed financial adviser."
+    applies_to: all
+
+  capital_risk:
+    text: "Your capital is at risk. You may lose some or all of your investment."
+    applies_to: all

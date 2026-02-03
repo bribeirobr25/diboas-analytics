@@ -1,0 +1,120 @@
+# CLO Gate 4 Compliance Configuration
+# Legal compliance settings for Adelaide content validation
+
+# Spot-check requirement
+first_n_spot_check: 20
+
+# SLA times in minutes
+sla_minutes:
+  level_3: 60
+  level_4: 75
+  level_5: 90
+  spot_check: 480  # 8 hours
+
+# Geo-blocked jurisdictions (FSMA Section 21, etc.)
+geo_blocked:
+  - UK
+
+# Routing decisions
+routing:
+  auto_approve:
+    - level_0
+    - level_1
+    - level_2
+  require_human:
+    - level_3
+    - level_4
+    - level_5
+
+# Approval chains by crisis level
+approvers:
+  level_3:
+    - clo_board
+    - ceo
+  level_4:
+    - clo_board
+    - ceo
+    - external_counsel
+  level_5:
+    - clo_board
+    - ceo
+    - board
+    - external_counsel
+
+# Notification settings
+notifications:
+  slack:
+    enabled: true
+    channels:
+      level_3: "#crisis-warning"
+      level_4: "#crisis-alert"
+      level_5: "#crisis-critical"
+  email:
+    enabled: false  # Phase 2+
+
+# Disclaimer requirements by jurisdiction
+disclaimers:
+  US:
+    required:
+      - "not investment advice"
+      - "past performance"
+    regulatory_refs:
+      - "SEC/FINRA Guidelines"
+      - "SEC Rule 206(4)-1"
+  EU:
+    required:
+      - "not investment advice"
+      - "capital at risk"
+    regulatory_refs:
+      - "MiFID II"
+      - "MiFID II Article 24"
+  BR:
+    required:
+      - "investimentos envolvem riscos"
+    regulatory_refs:
+      - "CVM Instruction 555"
+
+# Prohibited terms (universal)
+prohibited_terms_universal:
+  - guaranteed
+  - risk-free
+  - risk free
+  - cannot lose
+  - 100% safe
+  - assured profit
+  - get rich quick
+  - no risk
+  - zero risk
+
+# Prohibited terms by jurisdiction
+prohibited_terms:
+  US:
+    - you should invest
+    - i recommend
+    - we advise
+    - buy now
+    - sell now
+  BR:
+    - lucro garantido
+    - sem risco
+    - rentabilidade certa
+  EU:
+    - guaranteed returns
+    - capital protection guarantee
+
+# QR-approved claim limits
+claims:
+  apy_max: 50
+  return_timeframes:
+    - daily
+    - weekly
+    - monthly
+    - annual
+    - ytd
+  benchmarks:
+    - S&P 500
+    - BTC
+    - ETH
+    - SOL
+    - USDC
+    - Treasury

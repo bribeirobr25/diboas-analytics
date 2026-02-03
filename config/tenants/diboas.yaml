@@ -1,0 +1,52 @@
+tenant_id: "diboas"
+name: "diBoaS Platform"
+tier: "diboas"
+
+# Feature flags - diBoaS users get everything
+features:
+  estate_wallet_tracking: true
+  whale_alerts: true
+  real_time_data: true
+  custom_strategies: true
+  advanced_analytics: true
+
+# All collectors enabled
+collectors:
+  - fred
+  - yahoo_live
+  - defillama_live
+  - coingecko
+  - alternative
+
+# All engines enabled
+engines:
+  - battle_test
+  - monte_carlo
+  - monitoring
+  - anomaly
+
+# All personas enabled
+personas:
+  - ana
+  - maria
+  - felipe
+
+# All output formats enabled
+output_formats:
+  - newsletter_md
+  - twitter_thread
+  - linkedin_post
+  - website_teaser
+  - substack
+
+# All locales enabled
+locales:
+  - en
+  - pt-br
+
+# Unlimited usage for diBoaS
+api_calls_per_month: -1
+strategies_limit: -1
+
+# Metadata
+notes: "Default diBoaS platform configuration - full access"

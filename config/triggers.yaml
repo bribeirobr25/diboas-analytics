@@ -1,0 +1,145 @@
+# Intelligence Triggers Configuration
+# Layer 4 trigger thresholds and settings
+
+defaults:
+  cooldown_minutes: 60
+  enabled: true
+
+protocol:
+  sky:
+    depeg_l2:
+      threshold_pct: 1.0
+      enabled: true
+    depeg_l3:
+      threshold_pct: 2.0
+      enabled: true
+    depeg_l4:
+      threshold_pct: 5.0
+      enabled: true
+    tvl_l2:
+      threshold_pct: -10
+      enabled: true
+    tvl_l3:
+      threshold_pct: -25
+      enabled: true
+    buffer_l2:
+      threshold_usd: 50000000  # $50M
+      enabled: true
+
+  sanctum:
+    apy_l2:
+      threshold_pct: -50  # Match spec (was -30)
+      enabled: true
+    lst_health:
+      threshold_deviation_pct: 2.0
+      threshold_health_score: 80
+      enabled: true
+    tvl_l3:
+      threshold_pct: -20
+      enabled: true
+    tvl_l4:
+      threshold_pct: -50
+      enabled: true
+
+  jlp:
+    utilization_l2:
+      threshold_pct: 85
+      enabled: true
+    utilization_l3:
+      threshold_pct: 95
+      enabled: true
+    apy_l2:
+      threshold_pct: -40
+      enabled: true
+    tvl_l3:
+      threshold_pct: -30
+      enabled: true
+
+  aave:
+    utilization_l2:
+      threshold_pct: 80
+      enabled: true
+    liquidation_risk:
+      threshold_usd: 10000000
+      enabled: true
+
+market:
+  btc:
+    drop_l3:
+      threshold_pct: -10
+      enabled: true
+    drop_l4:
+      threshold_pct: -20
+      enabled: true
+
+  eth:
+    drop_l3:
+      threshold_pct: -15
+      enabled: true
+
+  sol:
+    drop_l3:
+      threshold_pct: -20
+      enabled: true
+    drop_l4:
+      threshold_pct: -30
+      enabled: true
+
+  volatility:
+    crypto_spike:
+      threshold_std: 2.0
+      enabled: true
+
+  cap_l3:
+    threshold_pct: -15
+    enabled: true
+
+wallet:
+  estate:
+    info:
+      threshold_usd: 10000000
+      enabled: true
+    l2:
+      threshold_usd: 50000000
+      enabled: true
+    l3:
+      threshold_usd: 100000000
+      enabled: true
+
+  whale:
+    movement:
+      threshold_usd: 25000000
+      enabled: true
+    accumulation:
+      threshold_usd: 50000000
+      enabled: true
+    distribution:
+      threshold_usd: -50000000
+      enabled: true
+
+macro:
+  vix:
+    l2:
+      threshold: 30
+      enabled: true
+    l3:
+      threshold: 40
+      enabled: true
+
+  yield_curve:
+    inversion:
+      threshold: 0
+      enabled: true
+    steep:
+      threshold: 1.0
+      enabled: true
+
+  credit:
+    spread_wide:
+      threshold_bp: 150
+      enabled: true
+
+  fed:
+    liquidity:
+      threshold_b: -50
+      enabled: true
