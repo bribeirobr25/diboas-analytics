@@ -1,7 +1,8 @@
 """
 File loader for bundled historical data.
 
-Loads CSV files from the data/ directory.
+Loads CSV files from the data/ directory with error handling
+and audit trail integration.
 """
 
 import pandas as pd
@@ -11,6 +12,8 @@ from datetime import date, datetime
 import logging
 
 from config.settings import DATA_DIR
+from src.utils.errors import DataNotFoundError, DataCorruptError, graceful_degradation
+from src.utils.audit import get_audit_trail
 
 logger = logging.getLogger(__name__)
 
@@ -18,11 +21,22 @@ logger = logging.getLogger(__name__)
 class FileLoader:
     """Load bundled historical data from CSV files."""
 
+    # V3 schema file mappings (from live collectors)
     FILES = {
         'defillama': 'defillama_historical_apy.csv',
-        'yahoo': 'yahoo_historical_prices.csv',
+        'yahoo': 'crypto_prices.csv',  # V3: wide format with btc_close, eth_close, sol_close
         'jupiter': 'jupiter_jlp_historical_apy.csv',
-        'perps': 'perps_lp_combined_apy.csv'
+        'perps': 'perps_lp_combined_apy.csv',
+        # Additional v3 sources
+        'crypto_prices': 'crypto_prices.csv',
+        'treasury_yields': 'treasury_yields.csv',
+        'sentiment': 'sentiment_indicators.csv',
+        'tradfi': 'tradfi_benchmark_data.csv',
+    }
+
+    # Fallback for legacy file names (pre-v3)
+    LEGACY_FILES = {
+        'yahoo': 'yahoo_historical_prices.csv',  # Legacy: long format with symbol column
     }
 
     def __init__(self, data_dir: Path = None):
@@ -44,23 +58,67 @@ class FileLoader:
 
         Returns:
             DataFrame with loaded data
+
+        Raises:
+            DataNotFoundError: If file doesn't exist
+            DataCorruptError: If file is malformed
         """
         if source not in self.FILES:
-            raise ValueError(f"Unknown source: {source}. Available: {list(self.FILES.keys())}")
+            available = ", ".join(self.FILES.keys())
+            raise ValueError(
+                f"Unknown source: '{source}'. Available sources: {available}"
+            )
 
         filepath = self.data_dir / self.FILES[source]
 
+        # Try legacy file if v3 file doesn't exist
+        if not filepath.exists() and source in self.LEGACY_FILES:
+            legacy_path = self.data_dir / self.LEGACY_FILES[source]
+            if legacy_path.exists():
+                logger.info(f"Using legacy file: {legacy_path}")
+                filepath = legacy_path
+
         if not filepath.exists():
-            raise FileNotFoundError(f"Data file not found: {filepath}")
+            raise DataNotFoundError(
+                filepath=str(filepath),
+                data_type=f'{source} historical data'
+            )
 
         logger.info(f"Loading {source} data from {filepath}")
 
-        # Load CSV with date parsing
-        df = pd.read_csv(filepath)
+        # Log to audit trail if active
+        audit = get_audit_trail()
+        if audit:
+            audit.log_input_file(filepath)
+
+        # Load CSV with error handling
+        try:
+            df = pd.read_csv(filepath)
+        except pd.errors.EmptyDataError:
+            raise DataCorruptError(
+                filepath=str(filepath),
+                reason="File is empty"
+            )
+        except pd.errors.ParserError as e:
+            raise DataCorruptError(
+                filepath=str(filepath),
+                reason=f"CSV parsing failed: {e}"
+            )
+
+        # Validate data has expected structure
+        if df.empty:
+            logger.warning(f"Data file {source} is empty")
+            return df
 
         # Parse date column
         if 'date' in df.columns:
-            df['date'] = pd.to_datetime(df['date'])
+            try:
+                df['date'] = pd.to_datetime(df['date'])
+            except Exception as e:
+                raise DataCorruptError(
+                    filepath=str(filepath),
+                    reason=f"Failed to parse date column: {e}"
+                )
 
             # Filter by date range if specified
             if start_date:
@@ -107,16 +165,26 @@ class FileLoader:
     def get_available_protocols(self, source: str = 'defillama') -> list[str]:
         """Get list of protocols available in the data."""
         df = self.load(source)
-        if 'project' in df.columns:
+        # V3 schema uses 'protocol', legacy uses 'project'
+        if 'protocol' in df.columns:
+            return sorted(df['protocol'].unique().tolist())
+        elif 'project' in df.columns:
             return sorted(df['project'].unique().tolist())
         return []
 
     def get_available_symbols(self, source: str = 'yahoo') -> list[str]:
         """Get list of symbols available in price data."""
         df = self.load(source)
+        # Legacy long format has 'symbol' column
         if 'symbol' in df.columns:
             return sorted(df['symbol'].unique().tolist())
-        return []
+        # V3 wide format has btc_close, eth_close, sol_close columns
+        symbols = []
+        for col in df.columns:
+            if col.endswith('_close'):
+                symbol = col.replace('_close', '').upper()
+                symbols.append(symbol)
+        return sorted(symbols) if symbols else []
 
 
 class DataAggregator:
@@ -148,8 +216,9 @@ class DataAggregator:
         """
         df = self.loader.load('defillama', start_date, end_date)
 
-        # Filter to specific protocol
-        protocol_df = df[df['project'] == protocol].copy()
+        # Filter to specific protocol (V3 uses 'protocol', legacy uses 'project')
+        protocol_col = 'protocol' if 'protocol' in df.columns else 'project'
+        protocol_df = df[df[protocol_col] == protocol].copy()
 
         if protocol_df.empty:
             logger.warning(f"No data found for protocol: {protocol}")
@@ -189,14 +258,23 @@ class DataAggregator:
         """
         df = self.loader.load('yahoo', start_date, end_date)
 
-        # Filter to specific symbol
-        symbol_df = df[df['symbol'] == symbol].copy()
-
-        if symbol_df.empty:
+        # Check if V3 wide format (btc_close, eth_close, sol_close)
+        close_col = f'{symbol.lower()}_close'
+        if close_col in df.columns:
+            # V3 wide format - extract single symbol
+            symbol_df = df[['date', close_col]].copy()
+            symbol_df = symbol_df.rename(columns={close_col: 'close'})
+            symbol_df = symbol_df.set_index('date')
+        elif 'symbol' in df.columns:
+            # Legacy long format - filter to specific symbol
+            symbol_df = df[df['symbol'] == symbol].copy()
+            if symbol_df.empty:
+                logger.warning(f"No price data found for symbol: {symbol}")
+                return pd.DataFrame()
+            symbol_df = symbol_df.set_index('date')
+        else:
             logger.warning(f"No price data found for symbol: {symbol}")
             return pd.DataFrame()
-
-        symbol_df = symbol_df.set_index('date')
 
         # Reindex to full date range
         date_range = pd.date_range(start_date, end_date, freq='D')

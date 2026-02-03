@@ -9,6 +9,7 @@ from typing import Any
 import logging
 
 from src.domain.simulation import BattleTestResult, MonteCarloResult, SimulationMetadata
+from src.utils.file_io import safe_write_json
 from config.settings import OUTPUT_DIR
 
 logger = logging.getLogger(__name__)
@@ -150,6 +151,5 @@ class JSONReporter:
         return output_path
 
     def _write_json(self, path: Path, data: Any):
-        """Write JSON to file with proper formatting."""
-        with open(path, 'w') as f:
-            json.dump(data, f, indent=2, default=str)
+        """Write JSON to file with proper formatting and atomic write."""
+        safe_write_json(data, path)

@@ -9,6 +9,7 @@ import pandas as pd
 import logging
 
 from src.domain.simulation import BattleTestResult, MonteCarloResult
+from src.utils.file_io import safe_write_csv
 from config.settings import OUTPUT_DIR
 
 logger = logging.getLogger(__name__)
@@ -55,7 +56,7 @@ class CSVReporter:
             })
 
         df = pd.DataFrame(rows)
-        df.to_csv(output_path, index=False)
+        safe_write_csv(df, output_path)
 
         logger.info(f"Battle Test results exported to {output_path}")
         return output_path
@@ -103,7 +104,7 @@ class CSVReporter:
             })
 
         df = pd.DataFrame(rows)
-        df.to_csv(output_path, index=False)
+        safe_write_csv(df, output_path)
 
         logger.info(f"Monte Carlo results exported to {output_path}")
         return output_path
@@ -117,7 +118,7 @@ class CSVReporter:
         output_path = self.output_dir / filename
 
         df = pd.DataFrame(validation_results)
-        df.to_csv(output_path, index=False)
+        safe_write_csv(df, output_path, allow_empty=True)  # Allow empty for "no violations" case
 
         logger.info(f"Validation results exported to {output_path}")
         return output_path
