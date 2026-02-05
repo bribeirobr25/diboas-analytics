@@ -91,7 +91,8 @@ class SystemHealthReport:
 
 def check_data_freshness(
     data_dir: Path = None,
-    max_age_hours: int = 24
+    max_age_hours: int = 24,
+    is_offline: bool = False
 ) -> HealthCheckResult:
     """
     Check if data files are fresh enough.
@@ -99,6 +100,7 @@ def check_data_freshness(
     Args:
         data_dir: Directory containing data files
         max_age_hours: Maximum acceptable age in hours
+        is_offline: Indicate using bundled offline data
 
     Returns:
         HealthCheckResult with freshness status
@@ -152,14 +154,18 @@ def check_data_freshness(
             )
 
         if stale_files:
+            msg = f"Stale files (>{max_age_hours}h): {', '.join(stale_files)}"
+            if is_offline:
+                msg += "\n   (Expected when using bundled data in offline mode)"
             return HealthCheckResult(
                 name="data_freshness",
                 status=HealthStatus.DEGRADED,
-                message=f"Stale files (>{max_age_hours}h): {', '.join(stale_files)}",
+                message=msg,
                 details={
                     "stale_files": stale_files,
                     "file_ages": file_ages,
                     "max_age_hours": max_age_hours,
+                    "is_offline": is_offline,
                 },
                 duration_ms=duration_ms,
             )
@@ -428,10 +434,15 @@ class HealthChecker:
         print(report.to_dict())
     """
 
-    def __init__(self):
-        """Initialize with default checks."""
+    def __init__(self, is_offline: bool = False):
+        """
+        Initialize with default checks.
+
+        Args:
+            is_offline: Indicate using bundled offline data
+        """
+        self._is_offline = is_offline
         self._checks: List[Callable[[], HealthCheckResult]] = [
-            check_data_freshness,
             check_disk_space,
             check_circuit_breakers,
         ]
@@ -459,11 +470,14 @@ class HealthChecker:
         Returns:
             SystemHealthReport with all check results
         """
+        # Start with data freshness check (needs is_offline parameter)
+        results = [check_data_freshness(is_offline=self._is_offline)]
+
+        # Run other checks
         checks = list(self._checks)
         if include_connectivity:
             checks.append(check_protocol_connectivity)
 
-        results = []
         for check_func in checks:
             try:
                 result = check_func()
@@ -498,16 +512,20 @@ class HealthChecker:
         )
 
 
-def get_system_health(include_connectivity: bool = False) -> Dict[str, Any]:
+def get_system_health(
+    include_connectivity: bool = False,
+    is_offline: bool = False
+) -> Dict[str, Any]:
     """
     Quick function to get system health status.
 
     Args:
         include_connectivity: Include API connectivity check
+        is_offline: Indicate using bundled offline data
 
     Returns:
         Dictionary with health status and details
     """
-    checker = HealthChecker()
+    checker = HealthChecker(is_offline=is_offline)
     report = checker.run_all_checks(include_connectivity=include_connectivity)
     return report.to_dict()

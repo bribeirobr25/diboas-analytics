@@ -42,6 +42,11 @@ def add_health_parser(subparsers):
         action="store_true",
         help="Include detailed check information",
     )
+    parser.add_argument(
+        "--offline",
+        action="store_true",
+        help="Indicate using bundled offline data (adjusts freshness warnings)",
+    )
     parser.set_defaults(func=run_health)
 
 
@@ -59,11 +64,15 @@ def run_health(args) -> int:
     include_connectivity = getattr(args, "connectivity", False)
     output_json = getattr(args, "output_json", False)
     verbose = getattr(args, "verbose", False)
+    is_offline = getattr(args, "offline", False)
 
     logger.info("Running system health checks...")
 
     # Get health status
-    health = get_system_health(include_connectivity=include_connectivity)
+    health = get_system_health(
+        include_connectivity=include_connectivity,
+        is_offline=is_offline
+    )
 
     # Get circuit breaker health
     circuit_health = get_all_circuit_health()
