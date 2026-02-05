@@ -1,0 +1,19 @@
+entity_name,entity_type,filing_date,fund_ticker,shares_held,value_usd,change_from_prior,source
+Millennium Management,Hedge Fund,2025-02-14,IBIT/FBTC/GBTC/ARKB/BITB,29800000,2600000000,remained_largest,CoinShares Q4 2024
+Jane Street Group,Market Maker,2025-02-14,Multiple BTC ETFs,not_specified,1700000000,liquidity_provider,CoinShares Q4 2024
+Goldman Sachs,Investment Bank,2025-02-12,IBIT,24077861,1270000000,+88%_from_Q3,SEC 13F Filing
+Goldman Sachs,Investment Bank,2025-02-12,FBTC,3530486,288000000,+105%_from_Q3,SEC 13F Filing
+Brevan Howard Capital,Hedge Fund,2025-02-14,Multiple BTC ETFs,not_specified,1400000000,8.7%_portfolio,CoinShares Q4 2024
+Horizon Kinetics,Asset Manager,2025-02-14,IBIT,not_specified,1300000000,16.16%_portfolio,PANews 13F Analysis
+DE Shaw & Co,Quant Hedge Fund,2025-02-14,Multiple BTC ETFs,not_specified,873000000,active_participant,CoinShares Q4 2024
+Harvard University,University Endowment,2025-11-14,IBIT,6800000,442800000,+257%_from_Q2,Bloomberg
+Tudor Investment Corp,Hedge Fund,2025-02-14,IBIT,8048552,440000000,doubled_from_Q3,GuruFocus 13F
+Mubadala Investment Company,Sovereign Wealth Fund,2025-02-14,IBIT,8235533,436900000,first_Gulf_SWF,SEC 13F/Bitcoin Magazine
+DRW Securities,Brokerage,2025-02-14,Multiple BTC ETFs,not_specified,365000000,market_making,CoinShares Q4 2024
+Bracebridge Capital,Hedge Fund,2025-02-14,IBIT,not_specified,334000000,23.6%_portfolio,PANews 13F Analysis
+State of Wisconsin,State Pension Fund,2025-02-14,IBIT,6060351,340000000,doubled_then_SOLD,Cointelegraph
+State Street Corporation,Asset Manager,2025-02-14,IBIT,5200000,275000000,new_position,SEC 13F Filing
+Morgan Stanley,Investment Bank,2025-02-14,Multiple BTC ETFs,not_specified,250000000,wealth_mgmt_clients,CoinShares Q4 2024
+State of Michigan Retirement,State Pension Fund,2025-08-14,ARKB,300000,11400000,tripled_from_Q1,Decrypt/SEC 13F
+Emory University,University Endowment,2025-11-14,BTC Mini/IBIT,1000000,52000000,first_endowment,CoinDesk
+Brown University,University Endowment,2025-02-14,IBIT,not_specified,13800000,new_position,Yahoo Finance

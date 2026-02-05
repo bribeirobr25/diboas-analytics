@@ -1,0 +1,14 @@
+entity,wallet_address,chain,current_balance,balance_usd,last_movement,status,court_date,source
+Mt. Gox Trustee,1JbezDVd9VsK9o1Ga9UqLydeuEvhKLAPs6,bitcoin,34689 BTC,4000000000,2024-12-15,distributing,Oct 2026,Arkham Intelligence
+FTX Estate,0x2faf487a4414Fe77e2327F0bf4AE2a264a776AD2,ethereum,mixed assets,varies,2025-09-01,liquidating,ongoing,Etherscan/Arkham
+FTX Estate SOL,staking addresses,solana,5290000 SOL,775000000,2025-09-01,liquidating,ongoing,Arkham/EmberCN
+Genesis DCG,entity tracking,ethereum,claims pending,2200000000,2024-08-01,emerged,litigation,Court docs SDNY
+Celsius Estate,distributed,ethereum,minimal,2900000000 distributed,2025-08-01,emerged,complete,Stretto
+BlockFi Estate,distributed via Coinbase,ethereum,minimal,100% paid,2025-03-01,emerged,May 2025,Kroll
+Voyager Estate,distributed via Stretto,ethereum,minimal,484000000 recovered,2024-04-01,wound down,complete,Stretto
+3AC Liquidation,not publicly labeled,multi-chain,FTX claim $1.53B,100000000,2025-03-01,active,ongoing,Teneo liquidators
+UK Government,Arkham entity,bitcoin,61000-71417 BTC,7000000000,held,seized,Jan 2026,Met Police/CPS
+US Government Strategic Reserve,bc1qf2yvj49j0av5nml45x9ek9hz6,bitcoin,198000 BTC,22000000000,varies,held,N/A per EO 14233,Arkham/DOJ
+US DOJ Silk Road,bc1qa5wkgaew2dkv56kfvj49j0av5nml45x9ek9hz6,bitcoin,30000+ BTC,3500000000,2024-12-01,held,no sales,Arkham/Bitquery
+US DOJ Bitfinex,ordered returned,bitcoin,94643 BTC,11000000000,2025-02-01,restitution,Feb 2025,DOJ/Court
+German Govt Saxony,SOLD,bitcoin,0 BTC,0,2024-07-12,CLOSED,complete,Dresden Prosecutor

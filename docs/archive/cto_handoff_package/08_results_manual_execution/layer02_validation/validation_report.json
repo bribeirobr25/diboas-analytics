@@ -1,0 +1,229 @@
+{
+  "validation_report": {
+    "meta": {
+      "report_id": "VAL-2026-01-24-001",
+      "pipeline_run": "manual_dry_run_1",
+      "validator": "rakia_data_validator",
+      "timestamp": "2026-01-24T12:00:00Z",
+      "layer": 2,
+      "gate": 1
+    },
+    "verdict": {
+      "status": "CONDITIONAL_PASS",
+      "can_proceed": true,
+      "blocking_errors": 0,
+      "warnings": 6,
+      "critical_discrepancies": 3
+    },
+    "summary": {
+      "files_validated": 20,
+      "tier1_pass_rate": 1.0,
+      "tier2_event_pass_rate": 0.83,
+      "tier3_discrepancies": 3,
+      "spec_gaps_found": 5
+    },
+    "tier1_results": {
+      "status": "PASS",
+      "files": {
+        "treasury_yields.csv": {"status": "PASS", "rows": 1514, "cols": 5, "null_pct": 0, "duplicates": 0},
+        "global_liquidity.csv": {"status": "PASS", "rows": 70, "cols": 3, "null_pct": 0, "duplicates": 0},
+        "real_yields.csv": {"status": "PASS", "rows": 1514, "cols": 2, "null_pct": 0, "duplicates": 0},
+        "tradfi_benchmark_data.csv": {"status": "PASS", "rows": 1582, "cols": 9, "null_pct": 0, "duplicates": 0},
+        "commodities.csv": {"status": "PASS", "rows": 93, "cols": 5, "null_pct": 0, "duplicates": 0},
+        "credit_spreads.csv": {"status": "PASS", "rows": 83, "cols": 3, "null_pct": 0, "duplicates": 0},
+        "crypto_prices.csv": {"status": "PASS", "rows": 96, "cols": 4, "null_pct": 0, "duplicates": 0},
+        "defillama_historical_apy.csv": {"status": "PASS", "rows": 96, "cols": 6, "null_pct": 0, "duplicates": 0},
+        "jupiter_jlp_historical_apy.csv": {"status": "PASS", "rows": 56, "cols": 3, "null_pct": 0, "duplicates": 0},
+        "jito_historical_apy.csv": {"status": "PASS", "rows": 54, "cols": 3, "null_pct": 0, "duplicates": 0},
+        "estate_wallet_tracker.csv": {"status": "WARN", "rows": 13, "cols": 9, "null_pct": 0, "duplicates": 0, "warning": "Column 'entity' vs spec 'entity_name'"},
+        "market_maker_wallet_tracker.csv": {"status": "PASS", "rows": 15, "cols": 7, "null_pct": 0, "duplicates": 0},
+        "protocol_treasury_tracker.csv": {"status": "PASS", "rows": 15, "cols": 8, "null_pct": 0, "duplicates": 0},
+        "whale_wallet_master_list.csv": {"status": "PASS", "rows": 30, "cols": 7, "null_pct": 0, "duplicates": 0},
+        "btc_etf_holdings.csv": {"status": "PASS", "rows": 22, "cols": 8, "null_pct": 0, "duplicates": 0},
+        "corporate_btc_holdings.csv": {"status": "PASS", "rows": 12, "cols": 8, "null_pct": 0, "duplicates": 0},
+        "institutional_13f.csv": {"status": "PASS", "rows": 18, "cols": 8, "null_pct": 0, "duplicates": 0},
+        "sentiment_indicators.csv": {"status": "PASS", "rows": 107, "cols": 3, "null_pct": 0, "duplicates": 0},
+        "aaii_sentiment.csv": {"status": "PASS", "rows": 170, "cols": 5, "null_pct": 0, "duplicates": 0},
+        "rotation_indicators.csv": {"status": "PASS", "rows": 1582, "cols": 7, "null_pct": 0, "duplicates": 0}
+      }
+    },
+    "tier2_results": {
+      "status": "PASS",
+      "event_checks": {
+        "covid_crash_treasury": {"status": "PASS", "drop_pct": 43.8, "threshold": 0.5},
+        "covid_crash_sp500": {"status": "PASS", "drop_pct": 22.8, "threshold": 20},
+        "covid_crash_crypto": {"status": "SKIP", "reason": "insufficient_pre_event_data"},
+        "ftx_collapse_btc": {"status": "PASS", "drop_pct": 18.2, "threshold": 15},
+        "rate_hikes_2022": {"status": "PASS", "rise": 2.16, "threshold": 1.5},
+        "btc_ath_2024": {"status": "PASS", "peak": 73000, "threshold": 65000}
+      },
+      "calculation_checks": {
+        "spy_tlt_ratio": {"status": "PASS", "max_diff": 0.00005},
+        "ma50": {"status": "PASS", "max_diff": 0.00005},
+        "m2_yoy": {"status": "PASS", "max_diff": 0.0513},
+        "aaii_sum": {"status": "PASS", "sum_range": [100.0, 100.0]},
+        "copper_gold_ratio": {"status": "WARN", "note": "scale_mismatch_with_commodities"}
+      }
+    },
+    "tier3_results": {
+      "status": "WARN",
+      "verification_date": "2026-01-24",
+      "checks": {
+        "treasury_10y": {
+          "status": "DISCREPANCY",
+          "expected": 4.6,
+          "actual": 4.26,
+          "source": "FRED_DGS10",
+          "variance_bps": -34
+        },
+        "treasury_2y": {
+          "status": "DISCREPANCY",
+          "expected": 4.3,
+          "actual": 3.61,
+          "source": "FRED_DGS2",
+          "variance_bps": -69
+        },
+        "treasury_30y": {
+          "status": "PASS",
+          "expected": 4.8,
+          "actual": 4.84,
+          "source": "FRED_DGS30",
+          "variance_bps": 4
+        },
+        "btc_price": {"status": "PASS", "value": 90630, "source": "CoinMarketCap"},
+        "eth_price": {"status": "PASS", "value": 3168, "source": "CoinMarketCap"},
+        "sol_price": {"status": "WARN", "variance_pct": 17, "note": "source_disagreement"},
+        "m2_freshness": {
+          "status": "DISCREPANCY",
+          "stored_latest": "2025-10",
+          "available_latest": "2025-11",
+          "source": "FRED_M2SL"
+        },
+        "aaii_sentiment": {"status": "PASS", "bullish": 43.2, "bearish": 32.7, "source": "AAII.com"},
+        "fear_greed_index": {"status": "PASS", "value": 20, "label": "Extreme Fear", "source": "Alternative.me"},
+        "ibit_holdings": {"status": "PASS", "btc": 779977, "source": "BlackRock"},
+        "fbtc_holdings": {"status": "PASS", "btc": 194498, "source": "Fidelity"}
+      }
+    },
+    "issues": [
+      {
+        "code": "T3-TRS-001",
+        "severity": "CRITICAL",
+        "file": "treasury_yields.csv",
+        "field": "yield_10y",
+        "message": "10Y Treasury yield discrepancy: stored ~4.6% vs live 4.26%",
+        "remediation": "Re-fetch from FRED DGS10"
+      },
+      {
+        "code": "T3-TRS-002",
+        "severity": "CRITICAL",
+        "file": "treasury_yields.csv",
+        "field": "yield_2y",
+        "message": "2Y Treasury yield discrepancy: stored ~4.3% vs live 3.61%",
+        "remediation": "Re-fetch from FRED DGS2"
+      },
+      {
+        "code": "T3-M2-001",
+        "severity": "CRITICAL",
+        "file": "global_liquidity.csv",
+        "field": "date",
+        "message": "M2 data ends Oct 2025; Nov 2025 ($22,322.4B) now available",
+        "remediation": "Update to include November 2025 data"
+      },
+      {
+        "code": "T1-SCH-001",
+        "severity": "WARNING",
+        "file": "estate_wallet_tracker.csv",
+        "field": "entity",
+        "message": "Column 'entity' doesn't match spec 'entity_name'",
+        "remediation": "Update spec or rename column"
+      },
+      {
+        "code": "T2-DAT-001",
+        "severity": "WARNING",
+        "file": "crypto_prices.csv",
+        "field": "date",
+        "message": "Insufficient pre-COVID data for drop calculation",
+        "remediation": "Backfill Jan-Feb 2020 daily data"
+      },
+      {
+        "code": "T2-CAL-001",
+        "severity": "WARNING",
+        "file": "rotation_indicators.csv",
+        "field": "copper_gold_ratio",
+        "message": "Copper/Gold ratio scale differs from commodities.csv",
+        "remediation": "Document calculation formula in specs"
+      }
+    ],
+    "spec_gaps": [
+      {
+        "id": "SG-001",
+        "document": "VALIDATION_GATES_CTO_HANDOFF.md",
+        "section": "Â§3.3",
+        "issue": "estate_wallet_tracker schema says 'entity_name' but actual column is 'entity'",
+        "priority": "HIGH"
+      },
+      {
+        "id": "SG-002",
+        "document": "VALIDATION_GATES_CTO_HANDOFF.md",
+        "section": "Â§3.3",
+        "issue": "10 files have no schema definition for validation",
+        "priority": "HIGH",
+        "affected_files": [
+          "commodities.csv",
+          "credit_spreads.csv",
+          "jupiter_jlp_historical_apy.csv",
+          "jito_historical_apy.csv",
+          "market_maker_wallet_tracker.csv",
+          "protocol_treasury_tracker.csv",
+          "whale_wallet_master_list.csv",
+          "btc_etf_holdings.csv",
+          "corporate_btc_holdings.csv",
+          "institutional_13f.csv"
+        ]
+      },
+      {
+        "id": "SG-003",
+        "document": "QR_BOARD_CTO_HANDOFF.md",
+        "section": "Â§5.3",
+        "issue": "M2 publication lag documented as ~2 months, actually 3-4 weeks",
+        "priority": "MEDIUM"
+      },
+      {
+        "id": "SG-004",
+        "document": "MANUAL_PIPELINE_EXECUTION_GUIDE.md",
+        "section": "Task 1.7",
+        "issue": "Copper/Gold ratio calculation formula not documented",
+        "priority": "MEDIUM"
+      },
+      {
+        "id": "SG-005",
+        "document": "VALIDATION_GATES_CTO_HANDOFF.md",
+        "section": "Â§3.3",
+        "issue": "Treasury freshness check says '7 days' but doesn't handle weekends/holidays",
+        "priority": "LOW"
+      }
+    ],
+    "recommendations": {
+      "before_production": [
+        "Re-fetch Treasury yields from FRED to verify current values",
+        "Update M2 data to include November 2025",
+        "Verify Researcher data source configuration"
+      ],
+      "before_automation": [
+        "Fix 5 specification gaps in CTO handoff documents",
+        "Add schema definitions for 10 files without validation specs",
+        "Document Copper/Gold ratio calculation methodology"
+      ]
+    },
+    "handoff": {
+      "gate_1_status": "CONDITIONAL_PASS",
+      "approved_for_layer_3": true,
+      "caveats": [
+        "Treasury yield data may need refresh",
+        "M2 data should be updated to Nov 2025",
+        "Spec gaps should be fixed before automation"
+      ]
+    }
+  }
+}

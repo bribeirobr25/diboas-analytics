@@ -1,0 +1,16 @@
+protocol,treasury_address,chain,native_token_balance,stablecoin_balance,total_usd,last_movement,source
+MakerDAO/Sky,0xBE8E3e3618f7474F8cB1d074A26afFef007E98FB,ethereum,83000000 SKY,55000000 DAI,214000000,2025-12-01,Etherscan/MakerDAO
+MakerDAO Surplus,0xA950524441892A31ebddF91d3cEEFa04Bf454466,ethereum,surplus buffer,55000000 DAI limit,varies,ongoing,MakerDAO docs
+Aave Treasury V2,0x464C71f6c2F760DdA6093dCB91C24c39e5d6E18c,ethereum,mixed aTokens,54000 GUSD,varies,ongoing,Aave GitHub
+Aave Avara,0x89C51828427F70D77875C6747759fB17BA10Ceb0,ethereum,multisig,varies,13200000 monthly,ongoing,Gnosis Safe
+Aave Arbitrum,0xc3301b30f4ecbfd59de0d74e89690c1a70c6f21b,arbitrum,V3 collector,varies,varies,ongoing,Aave docs
+Aave Base,0xBA9424d650A4F5c80a0dA641254d1AcCE2A37057,base,V3 collector,varies,varies,ongoing,Aave docs
+Compound DAO,0x6d903f6003cca6255D85CcA4D3B5E5146dC33925,ethereum,COMP + 5038 ETH,varies,11900000,2025-01,Compound forum
+Lido DAO Agent,0x3e40D73EB977Dc6a537aF587D48316feE66E9C8c,ethereum,109400000 LDO,12000000 DAI,350000000,2025-01,docs.lido.fi
+Lido stETH,0xae7ab96520DE3A18E5e111B5EaAb095312D7fE84,ethereum,stETH contract,N/A,28800000000 TVL,ongoing,Lido docs
+Jito JTO Token,jtojtomepa8beP8AuQc6eXt5FriJwfFMwQx2v2f9mCL,solana,JTO token,N/A,1940000000 TVL,ongoing,Solscan
+Jito JitoSOL,J1toso1uCk3RLmjorhTtrVwY9HJ7X8V9yYac6Y7kGCPn,solana,JitoSOL token,N/A,1940000000,ongoing,Solana Explorer
+Jupiter JUP,JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN,solana,100000000 JUP,10000000 USDC,varies,ongoing,jup.ag
+Arbitrum DAO,0xF3FC178157fb3c87548bAA86F9d24BA38E649B58,arbitrum,3160000000 ARB,1 USDC,1590000000,2025-01,Arbitrum docs
+Arbitrum ARB Token,0x912CE59144191C1204E64559FE8253a0e49E6548,arbitrum,ARB token,N/A,N/A,N/A,Arbiscan
+Arbitrum Timelock,0xbFc1FECa8B09A5c5D3EFfE7429eBE24b9c09EF58,arbitrum,ETH treasury,varies,varies,ongoing,Arbitrum Foundation

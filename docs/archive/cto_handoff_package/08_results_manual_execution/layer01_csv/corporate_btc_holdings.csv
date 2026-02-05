@@ -1,0 +1,13 @@
+company,ticker,btc_holdings,avg_cost_basis,total_cost_usd,market_value_usd,last_disclosure_date,source
+Strategy (MicroStrategy),MSTR,687410,66384,33139000000,71500000000,2026-01-18,Press Release/8-K
+MARA Holdings,MARA,53250,not_disclosed,not_disclosed,5540000000,2025-10-03,Monthly Production Report
+Riot Platforms,RIOT,18005,not_disclosed,not_disclosed,1700000000,2025-12-31,Monthly Production Report
+Hut 8 Mining,HUT,13696,113902,1560000000,1600000000,2025-09-30,Q3 2025 Earnings
+CleanSpark,CLSK,13099,not_disclosed,not_disclosed,1360000000,2025-12-31,Monthly Mining Update
+Coinbase,COIN,11776,63000,740000000,1060000000,2025-06-30,10-Q SEC Filing
+Tesla,TSLA,11509,33539,386000000,1200000000,2025-09-30,10-Q SEC Filing
+Block Inc,XYZ,8584,30405,261000000,890000000,2025-03-31,10-Q/Bitcoin Blueprint
+Galaxy Digital,GLXY,8100,not_disclosed,not_disclosed,840000000,2025-06-30,Company Filing
+Semler Scientific,SMLR,3303,87500,289000000,340000000,2025-12-31,Press Release
+Metaplanet,3350.T,1762,68000,120000000,180000000,2025-12-31,Press Release
+Boyaa Interactive,0434.HK,3183,not_disclosed,not_disclosed,330000000,2025-09-30,Company Filing

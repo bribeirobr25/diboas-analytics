@@ -1,0 +1,221 @@
+{
+  "evaluation_timestamp": "2026-01-24T13:00:00Z",
+  "input_files": {
+    "anomalies": "anomalies_detected.json",
+    "risk_metrics": "risk_metrics.json",
+    "battle_test": "battle_test_results.json",
+    "monte_carlo": "monte_carlo_results.json"
+  },
+  "data_snapshot": {
+    "vix": 15.48,
+    "credit_spreads_hy": 272,
+    "fear_greed_index": 20,
+    "btc_price": 91200,
+    "eth_price": 3015,
+    "sol_price": 130.50,
+    "btc_24h_change_pct": 1.67,
+    "eth_24h_change_pct": 1.79,
+    "sol_24h_change_pct": 3.48,
+    "protocol_apys": {
+      "aave_v3": 3.5,
+      "compound": 3.3,
+      "sky_ssr": 8.0
+    }
+  },
+  "triggers_evaluated": 28,
+  "triggered_actions": [
+    {
+      "trigger_id": "EST-MOV-INFO-001",
+      "event_type": "estate_monitoring",
+      "level": 0,
+      "level_name": "info",
+      "priority": "P3",
+      "affected_strategies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "trigger": {
+        "condition": "estate_status = distributing",
+        "actual_value": "distributing",
+        "threshold": "any_active_estate",
+        "unit": "status"
+      },
+      "action": {
+        "type": "smart_money_insight",
+        "template_id": "estate_monitoring",
+        "requires_consolidation": true
+      },
+      "metadata": {
+        "estate": "mt_gox",
+        "holdings_btc": 34689,
+        "holdings_usd": 4000000000,
+        "status": "distributing",
+        "court_date": "Oct 2026",
+        "last_movement": "2024-12-15",
+        "description": "Mt. Gox Trustee distribution ongoing - 34,689 BTC (~$4B) being distributed to creditors"
+      }
+    },
+    {
+      "trigger_id": "EST-MOV-INFO-002",
+      "event_type": "estate_monitoring",
+      "level": 0,
+      "level_name": "info",
+      "priority": "P3",
+      "affected_strategies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "trigger": {
+        "condition": "estate_status = liquidating",
+        "actual_value": "liquidating",
+        "threshold": "any_active_estate",
+        "unit": "status"
+      },
+      "action": {
+        "type": "smart_money_insight",
+        "template_id": "estate_monitoring",
+        "requires_consolidation": true
+      },
+      "metadata": {
+        "estate": "ftx",
+        "holdings": "mixed assets",
+        "status": "liquidating",
+        "court_date": "ongoing",
+        "last_movement": "2025-09-01",
+        "description": "FTX Estate liquidation ongoing - mixed crypto assets being sold for creditor repayment"
+      }
+    },
+    {
+      "trigger_id": "EST-MOV-INFO-003",
+      "event_type": "estate_monitoring",
+      "level": 0,
+      "level_name": "info",
+      "priority": "P3",
+      "affected_strategies": [2, 4, 6, 8, 10],
+      "trigger": {
+        "condition": "estate_sol_holdings > $100M",
+        "actual_value": 775000000,
+        "threshold": 100000000,
+        "unit": "USD"
+      },
+      "action": {
+        "type": "smart_money_insight",
+        "template_id": "estate_sol_exposure",
+        "requires_consolidation": true
+      },
+      "metadata": {
+        "estate": "ftx_sol",
+        "holdings_sol": 5290000,
+        "holdings_usd": 775000000,
+        "status": "liquidating",
+        "court_date": "ongoing",
+        "last_movement": "2025-09-01",
+        "description": "FTX Estate SOL holdings (~5.3M SOL, $775M) - potential selling pressure on Solana ecosystem",
+        "sol_strategies_note": "Strategies with SOL exposure (2,4,6,8,10) should monitor for liquidation events"
+      }
+    },
+    {
+      "trigger_id": "SENT-FG-INFO",
+      "event_type": "sentiment_extreme",
+      "level": 0,
+      "level_name": "info",
+      "priority": "P3",
+      "affected_strategies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "trigger": {
+        "condition": "fear_greed_index <= 25",
+        "actual_value": 20,
+        "threshold": 25,
+        "unit": "index"
+      },
+      "action": {
+        "type": "opportunity_insight",
+        "template_id": "sentiment_extreme_fear",
+        "requires_consolidation": false
+      },
+      "metadata": {
+        "indicator": "fear_greed_index",
+        "value": 20,
+        "label": "Extreme Fear",
+        "interpretation": "Potential buying opportunity (contrarian signal)",
+        "historical_context": "Extreme Fear often precedes market recoveries",
+        "recommended_action": "Consider DCA for long-term positions"
+      }
+    }
+  ],
+  "triggers_not_fired": [
+    {
+      "trigger_id": "SKY-DEP-L1",
+      "reason": "USDS peg within tolerance",
+      "threshold": ">0.5% off peg",
+      "current_status": "Protocol APYs stable at 8.0%"
+    },
+    {
+      "trigger_id": "SKY-TVL-L2",
+      "reason": "No significant TVL drop detected",
+      "threshold": ">10% drop in 24h"
+    },
+    {
+      "trigger_id": "SAN-APY-L2",
+      "reason": "Sanctum APY within normal range",
+      "threshold": ">50% drop from 7d avg"
+    },
+    {
+      "trigger_id": "JLP-UTL-L2",
+      "reason": "JLP utilization within normal range",
+      "threshold": ">90%"
+    },
+    {
+      "trigger_id": "MKT-BTC-L3",
+      "reason": "BTC stable (+1.67% 24h)",
+      "threshold": ">10% drop in 24h",
+      "actual_value": "+1.67%"
+    },
+    {
+      "trigger_id": "MKT-ETH-L3",
+      "reason": "ETH stable (+1.79% 24h)",
+      "threshold": ">15% drop in 24h",
+      "actual_value": "+1.79%"
+    },
+    {
+      "trigger_id": "MKT-SOL-L3",
+      "reason": "SOL stable (+3.48% 24h)",
+      "threshold": ">20% drop in 24h",
+      "actual_value": "+3.48%"
+    },
+    {
+      "trigger_id": "MKT-BTC-UP",
+      "reason": "BTC not pumping significantly",
+      "threshold": ">15% rise in 24h",
+      "actual_value": "+1.67%"
+    },
+    {
+      "trigger_id": "MAC-VIX-L2",
+      "reason": "VIX at normal levels",
+      "threshold": ">30",
+      "actual_value": 15.48
+    },
+    {
+      "trigger_id": "MAC-STBL-L2",
+      "reason": "Stablecoin supply stable",
+      "threshold": ">5% drop in 7d"
+    },
+    {
+      "trigger_id": "WHL-DIST-L2",
+      "reason": "No whale distribution events detected",
+      "threshold": ">$50M distribution in 7d"
+    }
+  ],
+  "summary": {
+    "total_triggers_evaluated": 28,
+    "triggers_fired": 4,
+    "by_priority": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 0,
+      "P3": 4
+    },
+    "by_category": {
+      "protocol_health": 0,
+      "market_conditions": 0,
+      "macro": 0,
+      "estate_whale": 3,
+      "sentiment": 1
+    },
+    "overall_assessment": "GREEN - No critical or warning triggers. All fired triggers are informational (P3).",
+    "action_required": false
+  }
+}

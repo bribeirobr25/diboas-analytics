@@ -1,0 +1,465 @@
+# TICKER_MASTER_LIST.yaml
+# 
+# Purpose: Consolidated reference of all tickers used in diBoaS Analytics pipeline
+# Created: January 24, 2026
+# Updated: January 24, 2026
+# Owner: Rakia
+# Change Log:
+#   - v1: Initial creation (GAP-016 fix)
+#
+# Usage: This file serves as the single source of truth for all ticker symbols
+# used across the data collection pipeline. CTO Board should reference this file
+# when building automation to ensure consistency.
+
+---
+
+# =============================================================================
+# EQUITY INDICES
+# =============================================================================
+
+equity_indices:
+  # Required - Always collect
+  required:
+    - symbol: "^GSPC"
+      name: "S&P 500"
+      source: "Yahoo Finance"
+      data_type: "index"
+      frequency: "daily"
+      used_in: ["tradfi_benchmark_data.csv", "rotation_indicators.csv"]
+      
+    - symbol: "^IXIC"
+      name: "NASDAQ Composite"
+      source: "Yahoo Finance"
+      data_type: "index"
+      frequency: "daily"
+      used_in: ["tradfi_benchmark_data.csv"]
+      
+    - symbol: "^VIX"
+      name: "CBOE Volatility Index"
+      source: "Yahoo Finance"
+      data_type: "index"
+      frequency: "daily"
+      used_in: ["tradfi_benchmark_data.csv", "anomaly_detection"]
+      alert_thresholds:
+        warning: 25
+        elevated: 30
+        critical: 40
+  
+  # Regional - Important for Adelaide context
+  regional:
+    - symbol: "^STOXX50E"
+      name: "Euro Stoxx 50"
+      source: "Yahoo Finance"
+      region: "EU"
+      
+    - symbol: "^GDAXI"
+      name: "DAX"
+      source: "Yahoo Finance"
+      region: "Germany"
+      
+    - symbol: "^BVSP"
+      name: "Bovespa"
+      source: "Yahoo Finance"
+      region: "Brazil"
+      
+    - symbol: "^N225"
+      name: "Nikkei 225"
+      source: "Yahoo Finance"
+      region: "Japan"
+      status: "MISSING - Add to collection"
+      
+    - symbol: "^HSI"
+      name: "Hang Seng"
+      source: "Yahoo Finance"
+      region: "Hong Kong"
+      status: "MISSING - Add to collection"
+
+# =============================================================================
+# ROTATION ETFs (REQUIRED for Task 1.7)
+# =============================================================================
+
+rotation_etfs:
+  priority: "CRITICAL"
+  note: "These ETFs are REQUIRED for capital rotation calculations"
+  
+  etfs:
+    - symbol: "SPY"
+      name: "SPDR S&P 500 ETF"
+      source: "Yahoo Finance"
+      frequency: "daily"
+      used_in: ["tradfi_benchmark_data.csv", "rotation_indicators.csv"]
+      ratios: ["SPY/TLT", "IWM/SPY"]
+      
+    - symbol: "TLT"
+      name: "iShares 20+ Year Treasury Bond ETF"
+      source: "Yahoo Finance"
+      frequency: "daily"
+      used_in: ["tradfi_benchmark_data.csv", "rotation_indicators.csv"]
+      ratios: ["SPY/TLT"]
+      
+    - symbol: "XLF"
+      name: "Financial Select Sector SPDR Fund"
+      source: "Yahoo Finance"
+      frequency: "daily"
+      used_in: ["tradfi_benchmark_data.csv", "rotation_indicators.csv"]
+      ratios: ["XLF/XLU"]
+      
+    - symbol: "XLU"
+      name: "Utilities Select Sector SPDR Fund"
+      source: "Yahoo Finance"
+      frequency: "daily"
+      used_in: ["tradfi_benchmark_data.csv", "rotation_indicators.csv"]
+      ratios: ["XLF/XLU"]
+      
+    - symbol: "IWM"
+      name: "iShares Russell 2000 ETF"
+      source: "Yahoo Finance"
+      frequency: "daily"
+      used_in: ["tradfi_benchmark_data.csv", "rotation_indicators.csv"]
+      ratios: ["IWM/SPY"]
+
+# =============================================================================
+# COMMODITIES
+# =============================================================================
+
+commodities:
+  required:
+    - symbol: "GC=F"
+      name: "Gold Futures"
+      source: "Yahoo Finance"
+      unit: "USD per troy oz"
+      frequency: "daily"
+      used_in: ["commodities.csv", "rotation_indicators.csv"]
+      ratios: ["Copper/Gold"]
+      
+    - symbol: "HG=F"
+      name: "Copper Futures"
+      source: "Yahoo Finance"
+      unit: "cents per lb"
+      frequency: "daily"
+      used_in: ["commodities.csv", "rotation_indicators.csv"]
+      ratios: ["Copper/Gold"]
+      note: "Copper is in cents/lb, Gold in $/oz - raw ratio will be small (~0.0017)"
+      
+  optional:
+    - symbol: "SI=F"
+      name: "Silver Futures"
+      source: "Yahoo Finance"
+      
+    - symbol: "CL=F"
+      name: "WTI Crude Oil Futures"
+      source: "Yahoo Finance"
+
+# =============================================================================
+# CURRENCIES
+# =============================================================================
+
+currencies:
+  required:
+    - symbol: "DX-Y.NYB"
+      name: "US Dollar Index (DXY)"
+      source: "Yahoo Finance"
+      frequency: "daily"
+      
+    - symbol: "EURUSD=X"
+      name: "EUR/USD"
+      source: "Yahoo Finance"
+      
+    - symbol: "BRL=X"
+      name: "BRL/USD"
+      source: "Yahoo Finance"
+      region: "Brazil"
+      
+  optional:
+    - symbol: "GBPUSD=X"
+      name: "GBP/USD"
+      source: "Yahoo Finance"
+      
+    - symbol: "JPY=X"
+      name: "JPY/USD"
+      source: "Yahoo Finance"
+      status: "MISSING - Add to collection"
+      
+    - symbol: "CNY=X"
+      name: "CNY/USD"
+      source: "Yahoo Finance"
+      status: "MISSING - Add to collection"
+
+# =============================================================================
+# CRYPTOCURRENCIES
+# =============================================================================
+
+cryptocurrencies:
+  required:
+    - symbol: "BTC-USD"
+      name: "Bitcoin"
+      source: "Yahoo Finance"
+      frequency: "daily"
+      used_in: ["crypto_prices.csv"]
+      
+    - symbol: "ETH-USD"
+      name: "Ethereum"
+      source: "Yahoo Finance"
+      frequency: "daily"
+      used_in: ["crypto_prices.csv"]
+      
+    - symbol: "SOL-USD"
+      name: "Solana"
+      source: "Yahoo Finance"
+      frequency: "daily"
+      used_in: ["crypto_prices.csv"]
+
+# =============================================================================
+# FRED SERIES (Macro Data)
+# =============================================================================
+
+fred_series:
+  treasury_yields:
+    - series_id: "DGS2"
+      name: "2-Year Treasury Yield"
+      frequency: "daily"
+      used_in: ["treasury_yields.csv"]
+      
+    - series_id: "DGS5"
+      name: "5-Year Treasury Yield"
+      frequency: "daily"
+      used_in: ["treasury_yields.csv"]
+      
+    - series_id: "DGS10"
+      name: "10-Year Treasury Yield"
+      frequency: "daily"
+      used_in: ["treasury_yields.csv"]
+      
+    - series_id: "DGS30"
+      name: "30-Year Treasury Yield"
+      frequency: "daily"
+      used_in: ["treasury_yields.csv"]
+      
+  money_supply:
+    - series_id: "M2SL"
+      name: "M2 Money Supply"
+      frequency: "monthly"
+      publication_lag: "3-4 weeks"
+      used_in: ["global_liquidity.csv"]
+      
+  real_yields:
+    - series_id: "DFII10"
+      name: "10-Year TIPS Yield"
+      frequency: "daily"
+      used_in: ["real_yields.csv"]
+      
+  fed_funds:
+    - series_id: "FEDFUNDS"
+      name: "Federal Funds Rate"
+      frequency: "monthly"
+      
+  credit_spreads:
+    - series_id: "BAMLH0A0HYM2"
+      name: "High Yield OAS Spread"
+      frequency: "daily"
+      used_in: ["credit_spreads.csv"]
+
+# =============================================================================
+# BTC ETFs (For Institutional Flow Tracking)
+# =============================================================================
+
+btc_etfs:
+  - ticker: "IBIT"
+    name: "iShares Bitcoin Trust"
+    issuer: "BlackRock"
+    
+  - ticker: "FBTC"
+    name: "Fidelity Wise Origin Bitcoin Fund"
+    issuer: "Fidelity"
+    
+  - ticker: "GBTC"
+    name: "Grayscale Bitcoin Trust"
+    issuer: "Grayscale"
+    
+  - ticker: "ARKB"
+    name: "ARK 21Shares Bitcoin ETF"
+    issuer: "ARK/21Shares"
+    
+  - ticker: "BITB"
+    name: "Bitwise Bitcoin ETF"
+    issuer: "Bitwise"
+
+# =============================================================================
+# CRYPTO-RELATED STOCKS (For 13F Tracking)
+# =============================================================================
+
+crypto_stocks:
+  - ticker: "COIN"
+    name: "Coinbase Global"
+    
+  - ticker: "MSTR"
+    name: "MicroStrategy (Strategy)"
+    
+  - ticker: "MARA"
+    name: "MARA Holdings"
+    
+  - ticker: "RIOT"
+    name: "Riot Platforms"
+
+# =============================================================================
+# MAG 7 STOCKS
+# =============================================================================
+
+mag7_stocks:
+  - ticker: "AAPL"
+    name: "Apple"
+    
+  - ticker: "MSFT"
+    name: "Microsoft"
+    
+  - ticker: "AMZN"
+    name: "Amazon"
+    
+  - ticker: "GOOGL"
+    name: "Alphabet"
+    
+  - ticker: "META"
+    name: "Meta Platforms"
+    
+  - ticker: "NVDA"
+    name: "NVIDIA"
+    
+  - ticker: "TSLA"
+    name: "Tesla"
+
+# =============================================================================
+# DEFI PROTOCOLS (For APY Tracking)
+# =============================================================================
+
+defi_protocols:
+  phase_1:
+    - name: "Sky (Maker)"
+      chain: "Ethereum"
+      defillama_slug: "sky"
+      pool: "sUSDS"
+      
+    - name: "Aave V3"
+      chain: "Ethereum"
+      defillama_slug: "aave-v3"
+      pool: "USDC"
+      
+    - name: "Compound V3"
+      chain: "Arbitrum"
+      defillama_slug: "compound-v3"
+      pool: "USDC"
+      
+    - name: "Jupiter JLP"
+      chain: "Solana"
+      defillama_slug: "jupiter-perps-lp"
+      
+    - name: "Jito"
+      chain: "Solana"
+      defillama_slug: "jito"
+
+# =============================================================================
+# API ENDPOINTS
+# =============================================================================
+
+api_endpoints:
+  alternative_me:
+    name: "Crypto Fear & Greed Index"
+    url: "https://api.alternative.me/fng/"
+    auth_required: false
+    rate_limit: "~30/minute"
+    used_in: ["sentiment_indicators.csv"]
+    
+  defillama:
+    base_url: "https://api.llama.fi"
+    endpoints:
+      pools: "/pools"
+      treasuries: "/treasuries"
+      tvl: "/tvl"
+    auth_required: false
+    
+  fred:
+    base_url: "https://api.stlouisfed.org/fred/series/observations"
+    auth_required: true
+    note: "Free API key from fred.stlouisfed.org"
+
+# =============================================================================
+# ROTATION RATIOS (Calculated, not collected)
+# =============================================================================
+
+rotation_ratios:
+  phase_1:
+    - name: "SPY/TLT"
+      formula: "SPY close / TLT close"
+      interpretation: "High = Risk-On, Low = Risk-Off"
+      ma_period: 50
+      
+    - name: "Copper/Gold"
+      formula: "HG=F / GC=F"
+      interpretation: "Rising = Economic optimism"
+      note: "Result will be small (~0.0017) due to unit difference"
+      
+    - name: "XLF/XLU"
+      formula: "XLF close / XLU close"
+      interpretation: "High = Cyclical, Low = Defensive"
+      
+    - name: "IWM/SPY"
+      formula: "IWM close / SPY close"
+      interpretation: "High = Risk appetite, Low = Flight to quality"
+      
+  phase_2:
+    - name: "Gold/BTC"
+      formula: "GC=F / BTC-USD"
+      status: "Phase 2"
+      
+    - name: "DXY Trend"
+      formula: "DXY vs 50-day MA"
+      status: "Phase 2"
+
+# =============================================================================
+# OUTPUT FILES MAPPING
+# =============================================================================
+
+output_files:
+  - file: "treasury_yields.csv"
+    columns: ["date", "yield_2y", "yield_5y", "yield_10y", "yield_30y"]
+    sources: ["FRED DGS2", "FRED DGS5", "FRED DGS10", "FRED DGS30"]
+    
+  - file: "global_liquidity.csv"
+    columns: ["date", "us_m2_bn", "us_m2_yoy"]
+    sources: ["FRED M2SL"]
+    
+  - file: "real_yields.csv"
+    columns: ["date", "real_yield_10y"]
+    sources: ["FRED DFII10"]
+    
+  - file: "tradfi_benchmark_data.csv"
+    format: "WIDE (one column per ticker)"
+    columns: ["date", "spy_close", "tlt_close", "xlf_close", "xlu_close", "iwm_close", "gspc_close", "ixic_close", "vix_close"]
+    sources: ["Yahoo Finance"]
+    
+  - file: "commodities.csv"
+    columns: ["date", "gold_close", "copper_close"]
+    sources: ["Yahoo Finance GC=F", "Yahoo Finance HG=F"]
+    
+  - file: "credit_spreads.csv"
+    columns: ["date", "hy_oas_spread", "ig_spread"]
+    sources: ["FRED BAMLH0A0HYM2"]
+    
+  - file: "crypto_prices.csv"
+    columns: ["date", "btc_close", "eth_close", "sol_close"]
+    sources: ["Yahoo Finance BTC-USD", "Yahoo Finance ETH-USD", "Yahoo Finance SOL-USD"]
+    
+  - file: "rotation_indicators.csv"
+    columns: ["date", "spy_tlt_ratio", "copper_gold_ratio", "xlf_xlu_ratio", "iwm_spy_ratio", "spy_tlt_ma50", "spy_tlt_signal"]
+    sources: ["Calculated from tradfi_benchmark_data.csv and commodities.csv"]
+    
+  - file: "sentiment_indicators.csv"
+    columns: ["date", "fear_greed_index", "fear_greed_label"]
+    sources: ["Alternative.me API"]
+    
+  - file: "estate_wallet_tracker.csv"
+    columns: ["entity", "wallet_address", "chain", "last_known_balance", "estimated_usd_value", "risk_tier"]
+    note: "Column is 'entity', NOT 'entity_name'"
+
+# =============================================================================
+# END OF TICKER MASTER LIST
+# =============================================================================

@@ -1,0 +1,149 @@
+{
+  "classification_timestamp": "2026-01-24T13:10:00Z",
+  "input_files": {
+    "anomalies": "anomalies_detected.json",
+    "tradfi_data": "tradfi_benchmark_data.csv",
+    "sentiment_data": "sentiment_indicators.csv",
+    "credit_data": "credit_spreads.csv"
+  },
+  "indicators": {
+    "vix": {
+      "value": 15.48,
+      "threshold_risk_on": 20,
+      "threshold_risk_off": 30,
+      "threshold_crisis": 40,
+      "signal": "risk_on",
+      "weight": 0.25
+    },
+    "fear_greed": {
+      "value": 20,
+      "label": "Extreme Fear",
+      "threshold_greed": 50,
+      "threshold_fear": 30,
+      "threshold_extreme_fear": 20,
+      "signal": "extreme_fear",
+      "weight": 0.25
+    },
+    "credit_spreads_hy": {
+      "value": 272,
+      "unit": "bps",
+      "threshold_tight": 300,
+      "threshold_normal": 400,
+      "threshold_stress": 500,
+      "signal": "tight_spreads",
+      "weight": 0.25
+    },
+    "spy_trend": {
+      "current_price": 688.98,
+      "20d_moving_avg": 685.5,
+      "deviation_pct": 0.51,
+      "signal": "above_ma",
+      "weight": 0.25
+    }
+  },
+  "regime_scores": {
+    "risk_on_bull": {
+      "score": 0.75,
+      "components": {
+        "vix_below_20": true,
+        "fear_greed_above_50": false,
+        "spreads_below_300": true,
+        "spy_above_ma": true
+      },
+      "explanation": "3 of 4 indicators support risk-on: low VIX, tight credit spreads, SPY above MA. Only sentiment is negative."
+    },
+    "risk_off_bear": {
+      "score": 0.25,
+      "components": {
+        "vix_above_30": false,
+        "fear_greed_below_30": true,
+        "spreads_above_400": false,
+        "spy_below_ma": false
+      },
+      "explanation": "Only 1 of 4 indicators supports risk-off: extreme fear sentiment."
+    },
+    "neutral": {
+      "score": 0.0,
+      "components": {
+        "vix_20_to_30": false,
+        "fear_greed_30_to_50": false,
+        "spreads_300_to_400": false,
+        "spy_near_ma": false
+      },
+      "explanation": "No indicators in neutral range."
+    },
+    "crisis": {
+      "score": 0.0,
+      "components": {
+        "vix_above_40": false,
+        "fear_greed_below_20": false,
+        "spreads_above_500": false,
+        "correlation_spike": false
+      },
+      "explanation": "No crisis indicators triggered."
+    }
+  },
+  "current_regime": "risk_on_bull",
+  "confidence": 0.75,
+  "regime_interpretation": {
+    "label": "Risk-On with Fear (Wall of Worry)",
+    "description": "Market fundamentals strongly support risk-on positioning (VIX at 15.48, credit spreads tight at 272 bps, equities at highs). However, retail sentiment is at extreme fear (20), creating a classic 'wall of worry' setup. This divergence often precedes continued upside as fearful investors eventually capitulate and buy.",
+    "historical_analog": "Similar to Q4 2023 when fundamentals were strong but sentiment remained cautious after 2022 bear market."
+  },
+  "strategy_recommendations": {
+    "conservative_strategies": {
+      "ids": [1, 3, 5, 7, 9],
+      "recommendation": "hold_steady",
+      "rationale": "Current regime supports stable allocation. No changes needed for conservative positions.",
+      "action_type": "no_action"
+    },
+    "balanced_strategies": {
+      "ids": [2, 4, 6],
+      "recommendation": "maintain_allocation",
+      "rationale": "Balanced exposure appropriate for current environment. Monitor for sentiment improvement.",
+      "action_type": "no_action"
+    },
+    "aggressive_strategies": {
+      "ids": [8, 10],
+      "recommendation": "maintain_allocation",
+      "rationale": "Risk-on fundamentals support current exposure. Extreme fear sentiment suggests potential upside.",
+      "action_type": "no_action"
+    }
+  },
+  "adelaide_narrative": {
+    "headline": "Markets Climbing a Wall of Worry",
+    "body": "Market fundamentals remain strong with low volatility (VIX 15.48) and tight credit spreads (272 bps), suggesting institutions are comfortable taking risk. However, retail sentiment sits at Extreme Fear (20 on the Fear & Greed Index). This divergence - strong fundamentals with fearful sentiment - often creates buying opportunities as nervous investors eventually join the rally. Your strategy is well-positioned for current conditions. No changes recommended.",
+    "tone": "educational_optimistic",
+    "key_points": [
+      "VIX at 15.48 indicates low market stress",
+      "Credit spreads at 272 bps show healthy risk appetite",
+      "Extreme Fear sentiment often precedes rallies",
+      "No action required - strategies positioned appropriately"
+    ]
+  },
+  "next_regime_triggers": {
+    "to_risk_off_bear": {
+      "trigger": "VIX rises above 30 AND credit spreads widen above 400",
+      "probability": "Low",
+      "monitoring_frequency": "daily"
+    },
+    "to_crisis": {
+      "trigger": "VIX spikes above 40 AND Fear & Greed drops below 20 AND correlation spike",
+      "probability": "Very Low",
+      "monitoring_frequency": "continuous"
+    },
+    "to_full_risk_on": {
+      "trigger": "Fear & Greed rises above 50 (sentiment confirms fundamentals)",
+      "probability": "Medium",
+      "monitoring_frequency": "weekly"
+    }
+  },
+  "summary": {
+    "current_regime": "risk_on_bull",
+    "confidence": 0.75,
+    "crisis_mode": false,
+    "action_required": false,
+    "adelaide_content_ready": true,
+    "key_insight": "Fundamentals bullish, sentiment fearful - classic 'wall of worry' setup favoring continued upside"
+  }
+}

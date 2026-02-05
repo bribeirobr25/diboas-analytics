@@ -1,0 +1,23 @@
+date,fund_ticker,fund_name,btc_holdings,aum_usd,daily_change,cumulative_flows,source
+2024-01-11,IBIT,iShares Bitcoin Trust,0,0,0,0,SEC filing - launch
+2024-01-11,FBTC,Fidelity Wise Origin Bitcoin Fund,0,0,0,0,SEC filing - launch
+2024-01-11,GBTC,Grayscale Bitcoin Trust ETF,619000,28000000000,0,0,Grayscale ETF conversion
+2024-01-11,ARKB,ARK 21Shares Bitcoin ETF,0,0,0,0,SEC filing - launch
+2024-01-11,BITB,Bitwise Bitcoin ETF,0,0,0,0,SEC filing - launch
+2024-06-30,IBIT,iShares Bitcoin Trust,305000,18500000000,varies,12000000000,BlackRock
+2024-06-30,FBTC,Fidelity Wise Origin Bitcoin Fund,165000,10000000000,varies,9500000000,Fidelity
+2024-06-30,GBTC,Grayscale Bitcoin Trust ETF,275000,16500000000,varies,-11500000000,Grayscale
+2024-12-31,IBIT,iShares Bitcoin Trust,550000,52000000000,varies,21000000000,BlackRock
+2024-12-31,FBTC,Fidelity Wise Origin Bitcoin Fund,185000,17500000000,varies,11800000000,Fidelity
+2024-12-31,GBTC,Grayscale Bitcoin Trust ETF,195000,18500000000,varies,-21000000000,Grayscale
+2026-01-22,IBIT,iShares Bitcoin Trust,779977,69970000000,318200000,25100000000,Bitbo.io
+2026-01-22,FBTC,Fidelity Wise Origin Bitcoin Fund,194498,17450000000,-321400000,12300000000,Bitbo.io
+2026-01-22,GBTC,Grayscale Bitcoin Trust ETF,161170,14460000000,-176400000,-24800000000,Bitbo.io
+2026-01-22,BTC,Grayscale Bitcoin Mini Trust,48493,4350000000,-10000000,1100000000,Bitbo.io
+2026-01-22,BITB,Bitwise Bitcoin ETF,38978,3500000000,32700000,2100000000,Bitbo.io
+2026-01-22,ARKB,ARK 21Shares Bitcoin ETF,37265,3340000000,-57800000,-787000000,Bitbo.io
+2026-01-22,HODL,VanEck Bitcoin Trust,15796,1420000000,-1900000,302000000,Bitbo.io
+2026-01-22,BTCO,Invesco Galaxy Bitcoin ETF,6108,548000000,0,250000000,Bitbo.io
+2026-01-22,BRRR,Valkyrie Bitcoin Fund,6042,542000000,4000000,180000000,Bitbo.io
+2026-01-22,EZBC,Franklin Bitcoin ETF,5959,535000000,-10400000,220000000,Bitbo.io
+2026-01-22,BTCW,WisdomTree Bitcoin Fund,1650,148000000,4800000,75000000,Bitbo.io

@@ -1,0 +1,31 @@
+label,wallet_address,chain,category,estimated_holdings_usd,last_active,source
+Binance Cold Wallet 8,0xF977814e90dA44bFA03b6295A0616a897441aceC,ethereum,exchange,5000000000,2026-01-22,Arkham/Etherscan
+Binance Cold 3M219,3M219KR5vEneNb47ewrPfWyb5jQ2DjxRP6,bitcoin,exchange,varies,2026-01-22,Arkham
+Binance Cold 3E97A,3E97AjYaCq9QYnfFMtBCYiCEsN956Rvpj2,bitcoin,exchange,varies,2026-01-22,Arkham
+Kraken Cold Wallet 3,0x8d05d9924fe935bd533a844271a1b2078eae6fcf,ethereum,exchange,723000000,2026-01-22,Etherscan
+Bitfinex Cold Storage,0x742d35cc6634c0532925a3b844bc454e4438f44e,ethereum,exchange,503000000,2026-01-22,Etherscan
+Coinbase Prime,0x71660c4005BA85c37ccec55d0C4493E66Fe775d3,ethereum,exchange,varies,2026-01-22,Arkham
+OKX Hot Wallet,0x98ec059dc3adfbdd63429454aeb0c990fba4a128,ethereum,exchange,varies,2026-01-22,Etherscan
+vitalik.eth Primary,0xd8da6bf26964af9d7eed9e03e53415d37aa96045,ethereum,public_figure,2500000,2026-01-22,Vitalik Twitter
+Vitalik Secondary Vb,0xab5801a7d398351b8be11c439e05c5b3259aec9b,ethereum,public_figure,645000,2025-01,Etherscan
+Vitalik Vb3,0x220866b1a2219f40e72f5c628b65d54268ca3a9d,ethereum,public_figure,varies,2025-01,Etherscan
+Justin Sun,0x3ddfa8ec3052539b6c9549f12cea2c295cff5296,ethereum,public_figure,1000000000,2026-01-22,Etherscan/Arkham
+EF Treasury Main,0xc06145782F31030dB1C40B203bE6B0fD53410B6d,ethereum,foundation,610000000,2025-10-01,Official EF
+EF Treasury New Safe,0x9fC3dc011b461664c835F2527fffb1169b3C213e,ethereum,foundation,varies,2025-01-01,Hsiao-Wei Wang
+MicroStrategy BTC,1JHceFenZHACSRPD6tE4bfU6yJ83wTG6kH,bitcoin,public_company,45600000000,2026-01-22,Public filings
+a16z Crypto,0x05e793ce0c6027323ac150f6d45c2344d28b6019,ethereum,vc_fund,430000,2025-01,Etherscan
+Polychain Capital,0xe4abc54f5a6288b60c18b361442a151fc4911da6,ethereum,vc_fund,varies,2025-01,Etherscan
+Paradigm,0x9B9647431632AF44be02ddd22477Ed94d14AacAa,ethereum,vc_fund,varies,2025-01,Etherscan
+Three Arrows Capital,0x38163c3c8f1f99ba75b20d1c62070f6d6a38c785,ethereum,vc_fund_defunct,minimal,2022-07,Arkham
+Wintermute Main,0xDBF5E9c5206d0dB70a90108bf936DA60221dC080,ethereum,market_maker,varies,2026-01-22,Etherscan
+Jump Trading,0xf584F8728B874a6a5c7A8d4d387C9aae9172D621,ethereum,market_maker,994000000,2025-12-01,Arkham
+Mt. Gox Hot Wallet,1JbezDVd9VsK9o1Ga9UqLydeuEvhKLAPs6,bitcoin,estate,4000000000,2024-12-15,Arkham
+FTX Estate Wallet,0x2faf487a4414Fe77e2327F0bf4AE2a264a776AD2,ethereum,estate,varies,2025-09-01,Etherscan
+US Govt Silk Road,bc1qa5wkgaew2dkv56kfvj49j0av5nml45x9ek9hz6,bitcoin,government,3500000000,2024-12-01,Arkham/DOJ
+Arbitrum DAO Treasury,0xF3FC178157fb3c87548bAA86F9d24BA38E649B58,arbitrum,protocol,1590000000,2025-01,Arbitrum docs
+MakerDAO Pause Proxy,0xBE8E3e3618f7474F8cB1d074A26afFef007E98FB,ethereum,protocol,214000000,2025-12-01,MakerDAO docs
+Compound Timelock,0x6d903f6003cca6255D85CcA4D3B5E5146dC33925,ethereum,protocol,11900000,2025-01,Compound forum
+Lido DAO Agent,0x3e40D73EB977Dc6a537aF587D48316feE66E9C8c,ethereum,protocol,350000000,2025-01,Lido docs
+Jupiter JUP Token,JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN,solana,protocol,varies,ongoing,jup.ag
+Jito JTO Token,jtojtomepa8beP8AuQc6eXt5FriJwfFMwQx2v2f9mCL,solana,protocol,1940000000,ongoing,Solscan
+Whale Unknown 1,0x28c6c06298d514db089934071355e5743bf21d60,ethereum,unknown_whale,varies,2026-01,Etherscan

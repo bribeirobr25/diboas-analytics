@@ -132,6 +132,15 @@ Thumbs.db
 # Custom folders to ignore
 images/
 
+# Runtime state files
+data/trigger_cooldowns.json
+storage/
+
+# Generated outputs
+outputs/audit_report_*.json
+outputs/verification/
+outputs/logs/
+
 # Database and backup files
 *.sql
 *.sqlite

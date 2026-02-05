@@ -1,0 +1,142 @@
+{
+  "edition": {
+    "type": "daily",
+    "date": "2026-01-24",
+    "template": "daily_calm",
+    "day_of_week": "Friday",
+    "edition_number": 1,
+    "version": "manual_pipeline_v1"
+  },
+  "market_snapshot": {
+    "headline": "Markets Climbing a Wall of Worry",
+    "regime": "risk_on_bull",
+    "regime_confidence": 0.75,
+    "crisis_level": 0,
+    "indicators": {
+      "vix": {
+        "value": 15.48,
+        "status": "green",
+        "interpretation": "Low market stress"
+      },
+      "credit_spreads": {
+        "value": 272,
+        "unit": "bps",
+        "status": "green",
+        "interpretation": "Healthy risk appetite"
+      },
+      "fear_greed": {
+        "value": 20,
+        "label": "Extreme Fear",
+        "status": "yellow",
+        "interpretation": "Contrarian opportunity signal"
+      },
+      "spy_trend": {
+        "current_price": 688.98,
+        "ma_20d": 685.5,
+        "status": "green",
+        "interpretation": "Above 20-day moving average"
+      }
+    }
+  },
+  "alerts": [
+    {
+      "id": "CONS-2026-01-24-001",
+      "type": "estate_monitoring",
+      "headline": "Estate Wallet Monitoring Update",
+      "priority": "P3",
+      "action_required": false,
+      "estates": [
+        {
+          "name": "Mt. Gox",
+          "holdings": "34,689 BTC",
+          "estimated_value": "$4B",
+          "status": "Distribution ongoing",
+          "next_court_date": "Oct 2026"
+        },
+        {
+          "name": "FTX",
+          "holdings": "Mixed assets",
+          "status": "Liquidation continues"
+        },
+        {
+          "name": "FTX SOL",
+          "holdings": "5.3M SOL",
+          "estimated_value": "$775M",
+          "status": "Court-managed release"
+        }
+      ],
+      "summary": "No large movements this week. Distributions are gradual and market-managed."
+    },
+    {
+      "id": "CONS-2026-01-24-002",
+      "type": "sentiment_extreme",
+      "headline": "Market Sentiment at Extreme Fear",
+      "priority": "P3",
+      "action_required": false,
+      "details": {
+        "fear_greed_value": 20,
+        "fear_greed_label": "Extreme Fear",
+        "historical_note": "Extreme fear often precedes market recoveries",
+        "contrarian_signal": true
+      },
+      "summary": "Fearful markets have historically rewarded patient investors."
+    }
+  ],
+  "strategy_status": {
+    "all_strategies_status": "green",
+    "action_required": false,
+    "by_type": {
+      "conservative": {
+        "ids": [1, 3, 5, 7, 9],
+        "status": "on_track",
+        "action": "none_needed"
+      },
+      "balanced": {
+        "ids": [2, 4, 6],
+        "status": "on_track",
+        "action": "none_needed"
+      },
+      "aggressive": {
+        "ids": [8, 10],
+        "status": "on_track",
+        "action": "none_needed"
+      }
+    }
+  },
+  "adelaide_insight": {
+    "headline": "Adelaide's Take",
+    "grandmother_wisdom": "When everyone else is afraid to buy tomatoes at the market, that's often when the prices are best.",
+    "key_message": "Fearful markets have historically rewarded patient investors.",
+    "call_to_action": "Stay the course, or don't â€” you decide."
+  },
+  "compliance": {
+    "disclaimers_included": true,
+    "jurisdictions": ["US", "EU"],
+    "crisis_level": 0,
+    "auto_approve_eligible": true,
+    "prohibited_terms_check": "pass",
+    "investment_advice_check": "pass"
+  },
+  "content_metrics": {
+    "total_words": 485,
+    "estimated_read_time_seconds": 120,
+    "sections": 6,
+    "emojis_count": 5,
+    "tables_count": 2
+  },
+  "localization_ready": {
+    "base_language": "en",
+    "translations_needed": ["pt-br"],
+    "cultural_adaptation_notes": "Grandmother voice stronger in PT-BR"
+  },
+  "metadata": {
+    "generated_at": "2026-01-24T14:00:00Z",
+    "generator": "manual_pipeline_presenter",
+    "input_files": [
+      "consolidated_alerts.json",
+      "regime_classification.json"
+    ],
+    "template_used": "daily_calm",
+    "persona_base": "neutral"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "scan_timestamp": "2026-01-24T10:54:48.769744",
+  "anomalies": [
+    {
+      "id": "ANO-001",
+      "severity": "P2",
+      "category": "estate_distribution",
+      "description": "Mt. Gox Trustee is distributing (balance: 34689 BTC)",
+      "entity": "Mt. Gox Trustee",
+      "status": "distributing",
+      "balance_usd": "4000000000",
+      "court_date": "Oct 2026",
+      "recommended_action": "Monitor for market impact during distribution"
+    },
+    {
+      "id": "ANO-002",
+      "severity": "P2",
+      "category": "estate_distribution",
+      "description": "FTX Estate is liquidating (balance: mixed assets)",
+      "entity": "FTX Estate",
+      "status": "liquidating",
+      "balance_usd": "varies",
+      "court_date": "ongoing",
+      "recommended_action": "Monitor for market impact during distribution"
+    },
+    {
+      "id": "ANO-003",
+      "severity": "P2",
+      "category": "estate_distribution",
+      "description": "FTX Estate SOL is liquidating (balance: 5290000 SOL)",
+      "entity": "FTX Estate SOL",
+      "status": "liquidating",
+      "balance_usd": "775000000",
+      "court_date": "ongoing",
+      "recommended_action": "Monitor for market impact during distribution"
+    },
+    {
+      "id": "ANO-004",
+      "severity": "P2",
+      "category": "sentiment_extreme",
+      "description": "Fear & Greed Index at 20 (Extreme Fear)",
+      "metric": "fear_greed_index",
+      "current_value": 20,
+      "interpretation": "Potential buying opportunity (contrarian)",
+      "recommended_action": "Review DCA opportunities"
+    }
+  ],
+  "summary": {
+    "total_anomalies": 4,
+    "p0_count": 0,
+    "p1_count": 0,
+    "p2_count": 4,
+    "p3_count": 0,
+    "overall_risk_assessment": "GREEN"
+  }
+}

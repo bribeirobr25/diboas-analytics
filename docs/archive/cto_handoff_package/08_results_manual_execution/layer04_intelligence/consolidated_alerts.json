@@ -1,0 +1,112 @@
+{
+  "consolidation_timestamp": "2026-01-24T13:05:00Z",
+  "input_file": "triggered_actions.json",
+  "consolidation_rules_applied": ["estate_monitoring"],
+  "deduplication_count": 0,
+  "consolidated_alerts": [
+    {
+      "consolidation_id": "CONS-2026-01-24-001",
+      "consolidation_group": "estate_monitoring",
+      "root_cause": "bankruptcy_estate_activity",
+      "individual_triggers": ["EST-MOV-INFO-001", "EST-MOV-INFO-002", "EST-MOV-INFO-003"],
+      "trigger_count": 3,
+      "affected_strategies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "highest_level": 0,
+      "priority": "P3",
+      "unified_template": "estate_monitoring_digest",
+      "headline": "Estate Wallet Monitoring Update",
+      "summary": "Three bankruptcy estates remain active: Mt. Gox distribution (34,689 BTC), FTX liquidation (mixed assets), and FTX SOL holdings (5.3M SOL). No new large movements detected in past 30 days.",
+      "details": {
+        "estates_monitored": 3,
+        "total_btc_at_risk": 34689,
+        "total_sol_at_risk": 5290000,
+        "nearest_court_date": "Oct 2026 (Mt. Gox)",
+        "market_impact_assessment": "Low - distributions are gradual and market-managed"
+      },
+      "action_items": [
+        "Continue monitoring estate wallet addresses",
+        "Watch for sudden large movements",
+        "No immediate user action required"
+      ]
+    },
+    {
+      "consolidation_id": "CONS-2026-01-24-002",
+      "consolidation_group": null,
+      "root_cause": "sentiment_extreme",
+      "individual_triggers": ["SENT-FG-INFO"],
+      "trigger_count": 1,
+      "affected_strategies": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "highest_level": 0,
+      "priority": "P3",
+      "unified_template": "sentiment_contrarian_opportunity",
+      "headline": "Market Sentiment at Extreme Fear",
+      "summary": "Fear & Greed Index at 20 (Extreme Fear). Historically, extreme fear levels often precede market recoveries. This may represent a buying opportunity for long-term investors.",
+      "details": {
+        "fear_greed_value": 20,
+        "fear_greed_label": "Extreme Fear",
+        "historical_note": "Extreme Fear readings (<25) have historically preceded positive returns over 6-12 months",
+        "contrarian_signal": true
+      },
+      "action_items": [
+        "Consider dollar-cost averaging into positions",
+        "Review long-term allocation targets",
+        "Not a recommendation to change strategy allocation"
+      ]
+    }
+  ],
+  "adelaide_daily_top_5": [
+    {
+      "rank": 1,
+      "consolidation_id": "CONS-2026-01-24-001",
+      "headline": "Estate Wallet Monitoring Update",
+      "priority": "P3",
+      "affected_strategies_count": 10,
+      "action_required": false,
+      "template": "estate_monitoring_digest"
+    },
+    {
+      "rank": 2,
+      "consolidation_id": "CONS-2026-01-24-002",
+      "headline": "Market Sentiment at Extreme Fear",
+      "priority": "P3",
+      "affected_strategies_count": 10,
+      "action_required": false,
+      "template": "sentiment_contrarian_opportunity"
+    }
+  ],
+  "adelaide_weekly_digest": {
+    "period": "2026-01-20 to 2026-01-24",
+    "total_alerts": 4,
+    "consolidated_to": 2,
+    "by_priority": {
+      "P0": 0,
+      "P1": 0,
+      "P2": 0,
+      "P3": 4
+    },
+    "by_category": {
+      "market": 0,
+      "protocol": 0,
+      "estate_whale": 3,
+      "sentiment": 1,
+      "macro": 0
+    },
+    "week_summary": "Quiet week with no critical alerts. Market fundamentals remain stable (VIX 15.48, credit spreads 272 bps). Estate wallet monitoring continues for Mt. Gox, FTX, and FTX SOL. Sentiment at extreme fear levels may present contrarian opportunity.",
+    "key_metrics": {
+      "vix_weekly_avg": 15.3,
+      "btc_weekly_return": "+2.2%",
+      "eth_weekly_return": "+2.6%",
+      "sol_weekly_return": "+3.7%"
+    }
+  },
+  "summary": {
+    "input_triggers": 4,
+    "output_consolidated_alerts": 2,
+    "deduplication_savings": 0,
+    "consolidation_savings": 2,
+    "top_priority": "P3",
+    "crisis_mode": false,
+    "adelaide_daily_content_ready": true,
+    "adelaide_weekly_content_ready": true
+  }
+}

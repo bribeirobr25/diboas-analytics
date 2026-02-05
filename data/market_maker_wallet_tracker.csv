@@ -1,0 +1,16 @@
+firm,wallet_address,chain,tier,estimated_aum,last_active,source
+Wintermute,0xDBF5E9c5206d0dB70a90108bf936DA60221dC080,ethereum,1,multi-billion,2026-01-22,Etherscan/Arkham
+Wintermute,0x0000006daea1723962647b7e189d311d757fb793,ethereum,1,varies,2026-01-22,Etherscan labeled
+Wintermute,0xEae7380dD4CeF6fbD1144F49E4D1e6964258A4F4,ethereum,1,Binance deposit,2026-01-22,Arkham
+Wintermute,5sTQ5ih7xtctBhMXHr3f1aWdaXazWrWfoehqWdqWnTFP,solana,1,varies,2026-01-22,Solscan labeled
+Wintermute,MfDuWeqSHEqTFVYZ7LoexgAK9dxk7cy4DFJWjWMGVWa,solana,1,liquidity bot,2026-01-22,Solscan labeled
+Jump Trading,0xf584F8728B874a6a5c7A8d4d387C9aae9172D621,ethereum,1,677000000-994000000,2025-12-01,Arkham
+Cumberland DRW,entity via Arkham,bitcoin,1,not disclosed,2026-01-22,Arkham entity
+Cumberland DRW,entity via Arkham,ethereum,1,not disclosed,2026-01-22,Arkham entity
+GSR Markets,entity via Arkham,ethereum,1,not disclosed,2026-01-22,Arkham entity
+GSR Markets,entity via Arkham,solana,1,not disclosed,2026-01-22,Arkham entity
+Amber Group,suspected wallet,ethereum,2,5000000000,2025-07-01,On-chain analysis
+Alameda Research,0x93C08a3168fC469F3fC165cd3A471D19a37ca19e,ethereum,DEFUNCT,0,2022-11-08,Arkham/FTX
+B2C2,entity via Arkham,ethereum,2,not disclosed,2026-01-22,Arkham entity
+Keyrock,entity via Arkham,ethereum,2,not disclosed,2026-01-22,Arkham entity
+Flow Traders,entity via Arkham,ethereum,2,not disclosed,2026-01-22,Arkham entity

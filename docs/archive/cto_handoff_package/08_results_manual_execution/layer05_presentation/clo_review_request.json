@@ -1,0 +1,224 @@
+{
+  "clo_review_request": {
+    "request_id": "CLO-REV-2026-01-24-001",
+    "request_timestamp": "2026-01-24T14:30:00Z",
+    "requestor": "The Presenter (Manual Pipeline)",
+    "edition": {
+      "type": "daily",
+      "date": "2026-01-24",
+      "template": "daily_calm"
+    }
+  },
+  "files_for_review": [
+    {
+      "filename": "adelaide_daily_draft.md",
+      "type": "base_content",
+      "language": "en",
+      "persona": "neutral",
+      "size_bytes": 2847
+    },
+    {
+      "filename": "adelaide_daily_ana_en.md",
+      "type": "persona_adaptation",
+      "language": "en",
+      "persona": "ana_conservative",
+      "size_bytes": 2654
+    },
+    {
+      "filename": "adelaide_daily_maria_en.md",
+      "type": "persona_adaptation",
+      "language": "en",
+      "persona": "maria_balanced",
+      "size_bytes": 3124
+    },
+    {
+      "filename": "adelaide_daily_felipe_en.md",
+      "type": "persona_adaptation",
+      "language": "en",
+      "persona": "felipe_aggressive",
+      "size_bytes": 2356
+    },
+    {
+      "filename": "adelaide_daily_ana_ptbr.md",
+      "type": "localization",
+      "language": "pt-br",
+      "persona": "ana_conservative",
+      "size_bytes": 2890
+    }
+  ],
+  "content_summary": {
+    "crisis_level": 0,
+    "highest_priority": "P3",
+    "alerts_count": 2,
+    "regime": "risk_on_bull",
+    "action_recommended": false,
+    "auto_approve_eligible": true
+  },
+  "claims_used": [
+    {
+      "claim": "VIX at 15.48",
+      "type": "factual_market_data",
+      "source": "Layer 4 regime_classification.json",
+      "qr_approval_required": false
+    },
+    {
+      "claim": "Credit spreads at 272 basis points",
+      "type": "factual_market_data",
+      "source": "Layer 4 regime_classification.json",
+      "qr_approval_required": false
+    },
+    {
+      "claim": "Fear & Greed Index at 20 (Extreme Fear)",
+      "type": "factual_index_reading",
+      "source": "Layer 4 consolidated_alerts.json",
+      "qr_approval_required": false
+    },
+    {
+      "claim": "Mt. Gox holds 34,689 BTC",
+      "type": "factual_on_chain_data",
+      "source": "Layer 4 consolidated_alerts.json",
+      "qr_approval_required": false
+    },
+    {
+      "claim": "FTX SOL holdings 5.3M SOL",
+      "type": "factual_on_chain_data",
+      "source": "Layer 4 consolidated_alerts.json",
+      "qr_approval_required": false
+    },
+    {
+      "claim": "Extreme fear often precedes recoveries (historical)",
+      "type": "historical_observation",
+      "disclaimer_included": true,
+      "language_used": "often", "has historically", "sometimes preceded",
+      "qr_approval_required": false,
+      "note": "Framed as observation, not prediction, with appropriate hedging"
+    }
+  ],
+  "disclaimers_included": {
+    "us_disclaimers": {
+      "not_financial_advice": {
+        "present": true,
+        "text_used": "diBoaS does not provide investment advice"
+      },
+      "past_performance": {
+        "present": true,
+        "text_used": "Past performance does not guarantee future results"
+      },
+      "consult_advisor": {
+        "present": true,
+        "text_used": "Consider consulting a licensed financial adviser"
+      }
+    },
+    "eu_disclaimers": {
+      "past_performance": {
+        "present": true,
+        "text_used": "Past performance does not guarantee future results"
+      },
+      "capital_at_risk": {
+        "present": true,
+        "text_used": "Your capital is at risk"
+      }
+    },
+    "br_disclaimers": {
+      "rentabilidade_passada": {
+        "present": true,
+        "text_used": "Rentabilidade passada nÃ£o Ã© garantia de rentabilidade futura"
+      },
+      "investimentos_envolvem_riscos": {
+        "present": true,
+        "text_used": "Investimentos envolvem riscos e podem resultar em perdas"
+      }
+    }
+  },
+  "prohibited_terms_check": {
+    "universal_terms": {
+      "guaranteed": false,
+      "risk-free": false,
+      "certain_return": false,
+      "cannot_lose": false,
+      "100%_safe": false,
+      "no_risk": false,
+      "assured_profit": false,
+      "sure_thing": false,
+      "always_wins": false,
+      "never_lose": false,
+      "get_rich_quick": false,
+      "double_your_money": false,
+      "free_money": false,
+      "cant_fail": false,
+      "foolproof": false
+    },
+    "us_specific_terms": {
+      "you_should_invest": false,
+      "i_recommend": false,
+      "we_advise": false,
+      "buy_now": false,
+      "sell_now": false
+    },
+    "br_specific_terms": {
+      "lucro_garantido": false,
+      "sem_risco": false
+    },
+    "all_clear": true
+  },
+  "investment_advice_check": {
+    "patterns_detected": [],
+    "you_should_phrases": false,
+    "we_recommend_phrases": false,
+    "best_strategy_for_you_phrases": false,
+    "educational_language_used": true,
+    "autonomy_language_present": true,
+    "autonomy_phrases_used": [
+      "you decide",
+      "it's your choice",
+      "Your call",
+      "Whether you stay the course or adjust is entirely your choice"
+    ],
+    "all_clear": true
+  },
+  "tone_check": {
+    "crisis_level": 0,
+    "tone_appropriate": true,
+    "panic_language": false,
+    "fomo_language": false,
+    "false_certainty": false,
+    "grandmother_voice": true,
+    "all_clear": true
+  },
+  "whale_tracking_compliance": {
+    "wallet_owner_identification": false,
+    "directional_implications": false,
+    "non_signal_disclaimer": true,
+    "uncertainty_acknowledged": true,
+    "all_clear": true
+  },
+  "self_validation_summary": {
+    "G4-DIS-001_us_disclaimers": "PASS",
+    "G4-DIS-002_eu_disclaimers": "PASS",
+    "G4-DIS-003_br_disclaimers": "PASS",
+    "G4-PRO-001_universal_prohibited": "PASS",
+    "G4-PRO-002_us_prohibited": "PASS",
+    "G4-PRO-003_br_prohibited": "PASS",
+    "G4-ADV-001_no_advice_patterns": "PASS",
+    "G4-ADV-002_educational_language": "PASS",
+    "G4-ADV-003_no_you_should": "PASS",
+    "G4-CLM-001_claims_validated": "PASS",
+    "G4-CLM-002_historical_disclaimers": "PASS",
+    "G4-CRI-001_crisis_level_0": "PASS",
+    "G4-TON-001_appropriate_tone": "PASS",
+    "G4-TON-002_no_false_certainty": "PASS",
+    "G4-WHT-001_whale_compliance": "PASS",
+    "overall_status": "PASS",
+    "errors": 0,
+    "warnings": 0
+  },
+  "clo_review_request_summary": {
+    "auto_approve_eligible": true,
+    "human_review_required": false,
+    "crisis_escalation_required": false,
+    "edition_number": 1,
+    "first_20_spot_check": true,
+    "recommended_action": "CLO spot-check (first 20 editions policy)",
+    "sla_minutes": 240
+  }
+}

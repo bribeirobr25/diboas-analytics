@@ -1,0 +1,186 @@
+{
+  "run_timestamp": "2026-01-24T10:53:38.787552",
+  "risk_free_rate_used": 0.0426,
+  "strategies": [
+    {
+      "id": 1,
+      "name": "Safe Harbor",
+      "crypto_pct": 0,
+      "risk_tier": "Minimal",
+      "metrics": {
+        "sharpe_1y": -18.82,
+        "sortino_1y": 0,
+        "var_95_pct": 0.02,
+        "cvar_95_pct": 0.02,
+        "beta_to_btc": -0.0,
+        "sharpe_3y": -18.01,
+        "sortino_3y": 0,
+        "calmar_3y": 99.99,
+        "sharpe_alltime": -4.48,
+        "max_drawdown_pct": 0.0
+      }
+    },
+    {
+      "id": 2,
+      "name": "Stable Growth",
+      "crypto_pct": 30,
+      "risk_tier": "Low",
+      "metrics": {
+        "sharpe_1y": 0.01,
+        "sortino_1y": 0.01,
+        "var_95_pct": 0.02,
+        "cvar_95_pct": -0.12,
+        "beta_to_btc": 0.551,
+        "sharpe_3y": 0.92,
+        "sortino_3y": 0.83,
+        "calmar_3y": 1.81,
+        "sharpe_alltime": 0.96,
+        "max_drawdown_pct": 49.84
+      }
+    },
+    {
+      "id": 3,
+      "name": "Goal Keeper",
+      "crypto_pct": 0,
+      "risk_tier": "Minimal",
+      "metrics": {
+        "sharpe_1y": -7.01,
+        "sortino_1y": 0,
+        "var_95_pct": 0.02,
+        "cvar_95_pct": 0.02,
+        "beta_to_btc": -0.0,
+        "sharpe_3y": -12.43,
+        "sortino_3y": 0,
+        "calmar_3y": 99.99,
+        "sharpe_alltime": -2.71,
+        "max_drawdown_pct": 0.0
+      }
+    },
+    {
+      "id": 4,
+      "name": "Steady Progress",
+      "crypto_pct": 35,
+      "risk_tier": "Low-Medium",
+      "metrics": {
+        "sharpe_1y": 0.01,
+        "sortino_1y": 0.0,
+        "var_95_pct": 0.02,
+        "cvar_95_pct": -0.14,
+        "beta_to_btc": 0.643,
+        "sharpe_3y": 0.92,
+        "sortino_3y": 0.83,
+        "calmar_3y": 1.77,
+        "sharpe_alltime": 0.96,
+        "max_drawdown_pct": 56.32
+      }
+    },
+    {
+      "id": 5,
+      "name": "Patient Builder",
+      "crypto_pct": 0,
+      "risk_tier": "Minimal",
+      "metrics": {
+        "sharpe_1y": -18.82,
+        "sortino_1y": 0,
+        "var_95_pct": 0.02,
+        "cvar_95_pct": 0.02,
+        "beta_to_btc": -0.0,
+        "sharpe_3y": -18.01,
+        "sortino_3y": 0,
+        "calmar_3y": 99.99,
+        "sharpe_alltime": -4.48,
+        "max_drawdown_pct": 0.0
+      }
+    },
+    {
+      "id": 6,
+      "name": "Balanced Builder",
+      "crypto_pct": 40,
+      "risk_tier": "Medium",
+      "metrics": {
+        "sharpe_1y": 0.07,
+        "sortino_1y": 0.04,
+        "var_95_pct": 0.02,
+        "cvar_95_pct": -2.17,
+        "beta_to_btc": 0.664,
+        "sharpe_3y": 1.0,
+        "sortino_3y": 0.81,
+        "calmar_3y": 1.88,
+        "sharpe_alltime": 1.01,
+        "max_drawdown_pct": 55.59
+      }
+    },
+    {
+      "id": 7,
+      "name": "Steady Compounder",
+      "crypto_pct": 0,
+      "risk_tier": "Minimal",
+      "metrics": {
+        "sharpe_1y": -11.5,
+        "sortino_1y": 0,
+        "var_95_pct": 0.02,
+        "cvar_95_pct": 0.02,
+        "beta_to_btc": -0.0,
+        "sharpe_3y": -14.63,
+        "sortino_3y": 0,
+        "calmar_3y": 99.99,
+        "sharpe_alltime": -3.42,
+        "max_drawdown_pct": 0.0
+      }
+    },
+    {
+      "id": 8,
+      "name": "Wealth Accelerator",
+      "crypto_pct": 70,
+      "risk_tier": "High",
+      "metrics": {
+        "sharpe_1y": 0.1,
+        "sortino_1y": 0.05,
+        "var_95_pct": 0.03,
+        "cvar_95_pct": -3.66,
+        "beta_to_btc": 1.121,
+        "sharpe_3y": 1.02,
+        "sortino_3y": 0.79,
+        "calmar_3y": 1.88,
+        "sharpe_alltime": 1.03,
+        "max_drawdown_pct": 78.14
+      }
+    },
+    {
+      "id": 9,
+      "name": "Yield Maximizer",
+      "crypto_pct": 0,
+      "risk_tier": "Minimal",
+      "metrics": {
+        "sharpe_1y": -25.16,
+        "sortino_1y": 0,
+        "var_95_pct": 0.02,
+        "cvar_95_pct": 0.02,
+        "beta_to_btc": -0.0,
+        "sharpe_3y": -20.72,
+        "sortino_3y": 0,
+        "calmar_3y": 99.99,
+        "sharpe_alltime": -5.24,
+        "max_drawdown_pct": 0.0
+      }
+    },
+    {
+      "id": 10,
+      "name": "Full Throttle",
+      "crypto_pct": 85,
+      "risk_tier": "Very High",
+      "metrics": {
+        "sharpe_1y": 0.08,
+        "sortino_1y": 0.04,
+        "var_95_pct": 0.03,
+        "cvar_95_pct": -4.58,
+        "beta_to_btc": 1.397,
+        "sharpe_3y": 1.0,
+        "sortino_3y": 0.81,
+        "calmar_3y": 1.82,
+        "sharpe_alltime": 1.02,
+        "max_drawdown_pct": 87.23
+      }
+    }
+  ]
+}
