@@ -80,7 +80,6 @@ class FileLoader:
         'yahoo': 'crypto_prices.csv',  # V3: wide format with btc_close, eth_close, sol_close
         'jupiter': 'jupiter_jlp_historical_apy.csv',
         'jito': 'jito_historical_apy.csv',  # P0-ADDENDUM-1: dedicated Jito APY file
-        'perps': 'perps_lp_combined_apy.csv',
         # Additional v3 sources
         'crypto_prices': 'crypto_prices.csv',
         'treasury_yields': 'treasury_yields.csv',
@@ -106,7 +105,7 @@ class FileLoader:
         Load data from bundled CSV file.
 
         Args:
-            source: Data source identifier ('defillama', 'yahoo', 'jupiter', 'perps')
+            source: Data source identifier ('defillama', 'yahoo', 'jupiter', 'jito', etc.)
             start_date: Optional filter for start date
             end_date: Optional filter for end date
 
