@@ -228,7 +228,10 @@ class MonteCarloEngine:
 
             # Generate daily return
             daily_return = self._generate_return(strategy, current_regime)
-            values[day] = values[day - 1] * (1 + daily_return)
+            # Cap daily loss at 99% to prevent mathematically impossible negative values
+            # (portfolios can only lose 100% max without leverage)
+            daily_return = max(daily_return, -0.99)
+            values[day] = max(0, values[day - 1] * (1 + daily_return))
 
         return values
 

@@ -10,6 +10,7 @@ import logging
 
 from src.domain.simulation import BattleTestResult, MonteCarloResult
 from src.utils.file_io import safe_write_csv
+from src.utils.audit import get_audit_trail
 from config.settings import OUTPUT_DIR
 
 logger = logging.getLogger(__name__)
@@ -57,6 +58,11 @@ class CSVReporter:
 
         df = pd.DataFrame(rows)
         safe_write_csv(df, output_path)
+
+        # Log output file to audit trail
+        audit = get_audit_trail()
+        if audit:
+            audit.log_output_file(output_path)
 
         logger.info(f"Battle Test results exported to {output_path}")
         return output_path
@@ -106,6 +112,11 @@ class CSVReporter:
         df = pd.DataFrame(rows)
         safe_write_csv(df, output_path)
 
+        # Log output file to audit trail
+        audit = get_audit_trail()
+        if audit:
+            audit.log_output_file(output_path)
+
         logger.info(f"Monte Carlo results exported to {output_path}")
         return output_path
 
@@ -119,6 +130,11 @@ class CSVReporter:
 
         df = pd.DataFrame(validation_results)
         safe_write_csv(df, output_path, allow_empty=True)  # Allow empty for "no violations" case
+
+        # Log output file to audit trail
+        audit = get_audit_trail()
+        if audit:
+            audit.log_output_file(output_path)
 
         logger.info(f"Validation results exported to {output_path}")
         return output_path

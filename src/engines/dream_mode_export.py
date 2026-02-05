@@ -14,6 +14,7 @@ import logging
 from config.dream_mode import DREAM_MODE_PATHS, BANK_COMPARISON, DISCLAIMERS, REGIONAL_DISCLAIMERS
 from src.domain.dream_mode import DreamModeData, PathMetrics, PathProjection, DataSourceInfo
 from src.domain.simulation import BattleTestResult, MonteCarloResult
+from src.utils.audit import get_audit_trail
 from config.settings import OUTPUT_DIR
 
 logger = logging.getLogger(__name__)
@@ -87,6 +88,11 @@ class DreamModeExporter:
 
         with open(output_path, 'w') as f:
             json.dump(dream_mode_data.to_dict(), f, indent=2)
+
+        # Log output file to audit trail for compliance tracking
+        audit = get_audit_trail()
+        if audit:
+            audit.log_output_file(output_path)
 
         logger.info(f"Dream Mode data exported to: {output_path}")
         return dream_mode_data

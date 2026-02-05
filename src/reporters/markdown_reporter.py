@@ -10,6 +10,7 @@ import logging
 from src.domain.simulation import BattleTestResult, MonteCarloResult
 from src.utils.file_io import safe_write_text
 from src.adelaide.localization import HYPOTHETICAL_DISCLAIMERS
+from src.utils.audit import get_audit_trail
 from config.settings import OUTPUT_DIR
 
 logger = logging.getLogger(__name__)
@@ -119,6 +120,11 @@ class MarkdownReporter:
 
         safe_write_text('\n'.join(lines), output_path)
 
+        # Log output file to audit trail
+        audit = get_audit_trail()
+        if audit:
+            audit.log_output_file(output_path)
+
         logger.info(f"Battle Test report exported to {output_path}")
         return output_path
 
@@ -212,6 +218,11 @@ class MarkdownReporter:
         ])
 
         safe_write_text('\n'.join(lines), output_path)
+
+        # Log output file to audit trail
+        audit = get_audit_trail()
+        if audit:
+            audit.log_output_file(output_path)
 
         logger.info(f"Monte Carlo report exported to {output_path}")
         return output_path

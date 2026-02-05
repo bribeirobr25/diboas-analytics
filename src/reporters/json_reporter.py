@@ -11,6 +11,7 @@ import logging
 from src.domain.simulation import BattleTestResult, MonteCarloResult, SimulationMetadata
 from src.utils.file_io import safe_write_json
 from src.adelaide.localization import HYPOTHETICAL_DISCLAIMERS
+from src.utils.audit import get_audit_trail
 from config.settings import OUTPUT_DIR
 
 logger = logging.getLogger(__name__)
@@ -158,3 +159,7 @@ class JSONReporter:
     def _write_json(self, path: Path, data: Any):
         """Write JSON to file with proper formatting and atomic write."""
         safe_write_json(data, path)
+        # Log output file to audit trail for compliance tracking
+        audit = get_audit_trail()
+        if audit:
+            audit.log_output_file(path)

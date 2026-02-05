@@ -80,8 +80,7 @@ class FileLoader:
         'yahoo': 'crypto_prices.csv',  # V3: wide format with btc_close, eth_close, sol_close
         'jupiter': 'jupiter_jlp_historical_apy.csv',
         'jito': 'jito_historical_apy.csv',  # P0-ADDENDUM-1: dedicated Jito APY file
-        # Additional v3 sources
-        'crypto_prices': 'crypto_prices.csv',
+        # Additional v3 sources (note: 'yahoo' already maps to crypto_prices.csv)
         'treasury_yields': 'treasury_yields.csv',
         'sentiment': 'sentiment_indicators.csv',
         'tradfi': 'tradfi_benchmark_data.csv',
