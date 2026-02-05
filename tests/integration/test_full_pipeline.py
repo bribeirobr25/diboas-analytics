@@ -2,6 +2,8 @@
 End-to-end integration tests for the complete validation pipeline.
 
 Tests the full flow: Data → Gate 1 → Triggers → Gate 3 → Adelaide → Gate 4 → Output
+
+Note: All Adelaide/CLO content must include AI disclosure (California SB 942).
 """
 
 import pytest
@@ -41,6 +43,10 @@ from src.crisis import (
 from src.adelaide.adelaide_edition_tracker import AdelaideEditionTracker
 
 
+# AI disclosure to include in test content (California SB 942 compliance)
+AI_DISCLOSURE = "🤖 This content was generated with artificial intelligence assistance."
+
+
 class TestFullPipelineE2E:
     """End-to-end tests for the complete validation pipeline."""
 
@@ -76,8 +82,8 @@ class TestFullPipelineE2E:
 
         assert tracker.requires_spot_check() is False
 
-        # Step 2: Create compliant content
-        content = """
+        # Step 2: Create compliant content (with AI disclosure)
+        content = f"""
         Weekly Market Update - Adelaide Newsletter #26
 
         Market conditions remain stable this week. Bitcoin is trading
@@ -85,6 +91,8 @@ class TestFullPipelineE2E:
 
         This is not investment advice. Past performance does not
         guarantee future results. Your capital is at risk.
+
+        {AI_DISCLOSURE}
         """
 
         # Step 3: Classify crisis level
@@ -103,11 +111,8 @@ class TestFullPipelineE2E:
         )
         clo_result = clo_validator.validate(clo_input)
 
-        # Should pass or warn (no errors)
-        assert clo_result.status in [
-            CLOValidationStatus.PASS,
-            CLOValidationStatus.WARN
-        ]
+        # Should pass (no errors)
+        assert clo_result.status == CLOValidationStatus.PASS
         assert clo_result.routing_decision == "auto_deliver"
 
     def test_full_pipeline_crisis_flow(self, temp_dir):

@@ -40,8 +40,14 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from src.utils.logging import setup_logging
 from src.utils.validation import validate_cli_args
+from src.utils.validation.cli import print_validation_errors
 from src.utils.errors import handle_error, DiBoaSError
 from src.utils.audit import create_audit_trail
+from src.utils.correlation import (
+    new_correlation_id,
+    set_correlation_id,
+    setup_correlated_logging,
+)
 
 
 def main():
@@ -306,6 +312,17 @@ Examples:
         help='Data directory (default: data/)'
     )
     validate_gate1_parser.add_argument(
+        '--edition',
+        choices=['pulse', 'weekly'],
+        default='weekly',
+        help='Adelaide edition type for SLA selection (default: weekly)'
+    )
+    validate_gate1_parser.add_argument(
+        '--strict',
+        action='store_true',
+        help='Fail on warnings (not just errors)'
+    )
+    validate_gate1_parser.add_argument(
         '--output',
         help='Output report file (optional)'
     )
@@ -331,6 +348,10 @@ Examples:
         '--output',
         help='Output report file (optional)'
     )
+
+    # Health command
+    from src.commands.health_cmd import add_health_parser
+    add_health_parser(subparsers)
 
     # Tenants command
     tenants_parser = subparsers.add_parser('tenants', help='Manage tenant configurations')
@@ -362,29 +383,24 @@ Examples:
 
     args = parser.parse_args()
 
-    # Setup logging
+    # Setup logging with correlation support
     log_level = 'DEBUG' if args.verbose else 'INFO'
     setup_logging(level=log_level, log_file=True, console=True)
+    setup_correlated_logging()
 
     logger = logging.getLogger('diboas')
+
+    # Generate correlation ID for this CLI invocation
+    correlation_id = new_correlation_id(prefix=f"cli-{args.command or 'help'}")
+    logger.debug(f"Starting CLI with correlation_id={correlation_id}")
 
     if args.command is None:
         parser.print_help()
         sys.exit(1)
 
-    # Validate CLI arguments
+    # Validate CLI arguments (Principle 8 - Security)
     validation_result = validate_cli_args(args)
-    if not validation_result.is_valid:
-        print("\nValidation Errors:")
-        print(validation_result.format_report())
-        sys.exit(1)
-
-    # Show warnings if any
-    if validation_result.warnings:
-        print("\nWarnings:")
-        for warning in validation_result.warnings:
-            print(f"  - {warning.message}")
-        print()
+    print_validation_errors(validation_result, command=args.command, exit_on_error=True)
 
     # Create audit trail for this execution
     audit = create_audit_trail(command=args.command)
@@ -468,6 +484,12 @@ Examples:
                 risk_metrics_file=args.risk_metrics,
                 output_file=args.output,
             )
+
+        elif args.command == 'health':
+            from src.commands.health_cmd import run_health
+            exit_code = run_health(args)
+            if exit_code != 0:
+                sys.exit(exit_code)
 
         # Save audit report on successful completion
         audit.log_event('execution_complete', f'Command {args.command} completed successfully')

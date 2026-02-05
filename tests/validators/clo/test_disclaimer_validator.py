@@ -1,4 +1,10 @@
-"""Tests for CLO disclaimer validator."""
+"""Tests for CLO disclaimer validator.
+
+Tests the CLODisclaimerValidator which validates:
+- Jurisdiction-specific disclaimer requirements (US, EU, BR)
+- AI disclosure requirements (California SB 942 compliance)
+- CVM 3-part structure for Brazil
+"""
 
 import pytest
 from src.validators.clo.clo_disclaimer_validator import CLODisclaimerValidator
@@ -7,6 +13,10 @@ from src.validators.clo.clo_validation_types import (
     CLOJurisdiction,
     CLOValidationSeverity,
 )
+
+
+# AI disclosure to include in test content (California SB 942 compliance)
+AI_DISCLOSURE = "🤖 This content was generated with artificial intelligence assistance."
 
 
 class TestDisclaimerValidator:
@@ -29,9 +39,9 @@ class TestDisclaimerValidator:
         assert all(i.severity == CLOValidationSeverity.ERROR for i in issues)
 
     def test_should_pass_when_us_disclaimers_present(self, validator):
-        """Passes when US disclaimers are present."""
+        """Passes when US disclaimers and AI disclosure are present."""
         input_data = CLOValidationInput(
-            content="This is not investment advice. Past performance does not guarantee future results.",
+            content=f"This is not investment advice. Past performance does not guarantee future results. {AI_DISCLOSURE}",
             jurisdiction=CLOJurisdiction.US
         )
         issues = validator.validate(input_data)
@@ -40,11 +50,11 @@ class TestDisclaimerValidator:
     def test_should_accept_alternative_disclaimer_phrases(self, validator):
         """Accepts alternative disclaimer phrases."""
         input_data = CLOValidationInput(
-            content="This content is for informational purposes only. Historical performance may not repeat.",
+            content=f"This content is for informational purposes only. Historical performance may not repeat. {AI_DISCLOSURE}",
             jurisdiction=CLOJurisdiction.US
         )
         issues = validator.validate(input_data)
-        # Should accept alternatives
+        # Should accept alternatives for jurisdictional disclaimers
         assert len([i for i in issues if "not investment advice" in i.message]) == 0
 
     def test_should_fail_when_eu_disclaimer_missing(self, validator):
@@ -58,9 +68,9 @@ class TestDisclaimerValidator:
         assert any(i.jurisdiction == "EU" for i in issues)
 
     def test_should_pass_when_eu_disclaimers_present(self, validator):
-        """Passes when EU disclaimers are present."""
+        """Passes when EU disclaimers and AI disclosure are present."""
         input_data = CLOValidationInput(
-            content="This is not investment advice. Your capital is at risk.",
+            content=f"This is not investment advice. Your capital is at risk. {AI_DISCLOSURE}",
             jurisdiction=CLOJurisdiction.EU
         )
         issues = validator.validate(input_data)
@@ -81,12 +91,14 @@ class TestDisclaimerValidator:
         # 1. Investor protection warning
         # 2. Loss warning
         # 3. Professional advice
+        # Plus AI disclosure (California SB 942)
         input_data = CLOValidationInput(
-            content="""
+            content=f"""
             Investimentos envolvem riscos de perda.
             Criptoativos NÃO são protegidos por esquemas de garantia.
             Você pode perder todo o capital investido.
             Consulte um profissional habilitado pela CVM.
+            {AI_DISCLOSURE}
             """,
             jurisdiction=CLOJurisdiction.BR
         )
@@ -106,17 +118,47 @@ class TestDisclaimerValidator:
     def test_should_be_case_insensitive(self, validator):
         """Detection is case insensitive."""
         input_data = CLOValidationInput(
-            content="THIS IS NOT INVESTMENT ADVICE. PAST PERFORMANCE DOES NOT PREDICT FUTURE RESULTS.",
+            content=f"THIS IS NOT INVESTMENT ADVICE. PAST PERFORMANCE DOES NOT PREDICT FUTURE RESULTS. {AI_DISCLOSURE}",
             jurisdiction=CLOJurisdiction.US
         )
         issues = validator.validate(input_data)
         assert len(issues) == 0
 
     def test_should_have_no_requirements_for_other_jurisdiction(self, validator):
-        """No specific requirements for OTHER jurisdiction."""
+        """No jurisdictional requirements for OTHER, but AI disclosure still required."""
         input_data = CLOValidationInput(
-            content="This is a newsletter.",
+            content=f"This is a newsletter. {AI_DISCLOSURE}",
             jurisdiction=CLOJurisdiction.OTHER
         )
         issues = validator.validate(input_data)
         assert len(issues) == 0
+
+    def test_should_fail_when_ai_disclosure_missing(self, validator):
+        """Fails when AI disclosure is missing (California SB 942)."""
+        input_data = CLOValidationInput(
+            content="This is not investment advice. Past performance does not guarantee future results.",
+            jurisdiction=CLOJurisdiction.US
+        )
+        issues = validator.validate(input_data)
+        ai_issues = [i for i in issues if "AI disclosure" in i.message or "SB 942" in i.message]
+        assert len(ai_issues) > 0, "Expected AI disclosure failure"
+
+    def test_should_accept_ai_disclosure_variations(self, validator):
+        """Accepts various AI disclosure phrasings."""
+        # Test robot emoji
+        input_data = CLOValidationInput(
+            content="This is not investment advice. Past performance does not guarantee future results. 🤖",
+            jurisdiction=CLOJurisdiction.US
+        )
+        issues = validator.validate(input_data)
+        ai_issues = [i for i in issues if "AI disclosure" in i.message]
+        assert len(ai_issues) == 0
+
+        # Test text-based disclosure
+        input_data = CLOValidationInput(
+            content="This is not investment advice. Past performance does not guarantee future results. AI-generated content.",
+            jurisdiction=CLOJurisdiction.US
+        )
+        issues = validator.validate(input_data)
+        ai_issues = [i for i in issues if "AI disclosure" in i.message]
+        assert len(ai_issues) == 0

@@ -1,4 +1,12 @@
-"""Tests for CLO Gate 4 validator."""
+"""Tests for CLO Gate 4 validator.
+
+Tests the final combined validation gate which runs all sub-validators:
+- Prohibited terms
+- Disclaimers (including AI disclosure)
+- Jurisdiction restrictions
+- Crisis level handling
+- Adelaide spot-check requirements
+"""
 
 import pytest
 from src.validators.clo.clo_gate4_validator import CLOGate4Validator
@@ -7,6 +15,10 @@ from src.validators.clo.clo_validation_types import (
     CLOJurisdiction,
     CLOValidationStatus,
 )
+
+
+# AI disclosure to include in test content (California SB 942 compliance)
+AI_DISCLOSURE = "🤖 This content was generated with artificial intelligence assistance."
 
 
 class TestCLOGate4Validator:
@@ -18,9 +30,9 @@ class TestCLOGate4Validator:
         return CLOGate4Validator({})
 
     def test_should_pass_clean_content(self, validator):
-        """Passes clean content with required disclaimers."""
+        """Passes clean content with required disclaimers and AI disclosure."""
         input_data = CLOValidationInput(
-            content="This is not investment advice. Past performance does not guarantee future results.",
+            content=f"This is not investment advice. Past performance does not guarantee future results. {AI_DISCLOSURE}",
             jurisdiction=CLOJurisdiction.US
         )
         result = validator.validate(input_data)
@@ -100,13 +112,13 @@ class TestCLOGate4Validator:
     def test_should_not_require_spot_check_after_20_editions(self, validator):
         """No spot-check required after 20 editions."""
         input_data = CLOValidationInput(
-            content="This is not investment advice. Past performance does not guarantee future results.",
+            content=f"This is not investment advice. Past performance does not guarantee future results. {AI_DISCLOSURE}",
             jurisdiction=CLOJurisdiction.US,
             adelaide_edition_number=25
         )
         result = validator.validate(input_data)
-        # Should proceed to normal validation
-        assert result.status in [CLOValidationStatus.PASS, CLOValidationStatus.WARN, CLOValidationStatus.FAIL]
+        # Should proceed to normal validation and PASS
+        assert result.status == CLOValidationStatus.PASS
 
     def test_should_include_duration_metadata(self, validator):
         """Includes gate duration in metadata."""
@@ -132,7 +144,7 @@ class TestCLOGate4Validator:
     def test_should_convert_to_dict(self, validator):
         """Result can be converted to dict."""
         input_data = CLOValidationInput(
-            content="This is not investment advice. Past performance does not guarantee future results.",
+            content=f"This is not investment advice. Past performance does not guarantee future results. {AI_DISCLOSURE}",
             jurisdiction=CLOJurisdiction.US
         )
         result = validator.validate(input_data)
@@ -162,7 +174,7 @@ class TestCLOGate4Configuration:
 
         # Edition 10 should not require spot-check with custom config
         input_data2 = CLOValidationInput(
-            content="This is not investment advice. Past performance does not guarantee future results.",
+            content=f"This is not investment advice. Past performance does not guarantee future results. {AI_DISCLOSURE}",
             jurisdiction=CLOJurisdiction.US,
             adelaide_edition_number=10
         )

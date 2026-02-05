@@ -3,19 +3,72 @@ File loader for bundled historical data.
 
 Loads CSV files from the data/ directory with error handling
 and audit trail integration.
+
+Security Features:
+- Path validation to prevent directory traversal
+- Audit logging for all data access
+- Checksum tracking for data integrity
 """
 
 import pandas as pd
+import hashlib
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Dict, Any
 from datetime import date, datetime
 import logging
+import os
 
 from config.settings import DATA_DIR
 from src.utils.errors import DataNotFoundError, DataCorruptError, graceful_degradation
 from src.utils.audit import get_audit_trail
+from src.utils.events import emit_data_loaded, EventNames, publish
+from src.utils.correlation import get_correlation_id
 
 logger = logging.getLogger(__name__)
+
+
+def _compute_file_checksum(filepath: Path, algorithm: str = 'sha256') -> str:
+    """
+    Compute checksum of a file for audit purposes.
+
+    Args:
+        filepath: Path to file
+        algorithm: Hash algorithm (default: sha256)
+
+    Returns:
+        Hexadecimal checksum string
+    """
+    hash_func = hashlib.new(algorithm)
+    with open(filepath, 'rb') as f:
+        # Read in chunks for large files
+        for chunk in iter(lambda: f.read(8192), b''):
+            hash_func.update(chunk)
+    return hash_func.hexdigest()
+
+
+def _validate_data_path(filepath: Path, allowed_base: Path) -> bool:
+    """
+    Validate that a file path is within the allowed data directory.
+
+    Prevents directory traversal attacks.
+
+    Args:
+        filepath: Path to validate
+        allowed_base: Allowed base directory
+
+    Returns:
+        True if path is safe, False otherwise
+    """
+    try:
+        # Resolve to absolute paths
+        resolved_file = filepath.resolve()
+        resolved_base = allowed_base.resolve()
+
+        # Check if file is within allowed base
+        resolved_file.relative_to(resolved_base)
+        return True
+    except (ValueError, OSError):
+        return False
 
 
 class FileLoader:
@@ -85,12 +138,35 @@ class FileLoader:
                 data_type=f'{source} historical data'
             )
 
+        # Security: Validate path is within allowed data directory
+        if not _validate_data_path(filepath, self.data_dir):
+            logger.error(f"Security: Path validation failed for {filepath}")
+            raise DataNotFoundError(
+                filepath=str(filepath),
+                data_type=f'{source} - path outside allowed directory'
+            )
+
         logger.info(f"Loading {source} data from {filepath}")
 
-        # Log to audit trail if active
+        # Log to audit trail with enhanced details
         audit = get_audit_trail()
+        file_stats = filepath.stat()
+        audit_details = {
+            'source': source,
+            'filepath': str(filepath.name),  # Only filename, not full path
+            'file_size_bytes': file_stats.st_size,
+            'modified_time': datetime.fromtimestamp(file_stats.st_mtime).isoformat(),
+            'start_date_filter': str(start_date) if start_date else None,
+            'end_date_filter': str(end_date) if end_date else None,
+        }
+
         if audit:
             audit.log_input_file(filepath)
+            # Log additional context
+            audit.log_checkpoint(
+                name=f'data_load_{source}',
+                details=audit_details
+            )
 
         # Load CSV with error handling
         try:
@@ -130,7 +206,35 @@ class FileLoader:
             # Sort by date
             df = df.sort_values('date').reset_index(drop=True)
 
+        # Log successful load with row count
         logger.info(f"Loaded {len(df)} rows from {source}")
+
+        # Emit data.loaded event
+        emit_data_loaded(
+            source=str(filepath.name),
+            rows=len(df),
+            columns=len(df.columns),
+            correlation_id=get_correlation_id(),
+        )
+
+        # Update audit trail with load results
+        if audit:
+            load_result = {
+                'source': source,
+                'rows_loaded': len(df),
+                'columns': list(df.columns),
+                'date_range': None,
+            }
+            if 'date' in df.columns and not df.empty:
+                load_result['date_range'] = {
+                    'min': str(df['date'].min()),
+                    'max': str(df['date'].max()),
+                }
+            audit.log_checkpoint(
+                name=f'data_load_{source}_complete',
+                details=load_result
+            )
+
         return df
 
     def load_all(

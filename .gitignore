@@ -130,7 +130,6 @@ ehthumbs.db
 Thumbs.db
 
 # Custom folders to ignore
-docs/
 images/
 
 # Database and backup files

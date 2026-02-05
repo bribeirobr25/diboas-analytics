@@ -1,4 +1,12 @@
-"""Integration tests for Adelaide to CLO validation pipeline."""
+"""Integration tests for Adelaide to CLO validation pipeline.
+
+Tests the full flow from Adelaide-generated content through CLO validation:
+- Clean content auto-approval
+- Prohibited content blocking
+- Crisis level routing
+- Spot-check requirements
+- AI disclosure compliance (California SB 942)
+"""
 
 import pytest
 import tempfile
@@ -13,6 +21,10 @@ from src.crisis.crisis_level_classifier import CrisisLevelClassifier, CrisisLeve
 from src.crisis.crisis_router import CrisisRouter
 from src.crisis.crisis_approval_queue import CrisisFileBasedApprovalQueue
 from src.adelaide.adelaide_edition_tracker import AdelaideEditionTracker
+
+
+# AI disclosure to include in test content (California SB 942 compliance)
+AI_DISCLOSURE = "🤖 This content was generated with artificial intelligence assistance."
 
 
 class TestAdelaideToCLOPipeline:
@@ -41,14 +53,16 @@ class TestAdelaideToCLOPipeline:
         return CrisisRouter(approval_queue=queue)
 
     def test_should_auto_approve_clean_content(self, clo_validator):
-        """Clean content is auto-approved."""
-        content = """
+        """Clean content with disclaimers and AI disclosure is auto-approved."""
+        content = f"""
         Weekly Market Update
 
         This week saw moderate growth across major markets.
 
         DISCLAIMER: This is not investment advice. Past performance
         does not guarantee future results.
+
+        {AI_DISCLOSURE}
         """
 
         input_data = CLOValidationInput(
@@ -127,11 +141,13 @@ class TestAdelaideToCLOPipeline:
 
     def test_should_not_require_spot_check_after_20_editions(self, clo_validator):
         """Later editions don't require spot-check."""
-        content = """
+        content = f"""
         Adelaide Newsletter #25
 
         This week's market analysis.
         This is not investment advice. Past performance does not guarantee future results.
+
+        {AI_DISCLOSURE}
         """
 
         input_data = CLOValidationInput(
@@ -143,8 +159,8 @@ class TestAdelaideToCLOPipeline:
 
         result = clo_validator.validate(input_data)
 
-        # Should proceed to normal validation
-        assert result.status in [CLOValidationStatus.PASS, CLOValidationStatus.WARN]
+        # Should proceed to normal validation and PASS
+        assert result.status == CLOValidationStatus.PASS
 
 
 class TestEditionTrackerIntegration:
@@ -199,14 +215,16 @@ class TestFullPipelineIntegration:
         for _ in range(25):  # Move past spot-check
             tracker.record_edition("daily")
 
-        # 2. Create content
-        content = """
+        # 2. Create content with required disclaimers and AI disclosure
+        content = f"""
         Weekly Market Update - Adelaide Newsletter
 
         Market conditions remain stable this week.
 
         This is not investment advice. Past performance does not
         guarantee future results.
+
+        {AI_DISCLOSURE}
         """
 
         # 3. Classify crisis level
