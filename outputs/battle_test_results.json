@@ -1,6 +1,8 @@
 {
-  "generated_at": "2025-12-30T16:43:16.957401",
+  "generated_at": "2026-02-05T15:18:33.388762",
   "type": "battle_test",
+  "is_hypothetical": true,
+  "hypothetical_disclaimer": "⚠️ HYPOTHETICAL PERFORMANCE: This analysis is based on historical data and simulated results. Past performance does not guarantee future returns. Actual results may differ materially due to market conditions, execution, and other factors. These results reflect hindsight bias and should not be relied upon as indicative of future performance.",
   "results": [
     {
       "strategy_id": 1,
@@ -10,11 +12,12 @@
       "period_end": "2025-12-31",
       "days": 1341,
       "deposited": 18600,
-      "final_value": 19172.91,
-      "profit": 572.91,
-      "return_pct": 3.08,
+      "final_value": 20909.05,
+      "profit": 2309.05,
+      "return_pct": 12.41,
       "max_drawdown_pct": 0.0,
-      "annualized_return": 0.83
+      "annualized_return": 3.24,
+      "is_hypothetical": true
     },
     {
       "strategy_id": 2,
@@ -24,11 +27,12 @@
       "period_end": "2025-12-31",
       "days": 1341,
       "deposited": 18600,
-      "final_value": 31104.95,
-      "profit": 12504.95,
-      "return_pct": 67.23,
-      "max_drawdown_pct": 31.11,
-      "annualized_return": 15.02
+      "final_value": 35779.69,
+      "profit": 17179.69,
+      "return_pct": 92.36,
+      "max_drawdown_pct": 29.05,
+      "annualized_return": 19.49,
+      "is_hypothetical": true
     },
     {
       "strategy_id": 3,
@@ -38,11 +42,12 @@
       "period_end": "2025-12-31",
       "days": 1341,
       "deposited": 18600,
-      "final_value": 19182.05,
-      "profit": 582.05,
-      "return_pct": 3.13,
+      "final_value": 20909.05,
+      "profit": 2309.05,
+      "return_pct": 12.41,
       "max_drawdown_pct": 0.0,
-      "annualized_return": 0.84
+      "annualized_return": 3.24,
+      "is_hypothetical": true
     },
     {
       "strategy_id": 4,
@@ -52,11 +57,12 @@
       "period_end": "2025-12-31",
       "days": 1341,
       "deposited": 18600,
-      "final_value": 33135.22,
-      "profit": 14535.22,
-      "return_pct": 78.15,
-      "max_drawdown_pct": 37.17,
-      "annualized_return": 17.02
+      "final_value": 38409.01,
+      "profit": 19809.01,
+      "return_pct": 106.5,
+      "max_drawdown_pct": 35.27,
+      "annualized_return": 21.82,
+      "is_hypothetical": true
     },
     {
       "strategy_id": 5,
@@ -66,11 +72,12 @@
       "period_end": "2025-12-31",
       "days": 1341,
       "deposited": 18600,
-      "final_value": 19172.91,
-      "profit": 572.91,
-      "return_pct": 3.08,
+      "final_value": 20909.05,
+      "profit": 2309.05,
+      "return_pct": 12.41,
       "max_drawdown_pct": 0.0,
-      "annualized_return": 0.83
+      "annualized_return": 3.24,
+      "is_hypothetical": true
     },
     {
       "strategy_id": 6,
@@ -80,11 +87,12 @@
       "period_end": "2025-12-31",
       "days": 1341,
       "deposited": 18600,
-      "final_value": 38838.56,
-      "profit": 20238.56,
-      "return_pct": 108.81,
-      "max_drawdown_pct": 36.1,
-      "annualized_return": 22.19
+      "final_value": 41588.93,
+      "profit": 22988.93,
+      "return_pct": 123.6,
+      "max_drawdown_pct": 34.5,
+      "annualized_return": 24.49,
+      "is_hypothetical": true
     },
     {
       "strategy_id": 7,
@@ -94,11 +102,12 @@
       "period_end": "2025-12-31",
       "days": 1341,
       "deposited": 18600,
-      "final_value": 19200.89,
-      "profit": 600.89,
-      "return_pct": 3.23,
+      "final_value": 20909.05,
+      "profit": 2309.05,
+      "return_pct": 12.41,
       "max_drawdown_pct": 0.0,
-      "annualized_return": 0.87
+      "annualized_return": 3.24,
+      "is_hypothetical": true
     },
     {
       "strategy_id": 8,
@@ -108,11 +117,12 @@
       "period_end": "2025-12-31",
       "days": 1341,
       "deposited": 18600,
-      "final_value": 59740.27,
-      "profit": 41140.27,
-      "return_pct": 221.18,
-      "max_drawdown_pct": 58.87,
-      "annualized_return": 37.38
+      "final_value": 59329.52,
+      "profit": 40729.52,
+      "return_pct": 218.98,
+      "max_drawdown_pct": 58.07,
+      "annualized_return": 37.12,
+      "is_hypothetical": true
     },
     {
       "strategy_id": 9,
@@ -122,11 +132,12 @@
       "period_end": "2025-12-31",
       "days": 1341,
       "deposited": 18600,
-      "final_value": 19191.75,
-      "profit": 591.75,
-      "return_pct": 3.18,
+      "final_value": 20909.05,
+      "profit": 2309.05,
+      "return_pct": 12.41,
       "max_drawdown_pct": 0.0,
-      "annualized_return": 0.86
+      "annualized_return": 3.24,
+      "is_hypothetical": true
     },
     {
       "strategy_id": 10,
@@ -136,17 +147,18 @@
       "period_end": "2025-12-31",
       "days": 1341,
       "deposited": 18600,
-      "final_value": 64662.55,
-      "profit": 46062.55,
-      "return_pct": 247.65,
-      "max_drawdown_pct": 70.16,
-      "annualized_return": 40.38
+      "final_value": 66070.81,
+      "profit": 47470.81,
+      "return_pct": 255.22,
+      "max_drawdown_pct": 69.53,
+      "annualized_return": 41.2,
+      "is_hypothetical": true
     }
   ],
   "metadata": {
-    "run_id": "bt-1767112996-bf0296",
+    "run_id": "bt-1770304713-730713",
     "run_type": "battle_test",
-    "timestamp": "2025-12-30T16:43:16.951696",
+    "timestamp": "2026-02-05T15:18:33.384256",
     "config_hash": "586770c7a22d",
     "parameters": {
       "scenario": "A",
@@ -154,7 +166,7 @@
       "start_date": "None",
       "end_date": "None"
     },
-    "duration_seconds": 121.76,
+    "duration_seconds": 15.83,
     "status": "success",
     "errors": [],
     "warnings": []

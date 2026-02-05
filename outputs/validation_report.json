@@ -1,9 +1,9 @@
 {
-  "generated_at": "2025-12-30T16:43:16.958418",
+  "generated_at": "2026-02-05T15:25:17.332608",
   "type": "validation",
   "status": "PASSED",
-  "total_rules": 70,
-  "passed": 70,
+  "total_rules": 105,
+  "passed": 105,
   "failed": 0,
   "critical_failures": 0,
   "warnings": 0,
@@ -37,7 +37,7 @@
       "passed": "True",
       "severity": "warning",
       "message": "OK",
-      "value": 19172.91247744905,
+      "value": 20909.04991737019,
       "threshold": 18600
     },
     {
@@ -53,7 +53,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 546.2124774490483,
+      "value": 2282.3499173701903,
       "threshold": 0
     },
     {
@@ -69,7 +69,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 6966.239461181006,
+      "value": 7177.711528269839,
       "threshold": 0
     },
     {
@@ -77,7 +77,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 31.109196452356848,
+      "value": 29.047144454639596,
       "threshold": 100
     },
     {
@@ -109,7 +109,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 12478.246725193636,
+      "value": 17152.98944327309,
       "threshold": 0
     },
     {
@@ -149,7 +149,7 @@
       "passed": "True",
       "severity": "warning",
       "message": "OK",
-      "value": 19182.04653820751,
+      "value": 20909.04991737019,
       "threshold": 18600
     },
     {
@@ -165,7 +165,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 555.346538207509,
+      "value": 2282.3499173701903,
       "threshold": 0
     },
     {
@@ -181,7 +181,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 6364.946436962542,
+      "value": 6560.290691377982,
       "threshold": 0
     },
     {
@@ -189,7 +189,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 37.16808070597511,
+      "value": 35.26722926967595,
       "threshold": 100
     },
     {
@@ -221,7 +221,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 14508.51843732806,
+      "value": 19782.31253167825,
       "threshold": 0
     },
     {
@@ -261,7 +261,7 @@
       "passed": "True",
       "severity": "warning",
       "message": "OK",
-      "value": 19172.91247744905,
+      "value": 20909.04991737019,
       "threshold": 18600
     },
     {
@@ -277,7 +277,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 546.2124774490483,
+      "value": 2282.3499173701903,
       "threshold": 0
     },
     {
@@ -293,7 +293,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 6486.353899225658,
+      "value": 6650.778143998494,
       "threshold": 0
     },
     {
@@ -301,7 +301,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 36.095658385403866,
+      "value": 34.498268595095254,
       "threshold": 100
     },
     {
@@ -333,7 +333,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 20211.859384324856,
+      "value": 22962.23345012534,
       "threshold": 0
     },
     {
@@ -373,7 +373,7 @@
       "passed": "True",
       "severity": "warning",
       "message": "OK",
-      "value": 19200.88805135164,
+      "value": 20909.04991737019,
       "threshold": 18600
     },
     {
@@ -389,7 +389,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 574.1880513516414,
+      "value": 2282.3499173701903,
       "threshold": 0
     },
     {
@@ -405,7 +405,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 4219.274560083515,
+      "value": 4303.077460656227,
       "threshold": 0
     },
     {
@@ -413,7 +413,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 58.87221299873951,
+      "value": 58.06786366374265,
       "threshold": 100
     },
     {
@@ -445,7 +445,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 41113.56954071413,
+      "value": 40702.823861760255,
       "threshold": 0
     },
     {
@@ -485,7 +485,7 @@
       "passed": "True",
       "severity": "warning",
       "message": "OK",
-      "value": 19191.74666123639,
+      "value": 20909.04991737019,
       "threshold": 18600
     },
     {
@@ -501,7 +501,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 565.0466612363896,
+      "value": 2282.3499173701903,
       "threshold": 0
     },
     {
@@ -517,7 +517,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 3076.743765274715,
+      "value": 3142.9035938311918,
       "threshold": 0
     },
     {
@@ -525,7 +525,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 70.15823926911034,
+      "value": 69.52746690747304,
       "threshold": 100
     },
     {
@@ -557,7 +557,7 @@
       "passed": "True",
       "severity": "critical",
       "message": "OK",
-      "value": 46035.84909462901,
+      "value": 47444.10542719113,
       "threshold": 0
     },
     {
@@ -567,6 +567,286 @@
       "message": "OK",
       "value": 10000,
       "threshold": 200
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 18850.976636633226,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 1.3606284996527211,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": "True",
+      "severity": "warning",
+      "message": "OK",
+      "value": 0.6,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 1.7763568394002505e-14,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 1891.4545656680523,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 60.8815174905375,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 1.0658141036401503e-14,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 19111.47018807745,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 1.4025982505560566,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": "True",
+      "severity": "warning",
+      "message": "OK",
+      "value": 0.45999999999999996,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 1.2434497875801753e-14,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 2588.6146434928078,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 68.65253874578731,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 3.552713678800501e-15,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 19125.013147597103,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 1.3752578338285963,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": "True",
+      "severity": "warning",
+      "message": "OK",
+      "value": 0.4,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 3.552713678800501e-15,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 1522.555405586458,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 74.21645112190284,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 0.0,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 18994.11224785876,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 1.3658581618488022,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": "True",
+      "severity": "warning",
+      "message": "OK",
+      "value": 0.33999999999999997,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 1.7763568394002505e-14,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 265.060888109575,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 93.13844259026499,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 2.842170943040401e-14,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 18967.52217588057,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 1.3712961863991706,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-03",
+      "passed": "True",
+      "severity": "warning",
+      "message": "OK",
+      "value": 0.58,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 5.329070518200751e-15,
+      "threshold": 1.0
+    },
+    {
+      "rule_id": "CV-01",
+      "passed": true,
+      "severity": "critical",
+      "message": "OK",
+      "value": 21.211402767409528,
+      "threshold": 0
+    },
+    {
+      "rule_id": "CV-02",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 96.5783530169794,
+      "threshold": 100
+    },
+    {
+      "rule_id": "CV-05",
+      "passed": "True",
+      "severity": "critical",
+      "message": "OK",
+      "value": 1.4210854715202004e-14,
+      "threshold": 1.0
     }
   ]
 }
